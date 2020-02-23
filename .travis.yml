@@ -11,10 +11,11 @@ cache:
 install:
   - yarn install
 
-stages:
-  - test
-
-script:
-  - yarn lint:ts
-  - yarn lint:styles
-  - yarn test
+jobs:
+  include:
+    - stage: test
+      name: test
+      script:
+        - yarn lint:ts
+        - yarn lint:styles
+        - yarn test
