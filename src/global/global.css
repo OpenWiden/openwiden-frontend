@@ -1,0 +1,42 @@
+:root {
+  --dark-theme-primary-bg: #232323;
+  --dark-theme-secondary-bg: #303030;
+  --dark-theme-primary-bg: #8A4DEE;
+  --dark-theme-primary-typo: rgba(255, 255, 255, 75);
+}
+
+@font-face {
+  font-family: 'CirceRegular';
+  font-style: normal;
+  font-weight: 500;
+  src: url(~static/fonts/CirceRegular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'CirceBold';
+  font-style: normal;
+  font-weight: 500;
+  src: url(~static/fonts/CirceBold.woff) format('woff');
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background-color: var(--dark-theme-main-bg);
+  
+  font-family: 'CirceRegular', 'Arial', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
