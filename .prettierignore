@@ -1,0 +1,7 @@
+# Dirs
+node_modules/
+coverage/
+.nuxt
+
+# Files
+*.md

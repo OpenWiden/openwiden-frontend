@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+    },
+    "types": ["@types/node", "@nuxt/types", "node_modules/@types"]
+  },
+  "exclude": [
+    ".nuxt",
+    "nuxt.config.js",
+    "**/*.test.ts",
+  ],
+  "include": ["vue-shim.d.ts", "**/*.ts"]
+}
