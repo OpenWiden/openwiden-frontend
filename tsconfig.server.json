@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noEmit": false,
+    "module": "commonjs",
+    "target": "es2017",
+    "lib": ["es2017"],
+    "outDir": ".nuxt"
+  },
+  "include": ["src/server/**/*.ts"]
+}
