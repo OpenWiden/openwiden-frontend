@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+install:
+  - yarn install
+
+stages:
+  - test
+
+script:
+  - yarn lint:ts
+  - yarn lint:styles
+  - yarn test
