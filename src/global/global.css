@@ -1,0 +1,24 @@
+:root {
+  --dark-theme-main-bg: #232323;
+  --primary-purple: #8A4DEE;
+}
+
+@font-face {
+  font-family: 'CirceRegular';
+  font-style: normal;
+  font-weight: 500;
+  src: url(~static/fonts/CirceRegular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'CirceBold';
+  font-style: normal;
+  font-weight: 500;
+  src: url(~static/fonts/CirceBold.woff) format('woff');
+}
+
+body {
+  background-color: var(--dark-theme-main-bg);
+  
+  font-family: 'CirceRegular', 'Arial', sans-serif;
+}
