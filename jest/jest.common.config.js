@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   rootDir: path.join(__dirname, '..'),
   transform: {
-    '^.+\\.(ts?|js?)$': 'babel-jest',
+    '^.+\\.(ts?|js?)?$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest',
   },
   testPathIgnorePatterns: ['<rootDir>/.nuxt/', '<rootDir>/node_modules/'],

@@ -47,7 +47,14 @@
     "vue-jest": "^4.0.0-0"
   },
   "lint-staged": {
-    "src/**/*.ts": ["eslint", "jest --findRelatedTests"],
+    "src/**/*.ts": [
+      "eslint",
+      "jest --findRelatedTests"
+    ],
+    "*.{js,json,yml}": [
+      "prettier --write",
+      "git add"
+    ],
     "src/**/*.{css,vue}": "stylelint"
   },
   "husky": {
