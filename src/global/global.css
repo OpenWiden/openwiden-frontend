@@ -1,7 +1,7 @@
 :root {
   --dark-theme-primary-bg: #232323;
   --dark-theme-secondary-bg: #303030;
-  --dark-theme-primary-bg: #8A4DEE;
+  --dark-theme-primary-accent-bg: #8A4DEE;
   --dark-theme-primary-typo: rgba(255, 255, 255, 75);
 }
 
@@ -15,7 +15,7 @@
 @font-face {
   font-family: 'CirceBold';
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   src: url(~static/fonts/CirceBold.woff) format('woff');
 }
 
@@ -27,7 +27,7 @@
 }
 
 body {
-  background-color: var(--dark-theme-main-bg);
+  background-color: var(--dark-theme-primary-bg);
   
   font-family: 'CirceRegular', 'Arial', sans-serif;
 }
