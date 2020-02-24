@@ -1,35 +1,43 @@
 :root {
+  /* main theme colors */
   --dark-theme-primary-bg: #232323;
   --dark-theme-secondary-bg: #303030;
-  --dark-theme-primary-accent-bg: #8A4DEE;
-  --dark-theme-primary-typo: rgba(255, 255, 255, 75);
+
+  /* main theme accent colors */
+  --dark-theme-primary-accent-bg: #8a4dee;
+
+  /* main theme typography colors */
+  --dark-theme-primary-typo: rgba(255, 255, 255, 0.95);
 }
 
+/* Fonts */
 @font-face {
-  font-family: 'CirceRegular';
+  font-family: 'Circe';
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   src: url(~static/fonts/CirceRegular.woff) format('woff');
 }
 
 @font-face {
-  font-family: 'CirceBold';
+  font-family: 'Circe';
   font-style: normal;
   font-weight: bold;
   src: url(~static/fonts/CirceBold.woff) format('woff');
 }
 
+/* Global styles */
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
   background-color: var(--dark-theme-primary-bg);
-  
-  font-family: 'CirceRegular', 'Arial', sans-serif;
+  font-family: 'Circe', 'Arial', sans-serif;
+  font-size: 16px;
+  color: var(--dark-theme-primary-typo);
 }
 
 img {
@@ -39,4 +47,11 @@ img {
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
