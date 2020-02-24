@@ -54,6 +54,12 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    postcss: {
+      plugins: {
+        'postcss-nested': {},
+        'postcss-hexrgba': {},
+      },
+    },
     extend() {},
   },
 };
