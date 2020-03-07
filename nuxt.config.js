@@ -25,14 +25,11 @@ module.exports = {
       eslint: true,
     },
   },
-  /*
-   ** Global CSS
-   */
+
   css: ['@src/global/global.css'],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: ['@nuxtjs/axios'],
+
+  /* Plugins to load before mounting the App */
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -46,7 +43,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['@nuxtjs/axios'],
   /*
    ** Build configuration
    */
