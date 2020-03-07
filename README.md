@@ -1,6 +1,6 @@
 # Welcome to OpenWiden project docs
 
-OpenWiden frontend app
+OpenWiden Frontend app
 
 ## Build Setup
 
