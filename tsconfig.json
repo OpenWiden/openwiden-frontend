@@ -20,14 +20,10 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./*"],
+      "@/*": ["./*"]
     },
     "types": ["@types/node", "@nuxt/types", "node_modules/@types"]
   },
-  "exclude": [
-    ".nuxt",
-    "nuxt.config.js",
-    "**/*.test.ts",
-  ],
-  "include": ["vue-shim.d.ts", "**/*.ts"]
+  "exclude": [".nuxt", "nuxt.config.js", "**/*.test.ts"],
+  "include": ["types/vue-shim.d.ts", "**/*.ts"]
 }

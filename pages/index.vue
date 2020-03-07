@@ -1,17 +1,12 @@
 <template>
-  <div class="container">
-    <Logo />
-  </div>
+  <main-screen />
 </template>
 
 <script>
-import Logo from '@/src/components/Logo/Logo.vue';
-
+import MainScreen from '@/src/components/MainScreen/MainScreen';
 export default {
   components: {
-    Logo,
+    MainScreen,
   },
 };
 </script>
-
-<style></style>
