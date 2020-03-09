@@ -1,5 +1,5 @@
 .introduction {
-  background-image: url(../../../static/svgs/introduction-bg.svg);
+  background-image: url(~assets/svgs/introduction-bg.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 5px center;

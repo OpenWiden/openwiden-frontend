@@ -5,6 +5,11 @@
       font-weight: bold;
     }
 
+    &_h2 {
+      font-size: 34px;
+      font-weight: bold;
+    }
+
     &_p {
       font-size: 16px;
     }

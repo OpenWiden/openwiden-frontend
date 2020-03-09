@@ -2,12 +2,16 @@
   /* main theme colors */
   --dark-theme-primary-bg: #232323;
   --dark-theme-secondary-bg: #303030;
+  --dark-theme-third-bg: #424242;
 
   /* main theme accent colors */
   --dark-theme-primary-accent-bg: #8a4dee;
 
   /* main theme typography colors */
   --dark-theme-primary-typo: rgba(255, 255, 255, 0.95);
+
+  /* Border radius */
+  --primary-border-radius: 6px;
 }
 
 /* Fonts */
