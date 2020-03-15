@@ -35,7 +35,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    browserBaseURL: 'https://openwiden-staging.herokuapp.com',
+    baseURL: 'https://openwiden-staging.herokuapp.com',
     timeout: 5000,
   },
   build: {
