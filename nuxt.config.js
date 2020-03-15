@@ -4,6 +4,9 @@ module.exports = {
    ** Headers of the page
    */
   head: {
+    server: {
+      port: process.env.PORT || '3000',
+    },
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -16,41 +19,26 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
   typescript: {
     typeCheck: {
       eslint: true,
     },
   },
-
-  css: ['@src/global/global.css'],
-
-  /* Plugins to load before mounting the App */
-  plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+  css: ['@/src/global/global.css'],
+  plugins: ['@/plugins/axios'],
   buildModules: [
     '@nuxt/typescript-build',
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
   ],
-  /*
-   ** Nuxt.js modules
-   */
   modules: ['@nuxtjs/axios'],
-  /*
-   ** Build configuration
-   */
+
+  axios: {
+    browserBaseURL: 'https://openwiden-staging.herokuapp.com',
+    timeout: 5000,
+  },
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     postcss: {
       plugins: {
         'postcss-nested': {},
