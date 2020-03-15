@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import cookies from 'js-cookie';
 
 Vue.use(Vuex);
 
@@ -12,24 +13,36 @@ export const mutations = {
     state.auth = auth;
   },
 
+  resetAuth(state, payload = null) {
+    state.auth = payload;
+    state.refresh = payload;
+    state.user = payload;
+  },
+
   setUser(state, user) {
     state.user = user;
   },
 };
 
 export const actions = {
-  nuxtServerInit({ commit }, { req, $axios }) {
+  async nuxtServerInit({ commit, dispatch }, { req }) {
     const authCookie = req.cookies?.auth || null;
 
     commit('setAuth', authCookie);
 
-    if (authCookie)
-      return $axios
-        .$get(`users/`, {
+    await dispatch('getUser', authCookie);
+  },
+
+  getUser({ commit }, accessToken = cookies.get('auth')) {
+    if (accessToken)
+      return this.$axios
+        .$get('users/', {
           headers: {
-            Authorization: `JWT ${authCookie}`,
+            Authorization: `JWT ${accessToken}`,
           },
         })
-        .then((resp) => commit('setUser', resp));
+        .then((user) => {
+          commit('setUser', user);
+        });
   },
 };
