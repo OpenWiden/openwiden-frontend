@@ -47,6 +47,8 @@ img {
 button {
   background-color: transparent;
   border: unset;
+  font-size: initial;
+  font-family: inherit;
 }
 
 a {
