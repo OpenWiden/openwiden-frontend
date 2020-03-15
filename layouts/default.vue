@@ -13,7 +13,6 @@ export default {
   components: {
     TopHeader,
   },
-  middleware: 'authenticated',
   beforeMount() {
     const href = new URL(window.location.href);
     const code = href.searchParams.get('code');
@@ -24,13 +23,19 @@ export default {
         .$get(`/users/complete/github/?code=${code}&state=${state}`)
         .then((result) => {
           const {
-            detail: { access },
+            detail: { access, refresh },
           } = result;
 
           cookie.set('auth', access);
-          this.$store.commit('setAuth', access);
+          cookie.set('refresh', refresh);
 
-          this.$router.push('/');
+          this.$store.commit('setAuth', access);
+          this.$store.dispatch('getUser', access);
+
+          href.searchParams.delete('code');
+          href.searchParams.delete('state');
+
+          window.history.pushState(null, '', href.toString());
         });
     }
   },
