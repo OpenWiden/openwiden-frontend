@@ -7,7 +7,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const config = require('../../nuxt.config.js');
 
-config.dev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== 'production';
 
 async function start() {
   const nuxt = new Nuxt(config);
@@ -16,7 +16,7 @@ async function start() {
 
   await nuxt.ready();
 
-  if (config.dev) {
+  if (isDev) {
     const builder = new Builder(nuxt);
     await builder.build();
   }
