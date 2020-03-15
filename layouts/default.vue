@@ -6,11 +6,33 @@
 </template>
 
 <script>
+import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
 
 export default {
   components: {
     TopHeader,
+  },
+  middleware: 'authenticated',
+  beforeMount() {
+    const href = new URL(window.location.href);
+    const code = href.searchParams.get('code');
+    const state = href.searchParams.get('state');
+
+    if (code && state) {
+      this.$axios
+        .$get(`/users/complete/github/?code=${code}&state=${state}`)
+        .then((result) => {
+          const {
+            detail: { access },
+          } = result;
+
+          cookie.set('auth', access);
+          this.$store.commit('setAuth', access);
+
+          this.$router.push('/');
+        });
+    }
   },
 };
 </script>
