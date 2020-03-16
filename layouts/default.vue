@@ -30,7 +30,6 @@ export default {
           cookie.set('refresh', refresh);
 
           this.$store.commit('setAuth', access);
-          this.$store.dispatch('getUser', access);
 
           href.searchParams.delete('code');
           href.searchParams.delete('state');

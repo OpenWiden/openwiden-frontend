@@ -1,11 +1,9 @@
-import { Context } from '@nuxt/types';
-
-export default function({ $axios, redirect }: Context) {
-  $axios.onRequest((config) => {
+export default function({ $axios, redirect }: any) {
+  $axios.onRequest((config: any) => {
     console.log(`Making request to ${config.url}`);
   });
 
-  $axios.onError((error) => {
+  $axios.onError((error: any) => {
     const code = error?.response?.status;
 
     if (code) {

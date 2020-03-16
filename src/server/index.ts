@@ -1,12 +1,10 @@
-const express = require('express');
-const consola = require('consola');
+import express from 'express';
+import consola from 'consola';
+import cookieParser from 'cookie-parser';
+import config from '../../nuxt.config.js';
 const { Nuxt, Builder } = require('nuxt');
+
 const app = express();
-
-// Import and Set Nuxt.js options
-const cookieParser = require('cookie-parser');
-const config = require('../../nuxt.config.js');
-
 const isDev = process.env.NODE_ENV !== 'production';
 
 async function start() {
