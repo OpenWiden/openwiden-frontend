@@ -9,10 +9,7 @@
       <nav :class="styles.headerNav" role="navigation">
         <ul v-if="$store.state.user === null" :class="styles.headerNavList">
           <li :class="styles.headerNavItem">
-            <a
-              :class="styles.headerNavLink"
-              href="https://openwiden-staging.herokuapp.com/users/login/github/?redirect_uri=http://localhost:3000/"
-            >
+            <a :class="styles.headerNavLink" @click.prevent="login('github')">
               Sign In
             </a>
           </li>
@@ -44,10 +41,11 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
 import cookie from 'js-cookie';
 import styles from './TopHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
+import { MUTATIONS } from '@/store/mutationTypes';
 
 export default {
   components: {
@@ -65,7 +63,19 @@ export default {
     logout() {
       cookie.remove('auth');
       cookie.remove('refresh');
-      this.$store.commit('resetAuth');
+      this.$store.commit(MUTATIONS.RESET_AUTH);
+    },
+    login(provider) {
+      const loginUrl = new URL(
+        `auth/login/${provider}/`,
+        'https://openwiden-staging.herokuapp.com'
+      );
+
+      this.$store.commit(MUTATIONS.SET_PROVIDER, provider);
+
+      loginUrl.searchParams.set('redirect_uri', window.location.href);
+
+      window.location.href = loginUrl.toString();
     },
   },
 };

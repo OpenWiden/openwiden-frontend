@@ -5,9 +5,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
+import { MUTATIONS } from '@/store/mutationTypes';
 
 export default {
   components: {
@@ -20,7 +21,7 @@ export default {
 
     if (code && state) {
       this.$axios
-        .$get(`/users/complete/github/?code=${code}&state=${state}`)
+        .$get(`auth/complete/github/?code=${code}&state=${state}`)
         .then((result) => {
           const {
             detail: { access, refresh },
@@ -29,7 +30,8 @@ export default {
           cookie.set('auth', access);
           cookie.set('refresh', refresh);
 
-          this.$store.commit('setAuth', access);
+          this.$store.commit(MUTATIONS.SET_AUTH, access);
+          this.$store.dispatch('getUser', access);
 
           href.searchParams.delete('code');
           href.searchParams.delete('state');

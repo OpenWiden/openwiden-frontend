@@ -1,6 +1,8 @@
+import consola from 'consola';
+
 export default function({ $axios, redirect }: any) {
   $axios.onRequest((config: any) => {
-    console.log(`Making request to ${config.url}`);
+    consola.info(`[ ${config.method.toUpperCase()} ] ${config.url}`);
   });
 
   $axios.onError((error: any) => {
@@ -9,7 +11,13 @@ export default function({ $axios, redirect }: any) {
     if (code) {
       switch (code) {
         case 401:
-          // Refresh token
+          $axios
+            .post('auth/token/refresh/', {
+              data: {},
+            })
+            .then((refreshedJWT: string) =>
+              consola.info('refreshedJWT-->', refreshedJWT)
+            );
           break;
         case 404:
           redirect('/400');

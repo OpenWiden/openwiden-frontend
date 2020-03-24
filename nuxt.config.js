@@ -1,8 +1,5 @@
 module.exports = {
   mode: 'universal',
-  /*
-   ** Headers of the page
-   */
   head: {
     server: {
       port: process.env.PORT || '3000',
