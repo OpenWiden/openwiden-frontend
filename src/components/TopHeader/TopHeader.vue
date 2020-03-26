@@ -13,10 +13,6 @@
               Sign In
             </a>
           </li>
-
-          <li :class="styles.headerNavItem">
-            <a :class="styles.headerNavLink" href="#">Sign Up</a>
-          </li>
         </ul>
 
         <ul v-else :class="styles.headerNavList">

@@ -58,16 +58,18 @@ export const actions: any = {
     await dispatch('getUser', authCookie);
   },
 
-  getUser({ commit }: any, accessToken = cookies.get('auth')): void {
-    if (accessToken)
-      this.$axios
-        .$get('user/', {
-          headers: {
-            Authorization: `JWT ${accessToken}`,
-          },
-        })
-        .then((user: User) => {
-          commit(MUTATIONS.SET_USER, user);
-        });
+  async getUser(
+    { commit }: any,
+    accessToken = cookies.get('auth')
+  ): Promise<void> {
+    if (accessToken) {
+      const user = await this.$axios.$get('user/', {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      });
+
+      commit(MUTATIONS.SET_USER, user);
+    }
   },
 };
