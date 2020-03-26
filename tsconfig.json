@@ -22,7 +22,12 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@types/node", "@nuxt/types", "node_modules/@types"]
+    "types": [
+      "@types/node",
+      "@nuxt/types",
+      "node_modules/@types",
+      "@nuxtjs/axios"
+    ]
   },
   "exclude": [".nuxt", "nuxt.config.js", "**/*.test.ts"],
   "include": ["types/vue-shim.d.ts", "**/*.ts"]

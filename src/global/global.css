@@ -48,6 +48,13 @@ img {
   max-width: 100%;
 }
 
+button {
+  background-color: transparent;
+  border: unset;
+  font-size: initial;
+  font-family: inherit;
+}
+
 a {
   text-decoration: none;
   cursor: pointer;
