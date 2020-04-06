@@ -13,6 +13,7 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js',
+    '\\.css$': 'identity-obj-proxy',
   },
   watchPlugins: [
     'jest-watch-select-projects',
