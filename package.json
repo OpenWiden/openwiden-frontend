@@ -25,7 +25,8 @@
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
     "postcss-hexrgba": "^2.0.0",
-    "postcss-nested": "^4.2.1"
+    "postcss-nested": "^4.2.1",
+    "vue-select": "^3.9.5"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.5.7",
@@ -45,6 +46,7 @@
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.4.2",
@@ -53,7 +55,8 @@
     "prettier": "^1.19.1",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^20.0.0",
-    "vue-jest": "^4.0.0-0"
+    "vue-jest": "^4.0.0-0",
+    "vue-property-decorator": "^8.4.1"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -61,8 +64,7 @@
       "jest --findRelatedTests"
     ],
     "*.{js,json,yml}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "src/**/*.{css,vue}": "stylelint"
   },
