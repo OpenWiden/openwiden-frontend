@@ -2,12 +2,12 @@
   &_tag {
     &_h1 {
       font-size: 42px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     &_h2 {
       font-size: 34px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     &_p {
