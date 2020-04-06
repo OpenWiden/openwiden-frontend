@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: normal;
+  src: url(~static/fonts/CirceRegular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  src: url(~static/fonts/CirceBold.woff) format('woff');
+}
