@@ -1,0 +1,130 @@
+<template>
+  <div class="wrapper">
+    <label class="label">
+      <span class="labelText">{{ label }}</span>
+      <v-select
+        :options="options"
+        :placeholder="placeholder"
+        :clearable="false"
+      >
+        <template #open-indicator="{ attributes }">
+          <span v-bind="attributes">
+            <arrow-icon aria-hidden />
+          </span>
+        </template>
+      </v-select>
+    </label>
+  </div>
+</template>
+
+<script scoped>
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
+import ArrowIcon from '@/src/components/Icons/ArrowIcon';
+
+export default {
+  components: {
+    vSelect,
+    ArrowIcon,
+  },
+  props: {
+    options: {
+      type: Array || Object,
+      default: () => [],
+    },
+    label: {
+      type: String,
+      default: () => '',
+    },
+    placeholder: {
+      type: String,
+      default: () => '',
+    },
+  },
+};
+</script>
+
+<style scoped>
+.wrapper >>> .v-select {
+  background-color: var(--primary-bg-select);
+  border-radius: var(--primary-border-radius-select);
+  font-size: 14px;
+}
+
+.wrapper >>> .v-select .vs__dropdown-toggle {
+  padding: 0;
+  border: none;
+}
+
+.wrapper >>> .v-select .vs__selected-options {
+  margin-top: auto;
+  padding: 5px 10px;
+}
+
+.wrapper >>> .v-select .vs__selected {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: var(--primary-typo-select);
+}
+
+.wrapper >>> .v-select .vs__search {
+  margin: 0;
+  padding: 0;
+  border: var(--primary-border-select);
+  font-family: var(--primary-font);
+  color: var(--primary-typo-select);
+}
+
+.wrapper >>> .v-select .vs__search::placeholder {
+  color: var(--primary-typo-select-placeholder);
+}
+
+.wrapper >>> .v-select .vs__search::-ms-input-placeholder {
+  color: var(--primary-typo-select-placeholder);
+}
+
+.wrapper >>> .v-select .vs__actions {
+  background-color: var(--secondary-bg-select);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 12px;
+}
+
+.wrapper >>> .v-select .vs__dropdown-menu {
+  top: calc(100% + 3px);
+  background-color: var(--primary-bg-select);
+  border-radius: var(--primary-border-radius-select);
+  border: var(--primary-border-select);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.wrapper >>> .v-select .vs__dropdown-option {
+  color: var(--primary-typo-select);
+}
+
+.wrapper >>> .v-select .vs__dropdown-option--highlight {
+  background-color: var(--secondary-bg-select);
+}
+
+.wrapper >>> .v-select .vs__open-indicator {
+  display: flex;
+}
+
+.wrapper .v-select .vs__clear {
+  display: flex;
+  height: 16px;
+}
+
+.label {
+  position: relative;
+}
+
+.labelText {
+  position: absolute;
+  z-index: 2;
+  top: 3px;
+  left: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+</style>
