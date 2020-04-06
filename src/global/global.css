@@ -1,35 +1,3 @@
-:root {
-  /* main theme colors */
-  --dark-theme-primary-bg: #232323;
-  --dark-theme-secondary-bg: #303030;
-  --dark-theme-third-bg: #424242;
-
-  /* main theme accent colors */
-  --dark-theme-primary-accent-bg: #8a4dee;
-
-  /* main theme typography colors */
-  --dark-theme-primary-typo: rgba(255, 255, 255, 0.95);
-
-  /* Border radius */
-  --primary-border-radius: 6px;
-}
-
-/* Fonts */
-@font-face {
-  font-family: 'Circe';
-  font-style: normal;
-  font-weight: normal;
-  src: url(~static/fonts/CirceRegular.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Circe';
-  font-style: normal;
-  font-weight: bold;
-  src: url(~static/fonts/CirceBold.woff) format('woff');
-}
-
-/* Global styles */
 *,
 *::before,
 *::after {
@@ -39,8 +7,10 @@
 
 body {
   background-color: var(--dark-theme-primary-bg);
-  font-family: 'Circe', 'Arial', sans-serif;
+  font-family: var(--primary-font);
   font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
   color: var(--dark-theme-primary-typo);
 }
 
@@ -48,14 +18,8 @@ img {
   max-width: 100%;
 }
 
-button {
-  background-color: transparent;
-  border: unset;
-  font-size: initial;
-  font-family: inherit;
-}
-
 a {
+  color: inherit;
   text-decoration: none;
   cursor: pointer;
 }
