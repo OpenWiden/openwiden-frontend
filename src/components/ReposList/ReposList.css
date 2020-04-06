@@ -14,42 +14,10 @@
 
 .reposList {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+  grid-gap: 45px;
+}
+
+.reposWrapper {
   margin-top: 75px;
-}
-
-.repoItem {
-  padding: 20px 16px;
-  background-color: var(--dark-theme-third-bg);
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  border-radius: var(--primary-border-radius);
-}
-
-.repoDescription {
-  margin-top: 20px;
-}
-
-.repoFooter {
-  margin-top: 25px;
-}
-
-.statsList {
-  display: flex;
-}
-
-.statItem {
-  & + & {
-    margin-left: 25px;
-  }
-}
-
-.icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 4px;
-}
-
-.statText {
-  display: inline-block;
-  vertical-align: middle;
 }
