@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { ProgrammingLanguage } from './ProgrammingLanguage';
 
 export interface Repository {
   id?: string;
@@ -11,9 +12,5 @@ export interface Repository {
   forks_count?: number;
   created_at: Date;
   updated_at: Date;
-  programming_languages: ProgrammingLanguage;
+  programming_language: ProgrammingLanguage;
 }
-
-type ProgrammingLanguage = {
-  [x: string]: string;
-};
