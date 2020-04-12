@@ -4,7 +4,7 @@ import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
 import { User } from '@/src/interfaces/User';
 import { Provider } from '@/src/interfaces/Provider';
-import { Filters } from '@/src/interfaces/Filters';
+import { Filters, Filter } from '@/src/interfaces/Filters';
 
 Vue.use(Vuex);
 
@@ -26,13 +26,13 @@ export const state = (): AppState => {
     provider: null,
     user: null,
     filters: {
-      starCount: null,
-      openIssuesCount: null,
-      forksCount: null,
-      programmingLanguage: null,
-      versionControlService: null,
-      createdAt: null,
-      updatedAt: null,
+      [Filter.STAR_COUNT]: null,
+      [Filter.OPEN_ISSUES_COUNT]: null,
+      [Filter.FORKS_COUNT]: null,
+      [Filter.PROGRAMMING_LANGUAGE]: null,
+      [Filter.VERSION_CONTROL_SERVICE]: null,
+      [Filter.CREATED_AT]: null,
+      [Filter.UPDATED_AT]: null,
     },
   };
 };
@@ -59,6 +59,13 @@ export const mutations = {
 
   [MUTATIONS.SET_PROVIDER](state: AppState, provider: Provider): void {
     state.provider = provider;
+  },
+
+  [MUTATIONS.SET_FILTER](
+    state: AppState,
+    { name, value }: { name: Filter; value: any }
+  ): void {
+    state.filters[name] = value;
   },
 };
 
