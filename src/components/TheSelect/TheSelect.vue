@@ -5,7 +5,10 @@
       <v-select
         :options="options"
         :placeholder="placeholder"
-        :clearable="false"
+        :label="optionLabel"
+        :clearable="true"
+        :value="value"
+        @input="onChange"
       >
         <template #open-indicator="{ attributes }">
           <span v-bind="attributes">
@@ -36,9 +39,21 @@ export default {
       type: String,
       default: () => '',
     },
+    value: {
+      type: String || Object,
+      default: () => {},
+    },
     placeholder: {
       type: String,
       default: () => '',
+    },
+    optionLabel: {
+      type: String,
+      default: () => '',
+    },
+    onChange: {
+      type: Function,
+      default: () => {},
     },
   },
 };

@@ -9,22 +9,7 @@
 
       <div v-if="areReposLoading" :class="styles.reposWrapper">
         <ul :class="styles.reposList">
-          <li :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-          <li :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-          <li :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-          <li :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-          <li :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-          <li :class="styles.repoItem">
+          <li v-for="item in new Array(8)" :key="item" :class="styles.repoItem">
             <repo-card-skeleton />
           </li>
         </ul>
@@ -38,7 +23,7 @@
 
       <div v-else :class="styles.reposWrapper">
         <ul :class="styles.reposList">
-          <li v-for="repo in repos" :key="repo.name" :class="styles.repoItem">
+          <li v-for="repo in items" :key="repo.name" :class="styles.repoItem">
             <repo-card :repository="repo" />
           </li>
         </ul>
@@ -47,34 +32,68 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import styles from './ReposList.css?module';
-import TheText from '@/src/components/TheText/TheText';
-import RepoCard from '@/src/components/RepoCard/RepoCard';
-import ReposFilters from '@/src/components/ReposFilters/ReposFilters';
-import RepoCardSkeleton from '@/src/components/RepoCardSkeleton/RepoCardSkeleton';
+import TheText from '@/src/components/TheText/TheText.vue';
+import RepoCard from '@/src/components/RepoCard/RepoCard.vue';
+import ReposFilters from '@/src/components/ReposFilters/ReposFilters.vue';
+import RepoCardSkeleton from '@/src/components/RepoCardSkeleton/RepoCardSkeleton.vue';
+import { Filter, Filters } from '@/src/interfaces/Filters';
+import { getObjectKeys } from '@/src/lib/getObjectKeys';
+import { Repository } from '@/src/interfaces/Repository';
 
-export default {
+const filtrators: {
+  [k: string]: (repos: Repository[], filterValue: any) => Repository[];
+} = {
+  [Filter.STAR_COUNT]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.OPEN_ISSUES_COUNT]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.FORKS_COUNT]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.VERSION_CONTROL_SERVICE]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.CREATED_AT]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.UPDATED_AT]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+    return repos;
+  },
+  [Filter.PROGRAMMING_LANGUAGE]: (repos, filterValue) => {
+    if (!filterValue) return repos;
+
+    return repos.filter(
+      (repo) => repo.programming_language.name === filterValue.name
+    );
+  },
+};
+
+@Component({
   components: {
     TheText,
     RepoCard,
     RepoCardSkeleton,
     ReposFilters,
   },
-  data() {
-    return {
-      areReposLoading: true,
-      reposCount: 0,
-      repos: null,
-      error: false,
-    };
-  },
-  computed: {
-    styles() {
-      return styles;
-    },
-  },
-  beforeMount() {
+})
+export default class ReposList extends Vue {
+  areReposLoading: boolean = true;
+  reposCount: number = 0;
+  repos: Repository[] | null = null;
+  error: boolean = false;
+
+  created() {
     this.$axios
       .$get('/api/v1/repositories/')
       .then(({ count, results }) => {
@@ -86,6 +105,21 @@ export default {
         this.error = err;
         this.areReposLoading = false;
       });
-  },
-};
+  }
+
+  get styles() {
+    return styles;
+  }
+
+  get items() {
+    const { filters }: { filters: Filters } = this.$store.state;
+    const filtersKeys = getObjectKeys(filters);
+
+    if (!this.repos) return null;
+
+    return filtersKeys.reduce((filteredRepos: Repository[], filter: Filter) => {
+      return filtrators[filter](filteredRepos, filters[filter]);
+    }, this.repos);
+  }
+}
 </script>
