@@ -1,26 +1,25 @@
 import consola from 'consola';
 
-export default function({ $axios, redirect }: any) {
+export default function(context: any) {
+  const { $axios, redirect, req } = context;
+
+  if (req?.cookies?.auth) {
+    $axios.setHeader('Authorization', `JWT ${req.cookies.auth}`);
+  }
+
   $axios.onRequest((config: any) => {
     consola.info(`[ ${config.method.toUpperCase()} ] ${config.url}`);
   });
 
   $axios.onError((error: any) => {
-    const code = error?.response?.status;
+    const { status } = error?.response;
 
-    if (code) {
-      switch (code) {
+    if (status) {
+      switch (status) {
         case 401:
-          $axios
-            .post('auth/token/refresh/', {
-              data: {},
-            })
-            .then((refreshedJWT: string) =>
-              consola.info('refreshedJWT-->', refreshedJWT)
-            );
           break;
         case 404:
-          redirect('/400');
+          redirect('/404');
           break;
         case 500:
           redirect('/500');

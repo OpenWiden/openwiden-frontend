@@ -7,7 +7,7 @@
       </nuxt-link>
 
       <nav :class="styles.headerNav" role="navigation">
-        <ul v-if="$store.state.user === null" :class="styles.headerNavList">
+        <ul v-if="!user" :class="styles.headerNavList">
           <li :class="styles.headerNavItem">
             <a :class="styles.headerNavLink" @click.prevent="login('github')">
               Sign In
@@ -37,7 +37,7 @@
   </header>
 </template>
 
-<script lang="ts">
+<script>
 import cookie from 'js-cookie';
 import styles from './TopHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
@@ -59,12 +59,13 @@ export default {
     logout() {
       cookie.remove('auth');
       cookie.remove('refresh');
+      cookie.remove('provider');
       this.$store.commit(MUTATIONS.RESET_AUTH);
     },
     login(provider) {
       const loginUrl = new URL(
         `auth/login/${provider}/`,
-        'https://openwiden-staging.herokuapp.com'
+        'https://openwiden.com'
       );
 
       this.$store.commit(MUTATIONS.SET_PROVIDER, provider);

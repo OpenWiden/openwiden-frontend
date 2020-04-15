@@ -1,11 +1,13 @@
 <template>
   <div>
     <top-header />
-    <nuxt />
+    <main role="main">
+      <nuxt />
+    </main>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
 import { MUTATIONS } from '@/store/mutationTypes';

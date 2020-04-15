@@ -22,7 +22,11 @@ module.exports = {
       eslint: true,
     },
   },
-  css: ['@/src/global/global.css'],
+  css: [
+    '@/src/global/variables.css',
+    '@/src/global/fonts.css',
+    '@/src/global/global.css',
+  ],
   plugins: ['@/plugins/axios'],
   buildModules: [
     '@nuxt/typescript-build',
@@ -32,7 +36,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://openwiden-staging.herokuapp.com',
+    baseURL: 'https://openwiden.com',
     timeout: 5000,
   },
   build: {
