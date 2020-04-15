@@ -1,5 +1,7 @@
 <template>
   <div :class="styles.filters">
+    <the-text tag="h2" visually-hidden>Filters</the-text>
+
     <ul :class="styles.filtersList">
       <li :class="styles.filterItem">
         <the-select
@@ -12,15 +14,6 @@
           placeholder="Choose language..."
         />
       </li>
-      <li :class="styles.filterItem">
-        <the-button
-          :class="styles.searchButton"
-          title="Search repositories"
-          type="button"
-        >
-          Search
-        </the-button>
-      </li>
     </ul>
   </div>
 </template>
@@ -28,12 +21,12 @@
 <script>
 import styles from './ReposFilters.css?module';
 import TheSelect from '@/src/components/TheSelect/TheSelect';
-import TheButton from '@/src/components/TheButton/TheButton';
+import TheText from '@/src/components/TheText/TheText';
 
 export default {
   components: {
     TheSelect,
-    TheButton,
+    TheText,
   },
   data() {
     return { languages: [] };
