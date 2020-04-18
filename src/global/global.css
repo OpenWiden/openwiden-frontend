@@ -19,6 +19,7 @@ button {
   border: unset;
   font-size: initial;
   font-family: inherit;
+  cursor: pointer;
 }
 
 img {
