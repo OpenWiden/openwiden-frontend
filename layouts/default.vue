@@ -4,17 +4,20 @@
     <main role="main">
       <nuxt />
     </main>
+    <the-footer />
   </div>
 </template>
 
 <script>
 import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
+import TheFooter from '@/src/components/TheFooter/TheFooter';
 import { MUTATIONS } from '@/store/mutationTypes';
 
 export default {
   components: {
     TopHeader,
+    TheFooter,
   },
   beforeMount() {
     const href = new URL(window.location.href);
