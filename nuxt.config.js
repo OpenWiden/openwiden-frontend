@@ -4,7 +4,9 @@ module.exports = {
     server: {
       port: process.env.PORT || '3000',
     },
-    title: process.env.npm_package_name || '',
+    title:
+      'OpenWiden • Help out open source projects' ||
+      process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
