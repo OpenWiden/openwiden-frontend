@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-standard"],
   "rules": {
     "color-hex-length": "long",
-    "number-leading-zero": "always"
+    "number-leading-zero": "always",
+    "declaration-colon-newline-after": null
   }
 }
