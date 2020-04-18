@@ -9,6 +9,7 @@
     "build:staticProject": "nuxt generate",
     "dev": "cross-env NODE_ENV=development nodemon",
     "lint:packageScripts": "scriptlint --strict",
+    "lint:prettier": "prettier --check '**/*.{vue,js,ts,json,yml}'",
     "lint:styles": "stylelint './src/components/**/*.{css,vue}'",
     "lint:ts": "eslint --ext .ts ./src/",
     "start": "cross-env NODE_ENV=production nodemon",
@@ -65,9 +66,7 @@
       "eslint",
       "jest --findRelatedTests"
     ],
-    "*.{js,json,yml}": [
-      "prettier --write"
-    ],
+    "*.{vue,js,ts,json,yml}": "prettier --check",
     "src/**/*.{css,vue}": "stylelint"
   },
   "husky": {
