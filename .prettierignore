@@ -1,7 +1,12 @@
-# Dirs
+# Dependencies
 node_modules/
+
+# Tests
 coverage/
+
+# Build dirs
 .nuxt
+dist
 
 # Files
 *.md
