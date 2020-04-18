@@ -20,10 +20,21 @@
 }
 
 .headerNavLink {
+  display: flex;
+  align-items: center;
   color: var(--dark-theme-primary-typo);
+  transition: color 0.15s;
+
+  &:hover,
+  &:focus {
+    color: #8a4dee;
+  }
 }
 
 .headerNavItem {
+  display: flex;
+  align-items: center;
+
   & + & {
     margin-left: 25px;
   }
@@ -32,6 +43,12 @@
 .logo {
   display: flex;
   align-items: center;
+  transition: opacity 0.15s;
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
 }
 
 .logoText {
@@ -39,4 +56,40 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--dark-theme-primary-typo);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  background-color: var(--bg-avatar);
+  border-radius: 100%;
+}
+
+.suggest {
+  position: absolute;
+  top: 40px;
+  min-width: 115px;
+  padding: 4px 0;
+  background-color: #121212;
+  border-radius: 4px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.suggestLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  transition: background-color 0.15s;
+
+  &:hover,
+  &:focus {
+    background-color: #222222;
+  }
+}
+
+.suggestItemIcon {
+  width: 18px;
+  height: 18px;
 }
