@@ -70,8 +70,7 @@ export const mutations = {
 };
 
 /**
- * Actions than calls the mutations to change state
- * Could be async
+ * Actions than calls the mutations to change state. Could be async
  */
 export const actions: any = {
   async nuxtServerInit({ commit, dispatch }: any, { req }: any): Promise<void> {
@@ -85,8 +84,10 @@ export const actions: any = {
   async getUser(
     { commit }: any,
     accessToken = cookies.get('auth')
-  ): Promise<void> {
-    if (accessToken) {
+  ): Promise<void | null> {
+    if (!accessToken) return null;
+
+    try {
       const user = await this.$axios.$get('user/', {
         headers: {
           Authorization: `JWT ${accessToken}`,
@@ -94,6 +95,8 @@ export const actions: any = {
       });
 
       commit(MUTATIONS.SET_USER, user);
+    } catch (err) {
+      console.log('-->', err);
     }
   },
 };
