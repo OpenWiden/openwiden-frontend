@@ -18,9 +18,10 @@ install:
 
 jobs:
   include:
-    - stage: test
-      name: test
+    - stage: control
+      name: control
       script:
         - yarn lint:ts
         - yarn lint:styles
-        - yarn test
+        - yarn lint:prettier
+        - yarn testg
