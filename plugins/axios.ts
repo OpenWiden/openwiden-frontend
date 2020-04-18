@@ -1,7 +1,7 @@
 import consola from 'consola';
 
 export default function(context: any) {
-  const { $axios, redirect, req } = context;
+  const { $axios, req } = context;
 
   if (req?.cookies?.auth) {
     $axios.setHeader('Authorization', `JWT ${req.cookies.auth}`);
@@ -19,10 +19,10 @@ export default function(context: any) {
         case 401:
           break;
         case 404:
-          redirect('/404');
+          // redirect('/404');
           break;
         case 500:
-          redirect('/500');
+          // redirect('/500');
           break;
       }
     }
