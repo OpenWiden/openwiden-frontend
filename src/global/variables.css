@@ -33,4 +33,7 @@
   --primary-bg-select: #121212;
   --secondary-bg-select: #222222;
   --primary-border-radius-select: 6px;
+
+  /* avatar */
+  --bg-avatar: #424242;
 }

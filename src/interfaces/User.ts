@@ -2,6 +2,7 @@
 export interface User {
   id: string;
   username: string;
+  avatar: string;
   email?: string;
   date_joined?: Date;
   first_name?: string;
