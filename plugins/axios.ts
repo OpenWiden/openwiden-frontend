@@ -1,6 +1,6 @@
 import consola from 'consola';
 
-export default function(context: any) {
+export default function (context: any) {
   const { $axios, req } = context;
 
   if (req?.cookies?.auth) {
