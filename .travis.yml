@@ -21,7 +21,8 @@ jobs:
     - stage: control
       name: control
       script:
+        - yarn lint:packageScripts
         - yarn lint:ts
         - yarn lint:styles
         - yarn lint:prettier
-        - yarn testg
+        - yarn test
