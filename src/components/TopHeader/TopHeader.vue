@@ -21,9 +21,6 @@
               <div v-if="isSuggestOpen" :class="styles.suggest">
                 <ul :class="styles.suggestList">
                   <li :class="styles.suggestItem">
-                    123
-                  </li>
-                  <li :class="styles.suggestItem">
                     <a
                       :class="styles.suggestLink"
                       href="#"
