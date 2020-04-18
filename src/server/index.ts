@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import config from '../../nuxt.config.js';
 const { Nuxt, Builder } = require('nuxt');
 
-const app = express();
+const expressApp = express();
 const isDev = process.env.NODE_ENV !== 'production';
 
 async function start() {
@@ -18,9 +18,10 @@ async function start() {
     const builder = new Builder(nuxt);
     await builder.build();
   }
-  app.use(cookieParser(), nuxt.render);
 
-  app.listen(port, (err: any) => {
+  expressApp.use(cookieParser(), nuxt.render);
+
+  expressApp.listen(port, (err: any) => {
     if (err) throw err;
 
     consola.ready({
