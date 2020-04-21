@@ -19,30 +19,29 @@ export default {
     TopHeader,
     TheFooter,
   },
-  beforeMount() {
+  async beforeMount() {
     const href = new URL(window.location.href);
     const code = href.searchParams.get('code');
     const state = href.searchParams.get('state');
 
     if (code && state) {
-      this.$axios
-        .$get(`auth/complete/github/?code=${code}&state=${state}`)
-        .then((result) => {
-          const {
-            detail: { access, refresh },
-          } = result;
+      const {
+        detail: { access: authToken, refresh: refreshToken },
+      } = await this.$api.authorizeUser(code, state);
 
-          cookie.set('auth', access);
-          cookie.set('refresh', refresh);
+      cookie.set('auth', authToken);
+      cookie.set('refresh', refreshToken);
 
-          this.$store.commit(MUTATIONS.SET_AUTH, access);
-          this.$store.dispatch('getUser', access);
+      this.$store.commit(MUTATIONS.SET_AUTH, authToken);
+      this.$store.dispatch('getUser', {
+        authToken,
+        refreshToken,
+      });
 
-          href.searchParams.delete('code');
-          href.searchParams.delete('state');
+      href.searchParams.delete('code');
+      href.searchParams.delete('state');
 
-          window.history.pushState(null, '', href.toString());
-        });
+      window.history.pushState(null, '', href.toString());
     }
   },
 };
