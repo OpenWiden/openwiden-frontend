@@ -6,7 +6,7 @@
         :options="options"
         :placeholder="placeholder"
         :label="optionLabel"
-        :clearable="true"
+        :clearable="false"
         :value="value"
         @input="onChange"
       >
