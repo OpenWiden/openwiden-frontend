@@ -29,7 +29,7 @@ module.exports = {
     '@/src/global/fonts.css',
     '@/src/global/global.css',
   ],
-  plugins: ['@/plugins/axios'],
+  plugins: ['@/plugins/axios', '@/plugins/api'],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
