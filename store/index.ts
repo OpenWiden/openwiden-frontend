@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import consola from 'consola';
 import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
 import { User } from '@/src/interfaces/User';
@@ -96,7 +97,7 @@ export const actions: any = {
 
       commit(MUTATIONS.SET_USER, user);
     } catch (err) {
-      console.log('-->', err);
+      consola.error(err);
     }
   },
 };
