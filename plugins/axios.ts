@@ -1,6 +1,7 @@
+import { Context } from '@nuxt/types';
 import consola from 'consola';
 
-export default function (context: any) {
+export default function (context: Context) {
   const { $axios, redirect } = context;
 
   $axios.onRequest((config: any) => {

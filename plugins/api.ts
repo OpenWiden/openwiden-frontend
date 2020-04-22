@@ -1,7 +1,9 @@
+import { Context } from '@nuxt/types';
+import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import config from '@/config';
 import { User } from '@/src/interfaces/User';
 
-const apiCreator = ($axios: any) => ({
+const apiCreator = ($axios: NuxtAxiosInstance) => ({
   getUser(authToken: string): Promise<User> {
     const user = $axios.$get(config.urls.user, {
       headers: {
@@ -26,6 +28,6 @@ const apiCreator = ($axios: any) => ({
   },
 });
 
-export default ({ $axios }: any, inject: any) => {
+export default ({ $axios }: Context, inject: any) => {
   inject('api', apiCreator($axios));
 };
