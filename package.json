@@ -58,6 +58,7 @@
     "scriptlint": "^2.1.1",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^20.0.0",
+    "ts-node": "^8.9.0",
     "vue-jest": "^4.0.0-0",
     "vue-property-decorator": "^8.4.1"
   },
