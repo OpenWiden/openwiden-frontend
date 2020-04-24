@@ -5,9 +5,9 @@
         {{ repository.name }}
       </the-text>
       <img
-        v-if="langIcon"
-        :src="langIcon"
-        :alt="repository.programming_language.name"
+        v-if="lang.icon"
+        :src="lang.icon"
+        :alt="lang.name"
         width="24"
         height="24"
       />
@@ -107,13 +107,16 @@ export default {
 
       return description;
     },
-    langIcon() {
+    lang() {
       const {
         programming_language: { name },
       } = this.$props.repository;
 
       try {
-        return require(`@/assets/svgs/prog-languages/${name}.svg`);
+        return {
+          icon: require(`@/assets/svgs/prog-languages/${name}.svg`),
+          name,
+        };
       } catch (err) {
         return null;
       }
