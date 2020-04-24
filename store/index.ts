@@ -1,6 +1,7 @@
 import consola from 'consola';
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
 import { User } from '@/src/interfaces/User';
