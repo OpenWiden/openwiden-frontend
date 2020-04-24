@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import config from '../../../config';
 import styles from './ReposFilters.css?module';
 import TheSelect from '@/src/components/TheSelect/TheSelect';
 import TheText from '@/src/components/TheText/TheText';
@@ -38,7 +39,7 @@ export default {
   },
   async beforeMount() {
     const { results } = await this.$axios.$get(
-      '/api/v1/programming_languages/'
+      config.urls.programming_languages
     );
     this.languages.push(...results);
   },

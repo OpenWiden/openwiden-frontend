@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import config from '../../../config';
 import styles from './ReposList.css?module';
 import TheText from '@/src/components/TheText/TheText.vue';
 import RepoCard from '@/src/components/RepoCard/RepoCard.vue';
@@ -95,7 +96,7 @@ export default class ReposList extends Vue {
 
   created() {
     this.$axios
-      .$get('/api/v1/repositories/')
+      .$get(config.urls.repositories)
       .then(({ count, results }) => {
         this.repos = results;
         this.reposCount = count;
