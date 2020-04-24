@@ -1,4 +1,3 @@
-import consola from 'consola';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -95,10 +94,8 @@ export const actions: any = {
       const user = await getUser(authToken);
 
       commit(MUTATIONS.SET_USER, user);
-    } catch (err) {
-      consola.error(`[ getUser ] ${err}`);
-
-      if (err.response.status === 403) {
+    } catch ({ response }) {
+      if (response.status === 403) {
         const { access } = await getRefreshedToken(refreshToken);
         const user = await getUser(access);
 
