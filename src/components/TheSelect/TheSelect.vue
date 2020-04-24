@@ -6,14 +6,14 @@
         :options="options"
         :placeholder="placeholder"
         :label="optionLabel"
-        :clearable="false"
+        :clearable="true"
         :value="value"
         @input="onChange"
       >
         <template #open-indicator="{ attributes }">
-          <span v-bind="attributes">
+          <button v-bind="attributes">
             <arrow-icon aria-hidden />
-          </span>
+          </button>
         </template>
       </v-select>
     </label>
@@ -121,13 +121,27 @@ export default {
   background-color: var(--secondary-bg-select);
 }
 
-.wrapper >>> .v-select .vs__open-indicator {
-  display: flex;
+.vs__open-indicator {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-.wrapper .v-select .vs__clear {
-  display: flex;
+.wrapper >>> .v-select .vs__open-indicator,
+.wrapper >>> .v-select .vs__clear {
+  width: 16px;
   height: 16px;
+}
+
+.wrapper >>> .v-select .vs__clear {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper >>> .v-select .vs__open-indicator svg,
+.wrapper >>> .v-select .vs__clear svg {
+  fill: rgba(255, 255, 255, 0.87);
 }
 
 .label {
@@ -137,7 +151,7 @@ export default {
 .labelText {
   position: absolute;
   z-index: 2;
-  top: 3px;
+  top: 4px;
   left: 10px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.8);
