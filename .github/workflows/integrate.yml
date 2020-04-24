@@ -20,5 +20,17 @@ jobs:
       - name: run tests
         run: yarn test
 
-      - name: lint
-        run: [yarn lint:packageScripts, yarn lint:ts]
+      - name: lint packages
+        run: yarn lint:packageScripts
+
+      - name: lint ts
+        run: yarn lint:ts
+
+      - name: lint css
+        run: yarn lint:styles
+
+      - name: lint prettier
+        run: yarn lint:prettier
+
+      - name: test
+        run: yarn test
