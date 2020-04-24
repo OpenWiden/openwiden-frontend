@@ -1,0 +1,13 @@
+name: 'CI'
+
+on:
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+  test_pull_request:
+    runs-on: node:10.15.1-slim
+    steps:
+      - run: yarn
+      - run: yarn build
+      - run: yarn test
