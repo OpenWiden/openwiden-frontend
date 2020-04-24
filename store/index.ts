@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import consola from 'consola';
+
 import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
 import { User } from '@/src/interfaces/User';
@@ -39,8 +39,7 @@ export const state = (): AppState => {
 };
 
 /**
- * Store mutations
- * Sync operations to change state
+ * Store mutations. Sync operations to change state
  */
 export const mutations = {
   [MUTATIONS.SET_AUTH](state: AppState, authToken: string): void {
@@ -76,28 +75,33 @@ export const mutations = {
 export const actions: any = {
   async nuxtServerInit({ commit, dispatch }: any, { req }: any): Promise<void> {
     const authToken = req.cookies?.auth || null;
+    const refreshToken = req.cookies?.refresh || null;
 
     commit(MUTATIONS.SET_AUTH, authToken);
 
-    await dispatch('getUser', authToken);
+    await dispatch('getUser', { authToken, refreshToken });
   },
 
   async getUser(
     { commit }: any,
-    accessToken = cookies.get('auth')
+    { authToken = cookies.get('auth'), refreshToken = cookies.get('refresh') }
   ): Promise<void | null> {
-    if (!accessToken) return null;
+    if (!authToken) return null;
+
+    const { getUser, getRefreshedToken } = this.$api;
 
     try {
-      const user = await this.$axios.$get('user/', {
-        headers: {
-          Authorization: `JWT ${accessToken}`,
-        },
-      });
+      const user = await getUser(authToken);
 
       commit(MUTATIONS.SET_USER, user);
-    } catch (err) {
-      consola.error(err);
+    } catch ({ response }) {
+      if (response.status === 403) {
+        const { access } = await getRefreshedToken(refreshToken);
+        const user = await getUser(access);
+
+        commit(MUTATIONS.SET_AUTH, access);
+        commit(MUTATIONS.SET_USER, user);
+      }
     }
   },
 };

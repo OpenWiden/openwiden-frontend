@@ -29,7 +29,7 @@ module.exports = {
     '@/src/global/fonts.css',
     '@/src/global/global.css',
   ],
-  plugins: ['@/plugins/axios'],
+  plugins: ['@/plugins/axios', '@/plugins/api'],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
@@ -38,7 +38,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://openwiden.com',
+    baseURL: 'https://openwiden.com/api/v1/',
     timeout: 5000,
   },
   build: {
