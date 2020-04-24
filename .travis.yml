@@ -1,28 +1,28 @@
-# language: node_js
+language: node_js
 
-# node_js:
-#   - 'stable'
+node_js:
+  - 'stable'
 
-# branches:
-#   only:
-#     - master
-#     - develop
+branches:
+  only:
+    - master
+    - develop
 
-# cache:
-#   yarn: true
-#   directories:
-#     - node_modules
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
-# install:
-#   - yarn install
+install:
+  - yarn install
 
-# jobs:
-#   include:
-#     - stage: control
-#       name: control
-#       script:
-#         - yarn lint:packageScripts
-#         - yarn lint:ts
-#         - yarn lint:styles
-#         - yarn lint:prettier
-#         - yarn test
+jobs:
+  include:
+    - stage: control
+      name: control
+      script:
+        - yarn lint:packageScripts
+        - yarn lint:ts
+        - yarn lint:styles
+        - yarn lint:prettier
+        - yarn test
