@@ -5,7 +5,7 @@
         {{ repository.name }}
       </the-text>
       <img
-        v-if="lang.icon"
+        v-if="lang"
         :src="lang.icon"
         :alt="lang.name"
         width="24"
