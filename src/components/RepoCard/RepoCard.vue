@@ -1,9 +1,16 @@
 <template>
   <a :class="styles.repoCard" href="#">
     <div :class="styles.repoCardHeader">
-      <the-text :class="styles.repoCardTitle" tag="p">{{
-        repository.name
-      }}</the-text>
+      <the-text :class="styles.repoCardTitle" tag="p">
+        {{ repository.name }}
+      </the-text>
+      <img
+        v-if="langIcon"
+        :src="langIcon"
+        :alt="repository.programming_language.name"
+        width="24"
+        height="24"
+      />
     </div>
     <div :class="styles.repoCardStats">
       <ul :class="styles.statsList">
@@ -99,6 +106,17 @@ export default {
       }
 
       return description;
+    },
+    langIcon() {
+      const {
+        programming_language: { name },
+      } = this.$props.repository;
+
+      try {
+        return require(`@/assets/svgs/prog-languages/${name}.svg`);
+      } catch (err) {
+        return null;
+      }
     },
   },
 };
