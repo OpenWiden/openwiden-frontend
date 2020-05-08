@@ -1,0 +1,24 @@
+.wrapper {
+  max-width: 1200px;
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.title {
+  text-align: center;
+}
+
+.repos {
+  margin-top: 150px;
+}
+
+.reposList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+  grid-gap: 45px;
+}
+
+.reposWrapper {
+  margin-top: 45px;
+}

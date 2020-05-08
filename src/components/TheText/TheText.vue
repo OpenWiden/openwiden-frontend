@@ -25,11 +25,15 @@ export default Vue.extend({
       type: String as PropType<Tag>,
       default: Tag.P,
     },
+    visuallyHidden: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classObject() {
-      const { tag } = this.$props;
-      return em('text')({ tag });
+      const { tag, visuallyHidden } = this.$props;
+      return em('text')({ tag, visuallyHidden });
     },
     styles() {
       return styles;

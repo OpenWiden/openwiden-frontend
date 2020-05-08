@@ -1,8 +1,8 @@
 .introduction {
-  background-image: url(~assets/svgs/introduction-bg.svg);
+  background-image: url(~assets/svgs/introduction-bg2.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 5px center;
+  background-position: 70px center;
 }
 
 .wrapper {
@@ -12,6 +12,7 @@
   align-items: center;
   max-width: 1200px;
   height: 100vh;
+  min-height: 680px;
   margin: 0 auto;
   padding: 0 30px;
 }

@@ -1,0 +1,14 @@
+.footer {
+  margin-top: 60px;
+  background-color: var(--dark-theme-secondary-bg);
+}
+
+.wrapper {
+  padding: 13px 30px;
+  text-align: center;
+}
+
+.copyrightText {
+  font-size: 14px;
+  text-align: center;
+}

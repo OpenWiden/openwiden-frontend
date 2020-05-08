@@ -1,0 +1,18 @@
+.filters {
+  margin-top: 35px;
+  padding: 25px 30px;
+  background-color: var(--dark-theme-thirdly-bg);
+  border-radius: 6px;
+}
+
+.filtersList {
+  display: flex;
+}
+
+.filterItem {
+  width: 200px;
+
+  & + & {
+    margin-left: 40px;
+  }
+}

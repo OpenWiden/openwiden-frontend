@@ -1,10 +1,12 @@
 module.exports = {
   mode: 'universal',
-  /*
-   ** Headers of the page
-   */
   head: {
-    title: 'OpenWiden',
+    server: {
+      port: process.env.PORT || '3000',
+    },
+    title:
+      'OpenWiden • Help out open source projects' ||
+      process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,44 +18,30 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
   typescript: {
     typeCheck: {
       eslint: true,
     },
   },
-  /*
-   ** Global CSS
-   */
-  css: ['@src/global/global.css'],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+  css: [
+    '@/src/global/variables.css',
+    '@/src/global/fonts.css',
+    '@/src/global/global.css',
+  ],
+  plugins: ['@/plugins/axios', '@/plugins/api'],
   buildModules: [
     '@nuxt/typescript-build',
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
   ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [],
-  /*
-   ** Build configuration
-   */
+  modules: ['@nuxtjs/axios'],
+
+  axios: {
+    baseURL: 'https://openwiden.com/api/v1/',
+    timeout: 5000,
+  },
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     postcss: {
       plugins: {
         'postcss-nested': {},

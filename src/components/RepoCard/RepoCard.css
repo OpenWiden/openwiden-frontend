@@ -1,0 +1,61 @@
+.repoCard {
+  display: block;
+  height: 100%;
+  padding: 20px 16px;
+  background-color: var(--dark-theme-third-bg);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: var(--primary-border-radius);
+  transition: all 0.15s;
+
+  &:hover,
+  &:focus {
+    transform: translateY(-12px);
+    background-color: rgba(56, 56, 56);
+  }
+}
+
+.repoCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repoCardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.repoCardDescription {
+  margin-top: 10px;
+  word-break: break-word;
+}
+
+.repoCardStats {
+  margin-top: 10px;
+}
+
+.statsList {
+  display: flex;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+
+  & + & {
+    margin-left: 15px;
+  }
+}
+
+.icon {
+  margin-right: 6px;
+}
+
+.iconStar {
+  margin-top: -4px;
+}
+
+.iconFork {
+  fill: rgba(255, 255, 255, 0.87);
+}
