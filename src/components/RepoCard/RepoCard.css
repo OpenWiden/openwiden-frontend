@@ -44,14 +44,18 @@
   align-items: center;
 
   & + & {
-    margin-left: 25px;
+    margin-left: 15px;
   }
 }
 
 .icon {
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
 .iconStar {
   margin-top: -4px;
+}
+
+.iconFork {
+  fill: rgba(255, 255, 255, 0.87);
 }
