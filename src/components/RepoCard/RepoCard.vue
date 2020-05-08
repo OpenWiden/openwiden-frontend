@@ -14,7 +14,7 @@
     </div>
     <div :class="styles.repoCardStats">
       <ul :class="styles.statsList">
-        <li v-if="starCount" :class="styles.statItem">
+        <li v-if="starsCount" :class="styles.statItem">
           <icon-star
             :class="[styles.icon, styles.iconStar]"
             width="16"
@@ -22,7 +22,7 @@
             aria-hidden="true"
           />
           <the-text :class="styles.statText" tag="span">
-            {{ starCount }}
+            {{ starsCount }}
           </the-text>
         </li>
         <li v-if="openIssuesCount" :class="styles.statItem">
@@ -34,6 +34,17 @@
           />
           <the-text :class="styles.statText" tag="span">
             {{ openIssuesCount }}
+          </the-text>
+        </li>
+        <li v-if="forksCount" :class="styles.statItem">
+          <fork-icon
+            :class="[styles.icon, styles.iconFork]"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          />
+          <the-text :class="styles.statText" tag="span">
+            {{ forksCount }}
           </the-text>
         </li>
       </ul>
@@ -51,31 +62,18 @@ import styles from './RepoCard.css?module';
 import TheText from '@/src/components/TheText/TheText';
 import IconStar from '@/src/components/Icons/IconStar';
 import IconIssue from '@/src/components/Icons/IconIssue';
+import ForkIcon from '@/src/components/Icons/ForkIcon';
+import getShortNumberFormat from '@/src/lib/getShortNumberFormat';
+import getShortStringFormat from '@/src/lib/getShortStringFormat';
 
-function getShortNumberFormat(number) {
-  const million = 1000000;
-  const thousand = 1000;
-
-  if (!number || number < 0) {
-    return null;
-  }
-
-  if (number >= million) {
-    return (number / million).toFixed(1) + 'm';
-  }
-
-  if (number >= thousand) {
-    return (number / thousand).toFixed(1) + 'k';
-  }
-
-  return number;
-}
+const MAX_WORDS = 40;
 
 export default {
   components: {
     TheText,
     IconStar,
     IconIssue,
+    ForkIcon,
   },
   props: {
     repository: {
@@ -88,28 +86,23 @@ export default {
       return styles;
     },
     openIssuesCount() {
-      return getShortNumberFormat(this.$props.repository.open_issues_count);
+      return getShortNumberFormat(this.$props.repository.openIssuesCount);
     },
-    starCount() {
-      return getShortNumberFormat(this.$props.repository.star_count);
+    starsCount() {
+      return getShortNumberFormat(this.$props.repository.starsCount);
+    },
+    forksCount() {
+      return getShortNumberFormat(this.$props.repository.forksCount);
     },
     description() {
-      const {
-        repository: { description },
-      } = this.$props;
-
-      const words = description.split(/\s/);
-      const MAX_WORDS = 40;
-
-      if (words.length >= MAX_WORDS) {
-        return words.slice(0, MAX_WORDS).join(' ') + '...';
-      }
-
-      return description;
+      return getShortStringFormat(
+        this.$props.repository.description,
+        MAX_WORDS
+      );
     },
     lang() {
       const {
-        programming_language: { name },
+        programmingLanguage: { name },
       } = this.$props.repository;
 
       try {

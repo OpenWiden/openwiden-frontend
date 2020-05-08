@@ -3,19 +3,12 @@ import Vuex from 'vuex';
 
 import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
-import { User } from '@/src/interfaces/User';
+import { User } from '@/src/interfaces/User/User';
 import { Provider } from '@/src/interfaces/Provider';
-import { Filters, Filter } from '@/src/interfaces/Filters';
+import { Filter } from '@/src/interfaces/Filters';
+import { AppState } from '@/src/interfaces/AppState';
 
 Vue.use(Vuex);
-
-interface AppState {
-  auth: string | null;
-  refresh: string | null;
-  user: User | null;
-  provider: Provider | null;
-  filters: Filters;
-}
 
 /**
  * Application store
@@ -27,8 +20,8 @@ export const state = (): AppState => {
     provider: null,
     user: null,
     filters: {
-      [Filter.STAR_COUNT]: null,
-      [Filter.OPEN_ISSUES_COUNT]: null,
+      [Filter.STARS_COUNT_GTE]: null,
+      [Filter.OPEN_ISSUES_COUNT_GTE]: null,
       [Filter.FORKS_COUNT]: null,
       [Filter.PROGRAMMING_LANGUAGE]: null,
       [Filter.VERSION_CONTROL_SERVICE]: null,

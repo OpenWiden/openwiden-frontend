@@ -1,5 +1,7 @@
 <template>
-  <button :class="$style.button" :title="title" :type="type"><slot /></button>
+  <button :class="$style.button" :title="title" :type="type" @click="onClick">
+    <slot />
+  </button>
 </template>
 
 <script lang="ts">
@@ -8,6 +10,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component
 export default class TheButton extends Vue {
   @Prop({ required: true }) title!: string;
+  @Prop() onClick!: () => {};
   @Prop({ required: true }) type!: 'button' | 'submit';
 }
 </script>
