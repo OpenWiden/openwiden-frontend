@@ -5,14 +5,14 @@ import {
 
 export interface RepositoriesData {
   count: number;
-  results: RepositoryData;
+  results: RepositoryData[];
   next?: string;
   previous?: string;
 }
 
 export interface Repositories {
   count: number;
-  results: Repository;
+  results: Repository[];
   next?: string;
   previous?: string;
 }
