@@ -107,7 +107,7 @@ export default {
 
       try {
         return {
-          icon: require(`@/assets/svgs/prog-languages/${name}.svg`),
+          icon: require(`@/static/prog-languages/${name}.svg`),
           name,
         };
       } catch (err) {
