@@ -3,7 +3,11 @@ import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import config from '@/config';
 
 import { UserData, User } from '@/src/interfaces/User/User';
-import { AuthorizationTokens } from '@/src/interfaces/AuthorizationTokens';
+import {
+  AuthorizationTokensData,
+  AuthorizationTokens,
+} from '@/src/interfaces/AuthorizationTokens/AuthorizationTokens';
+import authTokensResolver from '@/src/interfaces/AuthorizationTokens/resolver';
 import { AppState } from '@/src/interfaces/AppState';
 import {
   RepositoriesData,
@@ -57,9 +61,11 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => ({
   },
 
   authorizeUser(code: string, state: string): Promise<AuthorizationTokens> {
-    return $axios.$get<AuthorizationTokens>(
-      `auth/complete/${store.state.provider}/?code=${code}&state=${state}`
-    );
+    return $axios
+      .$get<AuthorizationTokensData>(
+        `auth/complete/${store.state.provider}/?code=${code}&state=${state}`
+      )
+      .then(authTokensResolver);
   },
 });
 
