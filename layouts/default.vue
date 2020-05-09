@@ -1,7 +1,7 @@
 <template>
   <div>
     <top-header />
-    <main role="main">
+    <main class="main" role="main">
       <nuxt />
     </main>
     <the-footer />
@@ -46,3 +46,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.main {
+  min-height: 100vh;
+}
+</style>
