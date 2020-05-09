@@ -1,6 +1,5 @@
 export interface AuthorizationTokensData {
-  access: string;
-  refresh: string;
+  detail: { access: string; refresh: string };
 }
 
 export interface AuthorizationTokens {

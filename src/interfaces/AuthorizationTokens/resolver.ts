@@ -4,8 +4,7 @@ import {
 } from './AuthorizationTokens';
 
 export default function authTokensResolver({
-  access,
-  refresh,
+  detail: { access, refresh },
 }: AuthorizationTokensData): AuthorizationTokens {
   return {
     authToken: access,
