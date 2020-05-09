@@ -20,31 +20,21 @@
 
               <div v-if="isSuggestOpen" :class="styles.suggest">
                 <ul :class="styles.suggestList">
-                  <li :class="styles.suggestItem">
+                  <li
+                    v-for="provider in providers"
+                    :key="provider.name"
+                    :class="styles.suggestItem"
+                  >
                     <a
                       :class="styles.suggestLink"
                       href="#"
-                      @click.prevent="login('github')"
+                      @click.prevent="login(provider.name)"
                     >
-                      GitHub
+                      {{ provider.label }}
                       <img
                         :class="styles.suggestItemIcon"
-                        src="~assets/svgs/github-logo.svg"
-                        alt="GitHub Logo"
-                      />
-                    </a>
-                  </li>
-                  <li :class="styles.suggestItem">
-                    <a
-                      :class="styles.suggestLink"
-                      href="#"
-                      @click.prevent="login('gitlab')"
-                    >
-                      GitLab
-                      <img
-                        :class="styles.suggestItemIcon"
-                        src="~assets/svgs/gitlab-logo.svg"
-                        alt="GitLub Logo"
+                        :src="provider.icon"
+                        :alt="`${provider.label} logo`"
                       />
                     </a>
                   </li>
@@ -82,11 +72,9 @@
 </template>
 
 <script>
-import cookie from 'js-cookie';
 import styles from './TopHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
 import ClickedOutside from '@/src/components/ClickedOutside/ClickedOutside';
-import { MUTATIONS } from '@/store/mutationTypes';
 
 export default {
   components: {
@@ -94,7 +82,21 @@ export default {
     ClickedOutside,
   },
   data() {
-    return { isSuggestOpen: false };
+    return {
+      isSuggestOpen: false,
+      providers: [
+        {
+          name: 'github',
+          label: 'GitHub',
+          icon: require('@/assets/svgs/github-logo.svg'),
+        },
+        {
+          name: 'gitlab',
+          label: 'GitLab',
+          icon: require('@/assets/svgs/gitlab-logo.svg'),
+        },
+      ],
+    };
   },
   computed: {
     styles() {
@@ -112,10 +114,7 @@ export default {
       this.isSuggestOpen = false;
     },
     logout() {
-      cookie.remove('auth');
-      cookie.remove('refresh');
-      cookie.remove('provider');
-      this.$store.commit(MUTATIONS.RESET_AUTH);
+      this.$store.dispatch('logoutUser');
     },
     login(provider) {
       const loginUrl = new URL(
@@ -123,7 +122,7 @@ export default {
         this.$axios.defaults.baseURL
       );
 
-      this.$store.commit(MUTATIONS.SET_PROVIDER, provider);
+      this.$store.dispatch('loginUser', { provider });
 
       loginUrl.searchParams.set('redirect_uri', window.location.href);
 
