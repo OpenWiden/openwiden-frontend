@@ -14,7 +14,7 @@ export const DATA_STATUS: Record<string, DATA_STATUSES> = {
 };
 
 export interface Data<T> {
-  status: DATA_STATUSES;
+  loadingStatus: DATA_STATUSES;
   errorText: string;
   data: T[] | null;
 }

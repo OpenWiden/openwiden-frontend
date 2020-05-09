@@ -8,7 +8,7 @@
       <repos-filters :on-search="getRepos" />
 
       <div :class="styles.reposWrapper">
-        <div v-if="repos.status === DATA_STATUS.LOADING">
+        <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">
           <ul :class="styles.reposList">
             <li
               v-for="item in preloaderCards"
@@ -20,14 +20,14 @@
           </ul>
         </div>
 
-        <div v-else-if="repos.status === DATA_STATUS.FAILED">
+        <div v-else-if="repos.loadingStatus === DATA_STATUS.FAILED">
           <the-text :class="styles.title" tag="p">
             An error occurred while loading the repositories
           </the-text>
         </div>
 
         <div
-          v-else-if="repos.status === DATA_STATUS.IDLE"
+          v-else-if="repos.loadingStatus === DATA_STATUS.IDLE"
           :class="styles.reposWrapper"
         >
           <the-text :class="styles.title" tag="p">
@@ -35,7 +35,7 @@
           </the-text>
         </div>
 
-        <div v-else-if="repos.status === DATA_STATUS.LOADED">
+        <div v-else-if="repos.loadingStatus === DATA_STATUS.LOADED">
           <ul :class="styles.reposList">
             <li
               v-for="repo in repos.data"
@@ -77,7 +77,7 @@ export default class ReposList extends Vue {
   preloaderCards: number[] = new Array(8);
 
   repos: Data<Repository> = {
-    status: DATA_STATUS.NOT_ASKED,
+    loadingStatus: DATA_STATUS.NOT_ASKED,
     errorText: '',
     data: null,
   };
@@ -87,22 +87,22 @@ export default class ReposList extends Vue {
   }
 
   public getRepos() {
-    this.repos.status = DATA_STATUS.LOADING;
+    this.repos.loadingStatus = DATA_STATUS.LOADING;
 
     this.$api
       .getRepositories()
       .then(({ results, count }) => {
         if (!results.length) {
-          this.repos.status = DATA_STATUS.IDLE;
+          this.repos.loadingStatus = DATA_STATUS.IDLE;
           return;
         }
 
         this.repos.data = results;
         this.reposCount = count;
-        this.repos.status = DATA_STATUS.LOADED;
+        this.repos.loadingStatus = DATA_STATUS.LOADED;
       })
       .catch((err) => {
-        this.repos.status = DATA_STATUS.FAILED;
+        this.repos.loadingStatus = DATA_STATUS.FAILED;
         this.repos.errorText = err.message;
       });
   }
