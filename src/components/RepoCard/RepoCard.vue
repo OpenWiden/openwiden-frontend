@@ -1,5 +1,5 @@
 <template>
-  <a :class="styles.repoCard" href="#">
+  <nuxt-link :class="styles.repoCard" :to="`/repo/${repository.id}`">
     <div :class="styles.repoCardHeader">
       <the-text :class="styles.repoCardTitle" tag="p">
         {{ repository.name }}
@@ -54,7 +54,7 @@
         {{ description }}
       </the-text>
     </div>
-  </a>
+  </nuxt-link>
 </template>
 
 <script>
