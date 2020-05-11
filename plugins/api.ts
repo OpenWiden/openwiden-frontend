@@ -79,10 +79,14 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => ({
 
     const baseUrl = url || `${config.urls.repositories}${id}/issues`;
 
-    return $axios.$get<FetchingData<IssueData>>(baseUrl).then((data) => ({
-      ...data,
-      results: data.results.map(issueResolver),
-    }));
+    return $axios.$get<FetchingData<IssueData>>(baseUrl).then((data) => {
+      const results = data.results as IssueData[];
+
+      return {
+        ...data,
+        results: results.map(issueResolver),
+      };
+    });
   },
 
   getProgrammingLanguages(): Promise<ProgrammingLanguage[]> {
