@@ -1,0 +1,78 @@
+.wrapper {
+  max-width: 768px;
+  margin: 70px auto 0 auto;
+  padding: 30px;
+  background-color: var(--dark-theme-third-bg);
+  border-radius: 6px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.description {
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.texts {
+  max-width: 85%;
+}
+
+.info {
+  font-size: 14px;
+  color: #dadada;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+}
+
+.paginationButton {
+  max-width: 340px;
+}
+
+.issuesBlock {
+  margin-top: 45px;
+}
+
+.issuesList {
+  margin-top: 4px;
+}
+
+.issueLink {
+  display: flex;
+}
+
+.issue {
+  &:not(:last-of-type) {
+    & .issueLink {
+      position: relative;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #c4c4c4;
+      transition: all var(--primary-transition-time);
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+        border-bottom: 1px solid var(--dark-theme-primary-accent-bg);
+      }
+    }
+  }
+}
+
+.issueDescription {
+  margin-left: 10px;
+}
+
+.issueIcon {
+  margin-top: 3px;
+}
