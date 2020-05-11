@@ -1,4 +1,4 @@
-export interface Data<T> {
+export interface FetchingData<T> {
   count: number;
   next?: string;
   previous?: string;

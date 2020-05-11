@@ -20,7 +20,7 @@ import {
 import userResolver from '@/src/interfaces/User/resolver';
 import repositoryResolver from '@/src/interfaces/Repository/resolver';
 import { ProgrammingLanguage } from '@/src/interfaces/ProgrammingLanguage';
-import { Data } from '@/src/interfaces/Data';
+import { FetchingData } from '@/src/interfaces/FetchingData';
 import { IssueData, Issue } from '@/src/interfaces/Issue/Issue';
 import issueResolver from '@/src/interfaces/Issue/resolver';
 
@@ -74,12 +74,12 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => ({
   getRepositoryIssues(
     id: string,
     url?: string | null
-  ): null | Promise<Data<Issue>> {
+  ): null | Promise<FetchingData<Issue>> {
     if (!id) return null;
 
     const baseUrl = url || `${config.urls.repositories}${id}/issues`;
 
-    return $axios.$get<Data<IssueData>>(baseUrl).then((data) => ({
+    return $axios.$get<FetchingData<IssueData>>(baseUrl).then((data) => ({
       ...data,
       results: data.results.map(issueResolver),
     }));
