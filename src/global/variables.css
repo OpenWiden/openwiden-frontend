@@ -36,4 +36,7 @@
 
   /* avatar */
   --bg-avatar: #424242;
+
+  /* transitions */
+  --primary-transition-time: 0.15s;
 }
