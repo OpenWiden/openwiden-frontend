@@ -7,32 +7,45 @@
 
       <repos-filters :on-search="getRepos" />
 
-      <div v-if="areReposLoading" :class="styles.reposWrapper">
-        <ul :class="styles.reposList">
-          <li v-for="item in new Array(8)" :key="item" :class="styles.repoItem">
-            <repo-card-skeleton />
-          </li>
-        </ul>
-      </div>
+      <div :class="styles.reposWrapper">
+        <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">
+          <ul :class="styles.reposList">
+            <li
+              v-for="item in preloaderCards"
+              :key="item"
+              :class="styles.repoItem"
+            >
+              <repo-card-skeleton />
+            </li>
+          </ul>
+        </div>
 
-      <div v-else-if="!areReposLoading && error" :class="styles.reposWrapper">
-        <the-text :class="styles.title" tag="p">
-          An error occurred while loading the repositories
-        </the-text>
-      </div>
+        <div v-else-if="repos.loadingStatus === DATA_STATUS.FAILED">
+          <the-text :class="styles.title" tag="p">
+            An error occurred while loading the repositories
+          </the-text>
+        </div>
 
-      <div v-else-if="repos.length === 0" :class="styles.reposWrapper">
-        <the-text :class="styles.title" tag="p">
-          There are no suitable repositories to show
-        </the-text>
-      </div>
+        <div
+          v-else-if="repos.loadingStatus === DATA_STATUS.IDLE"
+          :class="styles.reposWrapper"
+        >
+          <the-text :class="styles.title" tag="p">
+            There are no suitable repositories to show
+          </the-text>
+        </div>
 
-      <div v-else :class="styles.reposWrapper">
-        <ul :class="styles.reposList">
-          <li v-for="repo in repos" :key="repo.name" :class="styles.repoItem">
-            <repo-card :repository="repo" />
-          </li>
-        </ul>
+        <div v-else-if="repos.loadingStatus === DATA_STATUS.LOADED">
+          <ul :class="styles.reposList">
+            <li
+              v-for="repo in repos.data"
+              :key="repo.name"
+              :class="styles.repoItem"
+            >
+              <repo-card :repository="repo" />
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -45,7 +58,8 @@ import TheText from '@/src/components/TheText/TheText.vue';
 import RepoCard from '@/src/components/RepoCard/RepoCard.vue';
 import ReposFilters from '@/src/components/ReposFilters/ReposFilters.vue';
 import RepoCardSkeleton from '@/src/components/RepoCardSkeleton/RepoCardSkeleton.vue';
-import { Repository } from '@/src/interfaces/Repository';
+import { Repository } from '@/src/interfaces/Repository/Repository';
+import { Data, DATA_STATUS } from '@/src/interfaces/Data';
 
 @Component({
   components: {
@@ -56,26 +70,40 @@ import { Repository } from '@/src/interfaces/Repository';
   },
 })
 export default class ReposList extends Vue {
-  areReposLoading: boolean = true;
+  DATA_STATUS = DATA_STATUS;
+
   reposCount: number = 0;
-  repos: Repository[] | null = null;
-  error: boolean = false;
+
+  preloaderCards: number[] = new Array(8);
+
+  repos: Data<Repository> = {
+    loadingStatus: DATA_STATUS.NOT_ASKED,
+    errorText: '',
+    data: null,
+  };
 
   async created() {
     await this.getRepos();
   }
 
   public getRepos() {
+    this.repos.loadingStatus = DATA_STATUS.LOADING;
+
     this.$api
       .getRepositories()
       .then(({ results, count }) => {
-        this.repos = results;
+        if (!results.length) {
+          this.repos.loadingStatus = DATA_STATUS.IDLE;
+          return;
+        }
+
+        this.repos.data = results;
         this.reposCount = count;
-        this.areReposLoading = false;
+        this.repos.loadingStatus = DATA_STATUS.LOADED;
       })
       .catch((err) => {
-        this.error = err;
-        this.areReposLoading = false;
+        this.repos.loadingStatus = DATA_STATUS.FAILED;
+        this.repos.errorText = err.message;
       });
   }
 
