@@ -1,5 +1,11 @@
 <template>
-  <button :class="$style.button" :title="title" :type="type" @click="onClick">
+  <button
+    :class="{ [$style.button]: true, [$style.disabled]: disabled }"
+    :title="title"
+    :type="type"
+    :disabled="disabled"
+    @click="onClick"
+  >
     <slot />
   </button>
 </template>
@@ -7,11 +13,17 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
+enum ButtonType {
+  SUBMIT = 'submit',
+  BUTTON = 'button',
+}
+
 @Component
 export default class TheButton extends Vue {
   @Prop({ required: true }) title!: string;
-  @Prop() onClick!: () => {};
-  @Prop({ required: true }) type!: 'button' | 'submit';
+  @Prop({ default: false }) disabled!: boolean;
+  @Prop({ default: ButtonType.BUTTON }) type!: ButtonType;
+  @Prop() onClick!: () => void;
 }
 </script>
 
@@ -34,6 +46,17 @@ export default class TheButton extends Vue {
   &:hover,
   &:focus {
     background-color: var(--primary-hover-bg-button);
+  }
+}
+
+.disabled {
+  background-color: #8a4dee;
+  opacity: 0.5;
+  cursor: no-drop;
+
+  &:hover,
+  &:focus {
+    background-color: #8a4dee;
   }
 }
 </style>
