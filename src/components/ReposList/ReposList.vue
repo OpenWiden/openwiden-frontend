@@ -11,8 +11,8 @@
         <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">
           <ul :class="styles.reposList">
             <li
-              v-for="item in preloaderCards"
-              :key="item"
+              v-for="index in preloaderCards"
+              :key="index"
               :class="styles.repoItem"
             >
               <repo-card-skeleton />
@@ -59,7 +59,7 @@ import RepoCard from '@/src/components/RepoCard/RepoCard.vue';
 import ReposFilters from '@/src/components/ReposFilters/ReposFilters.vue';
 import RepoCardSkeleton from '@/src/components/RepoCardSkeleton/RepoCardSkeleton.vue';
 import { Repository } from '@/src/interfaces/Repository/Repository';
-import { Data, DATA_STATUS } from '@/src/interfaces/Data';
+import { Data, DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
 
 @Component({
   components: {
@@ -74,13 +74,9 @@ export default class ReposList extends Vue {
 
   reposCount: number = 0;
 
-  preloaderCards: number[] = new Array(8);
+  preloaderCards: number = 8;
 
-  repos: Data<Repository> = {
-    loadingStatus: DATA_STATUS.NOT_ASKED,
-    errorText: '',
-    data: null,
-  };
+  repos: Data<Repository> = { ...DEFAULT_DATA_OBJECT };
 
   async created() {
     await this.getRepos();
