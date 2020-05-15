@@ -63,7 +63,7 @@
           :class="[styles.issuesList]"
         >
           <li
-            v-for="index in 10"
+            v-for="index in issuesSkeletons"
             :key="index"
             :class="[styles.issue, styles.loadingIssue]"
           >
@@ -176,6 +176,7 @@ export default {
         next: null,
       },
       repoID: this.$route.params.id,
+      issuesSkeletons: 10,
     };
   },
   computed: {
