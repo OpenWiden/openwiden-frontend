@@ -18,3 +18,9 @@ export interface Data<T> {
   errorText: string;
   data: T[] | null;
 }
+
+export const DEFAULT_DATA_OBJECT = {
+  loadingStatus: DATA_STATUS.NOT_ASKED,
+  errorText: '',
+  data: null,
+};
