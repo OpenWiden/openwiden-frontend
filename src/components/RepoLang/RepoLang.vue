@@ -1,13 +1,11 @@
 <template>
-  <div v-if="language.icon">
-    <img
-      v-if="language"
-      :src="language.icon"
-      :alt="language.name"
-      :width="width"
-      :height="height"
-    />
-  </div>
+  <img
+    v-if="language"
+    :src="language.icon"
+    :alt="language.name"
+    :width="width"
+    :height="height"
+  />
 </template>
 
 <script>
