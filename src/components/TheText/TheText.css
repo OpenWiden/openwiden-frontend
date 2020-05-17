@@ -29,10 +29,8 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: var(--tablet-width)) {
   .text {
-    word-break: break-word;
-
     &_tag {
       &_h1 {
         font-size: 42px;
