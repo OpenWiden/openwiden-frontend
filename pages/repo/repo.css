@@ -1,7 +1,11 @@
+.repo {
+  padding: 0 20px;
+}
+
 .wrapper {
   max-width: 768px;
   margin: 70px auto 0 auto;
-  padding: 30px;
+  padding: 25px 15px;
   background-color: var(--dark-theme-third-bg);
   border-radius: 6px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
@@ -22,26 +26,29 @@
 }
 
 .texts {
-  max-width: 85%;
+  flex-grow: 1;
+  max-width: 80%;
 }
 
 .info {
+  margin-top: 4px;
   font-size: 14px;
   color: #dadada;
 }
 
+.statsList {
+  margin-top: 3px;
+}
+
 .pagination {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  grid-gap: var(--m-size);
   margin-top: 35px;
 }
 
-.paginationButton {
-  max-width: 340px;
-}
-
 .issuesBlock {
-  margin-top: 45px;
+  margin-top: var(--l-size);
 }
 
 .issuesList {
@@ -74,10 +81,11 @@
 }
 
 .issueIcon {
+  flex-shrink: 0;
   margin-top: 3px;
 }
 
-@keyframes aniVertical {
+@keyframes animationAppearance {
   0% {
     opacity: 0;
   }
@@ -92,7 +100,7 @@
 }
 
 .loadingIssue {
-  animation: aniVertical 4.5s ease;
+  animation: animationAppearance 4.5s ease;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
   opacity: 0;
@@ -135,45 +143,15 @@
   }
 }
 
-@keyframes pulse {
-  from {
-    background-position-x: 0;
+@media (min-width: 768px) {
+  .wrapper {
+    max-width: 768px;
+    margin: 70px auto 0 auto;
+    padding: 25px;
   }
 
-  to {
-    background-position: -135%;
+  .progLangIcon {
+    width: 34px;
+    height: 34px;
   }
-}
-
-.issueSkeleton {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    -90deg,
-    rgb(48, 48, 48) 0%,
-    rgb(51, 51, 51) 50%,
-    rgb(48, 48, 48) 100%
-  );
-  background-size: 400% 400%;
-  animation: pulse 1.2s ease-in-out infinite;
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-.issueSkeletonLine {
-  width: 10em;
-  height: 0.7em;
-  border-radius: 2px;
-
-  & + & {
-    margin-top: 6px;
-  }
-
-  &::before {
-    content: '\00a0';
-  }
-}
-
-.skeletonCirce {
-  border-radius: 100%;
 }
