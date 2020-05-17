@@ -29,6 +29,9 @@ export default class TheButton extends Vue {
 
 <style module scoped>
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 10px 20px;
