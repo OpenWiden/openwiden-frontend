@@ -52,4 +52,7 @@
 
   /* transitions */
   --primary-transition-time: 0.15s;
+
+  /** issue  #8a4dee */
+  --issue-border-hover: #7e44f2;
 }

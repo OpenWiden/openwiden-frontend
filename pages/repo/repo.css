@@ -52,7 +52,7 @@
 }
 
 .issuesList {
-  margin-top: 4px;
+  margin-top: var(--s-size);
 }
 
 .issueLink {
@@ -70,7 +70,7 @@
 
       &:hover,
       &:focus {
-        border-bottom: 1px solid var(--dark-theme-primary-accent-bg);
+        border-bottom: 1px solid var(--issue-border-hover);
       }
     }
   }
