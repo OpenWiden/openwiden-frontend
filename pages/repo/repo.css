@@ -3,7 +3,7 @@
 }
 
 .wrapper {
-  max-width: 768px;
+  max-width: var(--tablet-width);
   margin: 70px auto 0 auto;
   padding: 25px 15px;
   background-color: var(--dark-theme-third-bg);
