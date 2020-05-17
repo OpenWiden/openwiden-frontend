@@ -1,4 +1,17 @@
 :root {
+  /** resolutions */
+  --mobile-width: 320px;
+  --tablet-width: 768px;
+  --desktop-width: 1024px;
+
+  /* sizes */
+  --size-xxs: 2px;
+  --size-xs: 4px;
+  --size-s: 8px;
+  --size-m: 16px;
+  --size-l: 32px;
+  --size-xl: 64px;
+
   /* fonts */
   --primary-font: 'Circe', 'Arial', sans-serif;
 
@@ -12,7 +25,7 @@
   --dark-them-preloader-bg: rgba(255, 255, 255, 0.95);
 
   /* main theme accent colors */
-  --dark-theme-primary-accent-bg: #8a4dee;
+  --dark-theme-primary-accent-bg: #6328c2;
 
   /* buttons */
   --primary-bg-button: #8a4dee;
@@ -36,4 +49,10 @@
 
   /* avatar */
   --bg-avatar: #424242;
+
+  /* transitions */
+  --primary-transition-time: 0.15s;
+
+  /** issue  #8a4dee */
+  --issue-border-hover: #7e44f2;
 }

@@ -1,12 +1,14 @@
 .text {
+  word-break: break-word;
+
   &_tag {
     &_h1 {
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 700;
     }
 
     &_h2 {
-      font-size: 34px;
+      font-size: 24px;
       font-weight: 700;
     }
 
@@ -24,5 +26,19 @@
     padding: 0;
     clip: rect(0 0 0 0);
     overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .text {
+    &_tag {
+      &_h1 {
+        font-size: 42px;
+      }
+
+      &_h2 {
+        font-size: 34px;
+      }
+    }
   }
 }
