@@ -7,7 +7,7 @@
   margin: 70px auto 0 auto;
   padding: 25px 15px;
   background-color: var(--dark-theme-third-bg);
-  border-radius: 6px;
+  border-radius: var(--primary-border-radius);
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
