@@ -43,16 +43,16 @@
 .pagination {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-  grid-gap: var(--m-size);
+  grid-gap: var(--size-m);
   margin-top: 35px;
 }
 
 .issuesBlock {
-  margin-top: var(--l-size);
+  margin-top: var(--size-l);
 }
 
 .issuesList {
-  margin-top: var(--s-size);
+  margin-top: var(--size-s);
 }
 
 .issueLink {
