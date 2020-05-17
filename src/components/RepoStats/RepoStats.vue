@@ -7,7 +7,7 @@
         height="16"
         aria-hidden="true"
       />
-      <the-text :class="styles.statText" tag="span">
+      <the-text tag="span">
         {{ formattedStarsCount }}
       </the-text>
     </li>
@@ -18,7 +18,7 @@
         height="16"
         aria-hidden="true"
       />
-      <the-text :class="styles.statText" tag="span">
+      <the-text tag="span">
         {{ formattedIssuesCount }}
       </the-text>
     </li>
@@ -29,7 +29,7 @@
         height="16"
         aria-hidden="true"
       />
-      <the-text :class="styles.statText" tag="span">
+      <the-text tag="span">
         {{ formattedForksCount }}
       </the-text>
     </li>
