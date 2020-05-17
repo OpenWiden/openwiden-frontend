@@ -85,7 +85,7 @@
   margin-top: 3px;
 }
 
-@keyframes animationAppearance {
+@keyframes animateIssueAppearance {
   0% {
     opacity: 0;
   }
@@ -100,7 +100,7 @@
 }
 
 .loadingIssue {
-  animation: animationAppearance 4.5s ease;
+  animation: animateIssueAppearance 4.5s ease;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
   opacity: 0;
