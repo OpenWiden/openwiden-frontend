@@ -29,7 +29,7 @@
   }
 }
 
-@media (min-width: var(--tablet-width)) {
+@media (min-width: 768px) {
   .text {
     &_tag {
       &_h1 {

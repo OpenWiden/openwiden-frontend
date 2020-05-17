@@ -143,7 +143,7 @@
   }
 }
 
-@media (min-width: var(--tablet-width)) {
+@media (min-width: 768px) {
   .wrapper {
     margin: 70px auto 0 auto;
     padding: 25px;
