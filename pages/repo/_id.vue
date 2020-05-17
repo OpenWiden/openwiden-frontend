@@ -214,7 +214,6 @@ export default {
             this.issues.data = results;
             this.issues.loadingStatus = DATA_STATUS.LOADED;
           } else {
-            this.issues.data = null;
             this.issues.loadingStatus = DATA_STATUS.IDLE;
           }
 
