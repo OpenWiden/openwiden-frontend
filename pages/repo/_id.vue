@@ -166,7 +166,6 @@ export default {
   data() {
     return {
       DATA_STATUS,
-      DEFAULT_DATA_OBJECT,
       repository: { ...DEFAULT_DATA_OBJECT },
       issues: { ...DEFAULT_DATA_OBJECT },
       pagination: {
