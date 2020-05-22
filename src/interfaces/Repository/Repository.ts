@@ -3,7 +3,7 @@ import { ProgrammingLanguage } from '../ProgrammingLanguage';
 
 export interface RepositoryData {
   id?: string;
-  version_control_service: string;
+  vcs: string;
   name: string;
   description?: string;
   url: string;
@@ -17,7 +17,7 @@ export interface RepositoryData {
 
 export interface Repository {
   id?: string;
-  versionControlService: string;
+  vcs: string;
   name: string;
   description?: string;
   url: string;
