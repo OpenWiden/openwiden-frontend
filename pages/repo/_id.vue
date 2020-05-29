@@ -24,7 +24,7 @@
           <div>
             <skeleton
               :class="styles.progLangIcon"
-              :style="{ width: '30px', height: '30px' }"
+              :style="{ width: '34px', height: '34px' }"
               is-circle
             />
           </div>

@@ -1,5 +1,10 @@
 <template>
-  <svg viewBox="0 0 56 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 56 21"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-lable="Open Widen logo"
+  >
     <g clip-path="url(#clip0)">
       <path
         d="M35.21 19.77L25.35 3.66998C24.63 2.49998 25.06 0.999979 26.3 0.329979C27.54 -0.350021 29.13 0.0499793 29.85 1.21998L39.71 17.32C40.43 18.49 40 19.99 38.76 20.66C37.51 21.35 35.92 20.95 35.21 19.77Z"

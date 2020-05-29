@@ -78,6 +78,8 @@ export const actions: any = {
     const refreshToken = req.cookies?.refresh || null;
     const provider = req.cookies?.provider || null;
 
+    console.log('actions -->', provider);
+
     commit(MUTATIONS.SET_PROVIDER, provider);
     commit(MUTATIONS.SET_AUTH, authToken);
     commit(MUTATIONS.SET_REFRESH, refreshToken);

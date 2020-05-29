@@ -87,7 +87,8 @@ export default {
       })
       .catch((err) => {
         // TODO: Remove this when pl endpoint will exist
-        console.log(err);
+        // console.log(err);
+        console.log('-->', err.message);
       });
   },
   methods: {
