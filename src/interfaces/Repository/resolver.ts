@@ -9,7 +9,7 @@ export default function repositoryResolver(
     name,
     description,
     url,
-    versionControlService: repository.version_control_service,
+    vcs: repository.vcs,
     starsCount: repository.stars_count,
     openIssuesCount: repository.open_issues_count,
     forksCount: repository.forks_count,

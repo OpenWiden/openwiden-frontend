@@ -34,7 +34,7 @@ export default class TheButton extends Vue {
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 10px 20px;
+  padding: var(--size-s) var(--size-m);
   background-color: var(--primary-bg-button);
   border: unset;
   border-radius: var(--primary-border-radius-button);

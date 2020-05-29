@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  min-height: 51px;
+  padding: var(--size-s) 0;
   background-color: var(--dark-theme-secondary-bg);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.24);
 }
@@ -12,7 +12,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .headerNavList {
@@ -52,25 +52,32 @@
   }
 }
 
-.logoText {
-  margin: 4px 0 0 10px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--dark-theme-primary-typo);
+.logoLabel {
+  display: none;
+}
+
+.navWrapper {
+  &_mobile {
+    display: block;
+  }
+
+  &_desktop {
+    display: none;
+  }
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
   margin-right: 10px;
-  background-color: var(--bg-avatar);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 100%;
+}
+
+.avatarButton {
+  display: flex;
+  justify-content: center;
 }
 
 .suggest {
   position: absolute;
-  top: 30px;
+  top: 40px;
   right: 0;
   min-width: 115px;
   padding: 4px 0;
@@ -95,4 +102,28 @@
 .suggestItemIcon {
   width: 18px;
   height: 18px;
+}
+
+@media (min-width: 768px) {
+  .headerWrapper {
+    padding: 0 30px;
+  }
+
+  .navWrapper {
+    &_mobile {
+      display: none;
+    }
+
+    &_desktop {
+      display: block;
+    }
+  }
+
+  .logoLabel {
+    display: block;
+    margin: 4px 0 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark-theme-primary-typo);
+  }
 }
