@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     language() {
-      const { name } = this.$props.programmingLanguage;
+      // TODO: uncomment when progLang will exist const { name } = this.$props.programmingLanguage;
 
       try {
         return {
