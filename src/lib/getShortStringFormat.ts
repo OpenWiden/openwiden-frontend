@@ -1,4 +1,6 @@
 function getShortStringFormat(string: string, maxWords: number): string {
+  if (!string || !string.length) return 'No description was provided';
+
   const words = string.split(/\s/);
 
   if (words.length <= maxWords) {
