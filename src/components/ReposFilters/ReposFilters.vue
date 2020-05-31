@@ -27,9 +27,14 @@
         />
       </li>
       <li :class="styles.filterItem">
-        <the-button type="button" title="Search" :on-click="onSearch"
-          >Search</the-button
+        <the-button
+          :class="styles.searchButton"
+          type="button"
+          title="Search"
+          :on-click="onSearch"
         >
+          Search
+        </the-button>
       </li>
     </ul>
   </div>

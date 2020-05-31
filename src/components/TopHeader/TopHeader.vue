@@ -75,6 +75,7 @@
 import styles from './TopHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
 import ClickedOutside from '@/src/components/ClickedOutside/ClickedOutside';
+import loginUser from '@/src/lib/loginUser/';
 
 export default {
   components: {
@@ -115,18 +116,12 @@ export default {
     },
     logout() {
       this.$store.dispatch('logoutUser');
+
+      window.location = window.location.origin;
     },
-    login(provider) {
-      const loginUrl = new URL(
-        `auth/login/${provider}/`,
-        this.$axios.defaults.baseURL
-      );
-
-      this.$store.dispatch('loginUser', { provider });
-
-      loginUrl.searchParams.set('redirect_uri', window.location.href);
-
-      window.location.href = loginUrl.toString();
+    login(vsc) {
+      const { $axios, $store } = this;
+      loginUser(vsc, $axios.defaults.baseURL, $store.dispatch);
     },
   },
 };
