@@ -67,15 +67,11 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
     addUserRepository(id: string): Promise<void> {
       const url = `${userURL.repositories}${id}/add/`;
 
-      return $axios
-        .$post<void>(url, null, {
-          headers: {
-            Authorization: `JWT ${store.state.auth}`,
-          },
-        })
-        .then((data) => {
-          console.log('data -->', data);
-        });
+      return $axios.$post<void>(url, null, {
+        headers: {
+          Authorization: `JWT ${store.state.auth}`,
+        },
+      });
     },
 
     getRefreshedToken(refreshToken: string): Promise<string> {
