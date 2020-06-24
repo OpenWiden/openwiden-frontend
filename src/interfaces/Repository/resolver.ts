@@ -3,13 +3,15 @@ import { RepositoryData, Repository } from './Repository';
 export default function repositoryResolver(
   repository: RepositoryData
 ): Repository {
-  const { id, name, description, url, vcs } = repository;
+  const { id, name, description, url, vcs, visibility } = repository;
   return {
     id,
     name,
     description,
     url,
     vcs,
+    visibility,
+    isAdded: repository.is_added,
     starsCount: repository.stars_count,
     openIssuesCount: repository.open_issues_count,
     forksCount: repository.forks_count,

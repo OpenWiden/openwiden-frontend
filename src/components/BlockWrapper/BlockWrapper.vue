@@ -12,6 +12,12 @@ export default {};
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: var(--size-m);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: var(--size-l);
+  }
 }
 </style>

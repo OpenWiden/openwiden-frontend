@@ -56,9 +56,9 @@
             </a>
           </li>
           <li :class="styles.headerNavItem">
-            <a :class="styles.headerNavLink" href="#">
+            <n-link :class="styles.headerNavLink" href="#" to="/repos/add/">
               Submit repo
-            </a>
+            </n-link>
           </li>
           <li :class="styles.headerNavItem">
             <button :class="styles.headerNavLink" @click="logout">

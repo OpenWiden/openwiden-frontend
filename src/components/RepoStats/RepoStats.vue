@@ -1,6 +1,8 @@
 <template>
   <ul :class="styles.statsList">
-    <li v-if="formattedStarsCount" :class="styles.statItem">
+    <li
+      :class="{ [styles.statItem]: true, [styles.empty]: !formattedStarsCount }"
+    >
       <icon-star
         :class="[styles.icon, styles.iconStar]"
         width="16"
@@ -11,7 +13,12 @@
         {{ formattedStarsCount }}
       </the-text>
     </li>
-    <li v-if="formattedIssuesCount" :class="styles.statItem">
+    <li
+      :class="{
+        [styles.statItem]: true,
+        [styles.empty]: !formattedIssuesCount,
+      }"
+    >
       <icon-issue
         :class="styles.icon"
         width="16"
@@ -22,7 +29,9 @@
         {{ formattedIssuesCount }}
       </the-text>
     </li>
-    <li v-if="formattedForksCount" :class="styles.statItem">
+    <li
+      :class="{ [styles.statItem]: true, [styles.empty]: !formattedForksCount }"
+    >
       <fork-icon
         :class="[styles.icon, styles.iconFork]"
         width="16"
