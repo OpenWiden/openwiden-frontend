@@ -1,9 +1,10 @@
 <template>
-  <section>
-    <BlockWrapper :class="$style.wrapper">
+  <section :class="$style.addRepo">
+    <BlockWrapper size="tablet">
       <the-text tag="h1" size="h2">
         Add a new repository to OpenWiden
       </the-text>
+
       <the-text tag="p">
         You can add your repositories to OpenWiden from any connected version
         control system. You are able to have more than one active connections
@@ -67,7 +68,6 @@
 </template>
 
 <script>
-import styles from './index.css?module';
 import TheText from '@/src/components/TheText/TheText';
 import BlockWrapper from '@/src/components/BlockWrapper/BlockWrapper';
 import RepoStats from '@/src/components/RepoStats/RepoStats';
@@ -87,11 +87,6 @@ export default {
       repos: DEFAULT_DATA_OBJECT,
       repoErr: null,
     };
-  },
-  computed: {
-    styles() {
-      return styles;
-    },
   },
   created() {
     this.getRepos();
@@ -140,12 +135,8 @@ export default {
 </script>
 
 <style scoped module>
-.wrapper {
-  max-width: 768px;
+.addRepo {
   margin-top: 70px;
-  padding: var(--size-m);
-  background-color: var(--dark-theme-thirdly-bg);
-  border-radius: var(--primary-border-radius);
 }
 
 .addRepoBlock {
@@ -153,11 +144,7 @@ export default {
 }
 
 .addRepoTable {
-  margin-top: var(--size-m);
-}
-
-.tableRow {
-  border-bottom: 1px solid #c4c4c4;
+  margin-top: var(--size-s);
 }
 
 .tableCell {
@@ -171,6 +158,14 @@ export default {
 
   &:last-of-type {
     padding-right: calc(var(--size-s) * 2);
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid #c4c4c4;
+
+  &:first-of-type .tableCell {
+    padding-top: 0;
   }
 }
 

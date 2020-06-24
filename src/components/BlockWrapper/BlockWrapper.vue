@@ -1,23 +1,43 @@
 <template>
-  <div :class="$style.wrapper">
-    <slot />
+  <div :class="emWrapper">
+    <div :class="emContentWrapper">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import cssmem from 'cssmem';
+import styles from './BlockWrapper.css?module';
+
+const em = cssmem(styles);
+
+export default {
+  props: {
+    size: {
+      default: 'desktop',
+      type: String,
+    },
+
+    withBackground: {
+      default: true,
+      type: Boolean,
+    },
+  },
+  computed: {
+    emWrapper() {
+      const { size } = this.$props;
+
+      return em('wrapper')({ size });
+    },
+    emContentWrapper() {
+      const { withBackground } = this.$props;
+
+      return em('contentWrapper')({ withBackground });
+    },
+    styles() {
+      return styles;
+    },
+  },
+};
 </script>
-
-<style module scoped>
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--size-m);
-}
-
-@media (min-width: 768px) {
-  .wrapper {
-    padding: var(--size-l);
-  }
-}
-</style>

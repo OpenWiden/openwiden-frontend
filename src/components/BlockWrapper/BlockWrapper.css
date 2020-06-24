@@ -1,0 +1,33 @@
+.wrapper {
+  margin: 0 auto;
+  padding: 0 var(--size-m);
+
+  &_size {
+    &_tablet {
+      max-width: 768px;
+    }
+
+    &_desktop {
+      max-width: 1200px;
+    }
+  }
+}
+
+.contentWrapper {
+  padding: var(--size-m);
+
+  &_withBackground {
+    background-color: var(--dark-theme-thirdly-bg);
+    border-radius: var(--primary-border-radius);
+  }
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 0;
+  }
+
+  .contentWrapper {
+    padding: var(--size-l);
+  }
+}

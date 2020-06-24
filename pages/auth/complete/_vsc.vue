@@ -1,6 +1,6 @@
 <template>
   <section :class="$style.section">
-    <BlockWrapper>
+    <BlockWrapper :with-background="false">
       <div v-if="!user">
         <Preloader width="12" height="12" />
       </div>
