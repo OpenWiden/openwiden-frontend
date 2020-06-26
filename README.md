@@ -2,6 +2,10 @@
 
 OpenWiden frontend app
 
+## Documentation
+
+All project documentation locates in `docs` directory.
+
 ## Build Setup
 
 ``` bash
