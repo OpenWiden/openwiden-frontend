@@ -20,7 +20,7 @@ import {
 import userResolver from '@/src/interfaces/User/resolver';
 import repositoryResolver from '@/src/interfaces/Repository/resolver';
 import { ProgrammingLanguage } from '@/src/interfaces/ProgrammingLanguage';
-import { FetchingData } from '@/src/interfaces/FetchingData';
+import { FetchingDataWithPagination } from '@/src/interfaces/FetchingDataWithPagination';
 import { IssueData, Issue } from '@/src/interfaces/Issue/Issue';
 import issueResolver from '@/src/interfaces/Issue/resolver';
 
@@ -39,10 +39,33 @@ const {
   },
 } = config;
 
-const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
+interface APIMethods {
+  getUser(authToken: string): Promise<User>;
+  getUserRepositories(): Promise<Repositories>;
+  addUserRepository(id: string): Promise<void>;
+  getRefreshedToken(refreshToken: string): Promise<string>;
+  getRepositories(): Promise<Repositories>;
+  getRepository(id: string): null | Promise<Repository>;
+  getRepositoryIssues(
+    id: string,
+    url?: string | undefined
+  ): null | Promise<FetchingDataWithPagination<Issue>>;
+  getProgrammingLanguages(): Promise<ProgrammingLanguage[]>;
+  authorizeUser(code: string, state: string): Promise<AuthorizationTokens>;
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $api: APIMethods;
+  }
+}
+
+const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
+  const { $get, $post } = $axios;
+
   return {
     getUser(authToken: string): Promise<User> {
-      const user = $axios.$get<UserData>(userURL.me, {
+      const user = $get<UserData>(userURL.me, {
         headers: {
           Authorization: `JWT ${authToken}`,
         },
@@ -52,22 +75,20 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
     },
 
     getUserRepositories(): Promise<Repositories> {
-      return $axios
-        .$get<RepositoriesData>(userURL.repositories, {
-          headers: {
-            Authorization: `JWT ${store.state.auth}`,
-          },
-        })
-        .then((data) => ({
-          ...data,
-          results: data.results.map(repositoryResolver),
-        }));
+      return $get<RepositoriesData>(userURL.repositories, {
+        headers: {
+          Authorization: `JWT ${store.state.auth}`,
+        },
+      }).then((data) => ({
+        ...data,
+        results: data.results.map(repositoryResolver),
+      }));
     },
 
     addUserRepository(id: string): Promise<void> {
       const url = `${userURL.repositories}${id}/add/`;
 
-      return $axios.$post<void>(url, null, {
+      return $post<void>(url, null, {
         headers: {
           Authorization: `JWT ${store.state.auth}`,
         },
@@ -75,7 +96,7 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
     },
 
     getRefreshedToken(refreshToken: string): Promise<string> {
-      const access = $axios.$post(auth.tokenRefresh, {
+      const access = $post(auth.tokenRefresh, {
         refresh: refreshToken,
       });
 
@@ -88,7 +109,7 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
 
       setFiltersQueryParams(url, filters);
 
-      return $axios.$get<RepositoriesData>(url.href).then((data) => ({
+      return $get<RepositoriesData>(url.href).then((data) => ({
         ...data,
         results: data.results.map(repositoryResolver),
       }));
@@ -97,35 +118,35 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store) => {
     getRepository(id: string): null | Promise<Repository> {
       if (!id) return null;
 
-      const url = repositoriesURL + id;
-
-      return $axios.$get<RepositoryData>(url).then(repositoryResolver);
+      return $axios
+        .$get<RepositoryData>(repositoriesURL + id)
+        .then(repositoryResolver);
     },
 
     getRepositoryIssues(
       id: string,
       url?: string | null
-    ): null | Promise<FetchingData<Issue>> {
+    ): null | Promise<FetchingDataWithPagination<Issue>> {
       if (!id) return null;
 
       const baseUrl = url || `${repositoriesURL}${id}/issues`;
 
-      return $axios.$get<FetchingData<IssueData>>(baseUrl).then((data) => ({
-        ...data,
-        results: data.results.map(issueResolver),
-      }));
+      return $get<FetchingDataWithPagination<IssueData>>(baseUrl).then(
+        (data) => ({
+          ...data,
+          results: data.results.map(issueResolver),
+        })
+      );
     },
 
     getProgrammingLanguages(): Promise<ProgrammingLanguage[]> {
-      return $axios.$get<ProgrammingLanguage[]>(programmingLanguages);
+      return $get<ProgrammingLanguage[]>(programmingLanguages);
     },
 
     authorizeUser(code: string, state: string): Promise<AuthorizationTokens> {
-      return $axios
-        .$get<AuthorizationTokensData>(
-          `auth/complete/${store.state.provider}/?code=${code}&state=${state}`
-        )
-        .then(authTokensResolver);
+      return $get<AuthorizationTokensData>(
+        `auth/complete/${store.state.provider}/?code=${code}&state=${state}`
+      ).then(authTokensResolver);
     },
   };
 };
