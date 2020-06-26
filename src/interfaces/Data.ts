@@ -1,3 +1,7 @@
+/**
+ * These types describe data which stores in the components
+ */
+
 export type DATA_STATUSES =
   | 'notAsked'
   | 'loading'
@@ -14,6 +18,7 @@ export const DATA_STATUS: Record<string, DATA_STATUSES> = {
 };
 
 export interface Data<T> {
+  /** For handling data status in components. For example, show preloader */
   loadingStatus: DATA_STATUSES;
   errorText: string;
   data: T[] | null;
