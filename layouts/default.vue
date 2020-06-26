@@ -1,46 +1,50 @@
 <template>
   <div>
     <top-header />
-    <main role="main">
+    <main class="main" role="main">
       <nuxt />
     </main>
+    <the-footer />
   </div>
 </template>
 
 <script>
-import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
-import { MUTATIONS } from '@/store/mutationTypes';
+import TheFooter from '@/src/components/TheFooter/TheFooter';
 
 export default {
   components: {
     TopHeader,
+    TheFooter,
   },
-  beforeMount() {
+  async beforeMount() {
     const href = new URL(window.location.href);
     const code = href.searchParams.get('code');
     const state = href.searchParams.get('state');
 
     if (code && state) {
-      this.$axios
-        .$get(`auth/complete/github/?code=${code}&state=${state}`)
-        .then((result) => {
-          const {
-            detail: { access, refresh },
-          } = result;
+      const { authToken, refreshToken } = await this.$api.authorizeUser(
+        code,
+        state
+      );
 
-          cookie.set('auth', access);
-          cookie.set('refresh', refresh);
+      this.$store.dispatch('setAuthTokens', { authToken, refreshToken });
+      this.$store.dispatch('getUser', {
+        authToken,
+        refreshToken,
+      });
 
-          this.$store.commit(MUTATIONS.SET_AUTH, access);
-          this.$store.dispatch('getUser', access);
+      href.searchParams.delete('code');
+      href.searchParams.delete('state');
 
-          href.searchParams.delete('code');
-          href.searchParams.delete('state');
-
-          window.history.pushState(null, '', href.toString());
-        });
+      window.history.pushState(null, '', href.toString());
     }
   },
 };
 </script>
+
+<style>
+.main {
+  min-height: 100vh;
+}
+</style>

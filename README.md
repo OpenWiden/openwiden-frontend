@@ -16,7 +16,7 @@ $ yarn build
 $ yarn start
 
 # generate static project
-$ yarn generate
+$ yarn build:staticProject
 ```
 
 ## Development

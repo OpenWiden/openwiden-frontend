@@ -13,8 +13,6 @@
 }
 
 .preloaderCircle {
-  width: 8px;
-  height: 8px;
   background-color: var(--dark-them-preloader-bg);
   border-radius: 100%;
   animation: circleScaling 1.6s ease-out;

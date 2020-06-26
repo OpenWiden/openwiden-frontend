@@ -14,6 +14,12 @@
   }
 }
 
+.repoCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .repoCardTitle {
   font-size: 18px;
   font-weight: 700;
@@ -27,25 +33,4 @@
 
 .repoCardStats {
   margin-top: 10px;
-}
-
-.statsList {
-  display: flex;
-}
-
-.statItem {
-  display: flex;
-  align-items: center;
-
-  & + & {
-    margin-left: 25px;
-  }
-}
-
-.icon {
-  margin-right: 8px;
-}
-
-.iconStar {
-  margin-top: -4px;
 }

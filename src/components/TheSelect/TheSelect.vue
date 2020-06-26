@@ -8,12 +8,12 @@
         :label="optionLabel"
         :clearable="true"
         :value="value"
-        @input="onChange"
+        @input="(value) => onChange(filter, value)"
       >
         <template #open-indicator="{ attributes }">
-          <span v-bind="attributes">
+          <button v-bind="attributes">
             <arrow-icon aria-hidden />
-          </span>
+          </button>
         </template>
       </v-select>
     </label>
@@ -32,16 +32,20 @@ export default {
   },
   props: {
     options: {
-      type: Array || Object,
+      type: [Array, Object],
       default: () => [],
+    },
+    filter: {
+      type: String,
+      default: '',
     },
     label: {
       type: String,
       default: () => '',
     },
     value: {
-      type: String || Object,
-      default: () => {},
+      type: [String, Number, Object],
+      default: () => '',
     },
     placeholder: {
       type: String,
@@ -121,23 +125,38 @@ export default {
   background-color: var(--secondary-bg-select);
 }
 
-.wrapper >>> .v-select .vs__open-indicator {
-  display: flex;
+.vs__open-indicator {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-.wrapper .v-select .vs__clear {
-  display: flex;
+.wrapper >>> .v-select .vs__open-indicator,
+.wrapper >>> .v-select .vs__clear {
+  width: 16px;
   height: 16px;
+}
+
+.wrapper >>> .v-select .vs__clear {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper >>> .v-select .vs__open-indicator svg,
+.wrapper >>> .v-select .vs__clear svg {
+  fill: rgba(255, 255, 255, 0.87);
 }
 
 .label {
   position: relative;
+  display: block;
 }
 
 .labelText {
   position: absolute;
   z-index: 2;
-  top: 3px;
+  top: 4px;
   left: 10px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.8);

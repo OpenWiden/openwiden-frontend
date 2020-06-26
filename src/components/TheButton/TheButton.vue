@@ -1,36 +1,45 @@
 <template>
-  <button :class="$style.button" :title="title" :type="type"><slot /></button>
+  <button
+    v-if="!href"
+    :class="{ [styles.button]: true, [styles.disabled]: disabled }"
+    :title="title"
+    :type="type"
+    :disabled="disabled"
+    @click="onClick"
+  >
+    <slot />
+  </button>
+
+  <nuxt-link
+    v-else
+    :class="{ [styles.button]: true, [styles.disabled]: disabled }"
+    :title="title"
+    :disabled="disabled"
+    :to="href"
+  >
+    <slot />
+  </nuxt-link>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import styles from './TheButton.css?module';
+
+enum ButtonType {
+  SUBMIT = 'submit',
+  BUTTON = 'button',
+}
 
 @Component
 export default class TheButton extends Vue {
   @Prop({ required: true }) title!: string;
-  @Prop({ required: true }) type!: 'button' | 'submit';
-}
-</script>
+  @Prop() href!: string;
+  @Prop({ default: false }) disabled!: boolean;
+  @Prop({ default: ButtonType.BUTTON }) type!: ButtonType;
+  @Prop() onClick!: () => void;
 
-<style module scoped>
-.button {
-  width: 100%;
-  height: 100%;
-  padding: 10px 20px;
-  background-color: var(--primary-bg-button);
-  border: unset;
-  border-radius: var(--primary-border-radius-button);
-  font-family: inherit;
-  font-size: initial;
-  font-weight: 700;
-  color: var(--primary-typo-button);
-  cursor: pointer;
-  transition: background-color 0.15s;
-  outline: none;
-
-  &:hover,
-  &:focus {
-    background-color: var(--primary-hover-bg-button);
+  get styles() {
+    return styles;
   }
 }
-</style>
+</script>

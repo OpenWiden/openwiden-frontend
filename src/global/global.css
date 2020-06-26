@@ -9,9 +9,19 @@ body {
   background-color: var(--dark-theme-primary-bg);
   font-family: var(--primary-font);
   font-size: 16px;
+  font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.01em;
   color: var(--dark-theme-primary-typo);
+}
+
+button {
+  background-color: transparent;
+  border: unset;
+  font-size: initial;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
 }
 
 img {

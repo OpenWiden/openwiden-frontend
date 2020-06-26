@@ -3,16 +3,38 @@
     <the-text tag="h2" visually-hidden>Filters</the-text>
 
     <ul :class="styles.filtersList">
-      <li :class="styles.filterItem">
+      <li v-if="languages.length > 0" :class="styles.filterItem">
         <the-select
-          v-if="languages.length > 0"
-          :options="languages"
-          :on-change="onChange"
-          :value="$store.state.filters.programmingLanguage"
+          filter="PROGRAMMING_LANGUAGE"
           option-label="name"
           label="Language"
           placeholder="Choose language..."
+          :options="languages"
+          :on-change="onFilterChange"
+          :value="$store.state.filters.PROGRAMMING_LANGUAGE"
         />
+      </li>
+      <li
+        v-for="filter in filters"
+        :key="filter.name"
+        :class="styles.filterItem"
+      >
+        <the-select
+          v-if="filter.options.length > 0"
+          v-bind="filter"
+          :filter="filter.name"
+          :value="$store.state.filters[filter.name]"
+        />
+      </li>
+      <li :class="styles.filterItem">
+        <the-button
+          :class="styles.searchButton"
+          type="button"
+          title="Search"
+          :on-click="onSearch"
+        >
+          Search
+        </the-button>
       </li>
     </ul>
   </div>
@@ -22,29 +44,60 @@
 import styles from './ReposFilters.css?module';
 import TheSelect from '@/src/components/TheSelect/TheSelect';
 import TheText from '@/src/components/TheText/TheText';
+import TheButton from '@/src/components/TheButton/TheButton';
 
 export default {
   components: {
     TheSelect,
     TheText,
+    TheButton,
+  },
+  props: {
+    onSearch: {
+      type: Function,
+      default: () => {},
+    },
   },
   data() {
-    return { languages: [] };
+    return {
+      languages: [],
+      filters: [
+        {
+          options: [10, 100, 1000, 10000, 1000000],
+          name: 'STARS_COUNT_GTE',
+          label: 'Popularity (stars)',
+          placeholder: 'Greater than...',
+          onChange: this.onFilterChange,
+        },
+        {
+          options: [10, 100, 1000, 10000, 1000000],
+          name: 'OPEN_ISSUES_COUNT_GTE',
+          label: 'Issues',
+          placeholder: 'Greater than...',
+          onChange: this.onFilterChange,
+        },
+      ],
+    };
   },
   computed: {
     styles() {
       return styles;
     },
   },
-  async beforeMount() {
-    const { results } = await this.$axios.$get(
-      '/api/v1/programming_languages/'
-    );
-    this.languages.push(...results);
+  created() {
+    this.$api
+      .getProgrammingLanguages()
+      .then(({ results }) => {
+        this.languages = results;
+      })
+      .catch((err) => {
+        // TODO: Remove this when pl endpoint will exist
+        console.log(err);
+      });
   },
   methods: {
-    onChange(value) {
-      this.$store.commit('SET_FILTER', { name: 'PROGRAMMING_LANGUAGE', value });
+    onFilterChange(filter, value) {
+      this.$store.commit('SET_FILTER', { name: filter, value });
     },
   },
 };
