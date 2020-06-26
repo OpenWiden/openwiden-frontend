@@ -1,7 +1,7 @@
 /**
  * Type for default fetching data structure with pagination
  */
-export interface FetchingData<T> {
+export interface FetchingDataWithPagination<T> {
   /** Count of fetched items */
   count: number;
 
