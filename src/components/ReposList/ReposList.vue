@@ -31,7 +31,7 @@
           :class="styles.reposWrapper"
         >
           <the-text :class="styles.title" tag="p">
-            There are no suitable repositories to show
+            There are no repositories to show
           </the-text>
         </div>
 

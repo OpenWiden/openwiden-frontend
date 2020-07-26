@@ -26,9 +26,8 @@ export default {
   },
   computed: {
     language() {
-      // TODO: uncomment when progLang will exist const { name } = this.$props.programmingLanguage;
-
       try {
+        const { name } = this.$props.programmingLanguage;
         return {
           icon: require(`@/assets/svgs/prog-languages/${name}.svg`),
           name,
