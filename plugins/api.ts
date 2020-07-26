@@ -43,6 +43,7 @@ interface APIMethods {
   getUser(authToken: string): Promise<User>;
   getUserRepositories(): Promise<Repositories>;
   addUserRepository(id: string): Promise<void>;
+  removeUserRepository(id: string): Promise<void>;
   getRefreshedToken(refreshToken: string): Promise<string>;
   getRepositories(): Promise<Repositories>;
   getRepository(id: string): null | Promise<Repository>;
@@ -61,7 +62,10 @@ declare module 'vue/types/vue' {
 }
 
 const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
-  const { $get, $post } = $axios;
+  const { $get, $post, $delete } = $axios;
+  const headers = {
+    Authorization: `JWT ${store.state.auth}`,
+  };
 
   return {
     getUser(authToken: string): Promise<User> {
@@ -76,9 +80,7 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
 
     getUserRepositories(): Promise<Repositories> {
       return $get<RepositoriesData>(userURL.repositories, {
-        headers: {
-          Authorization: `JWT ${store.state.auth}`,
-        },
+        headers,
       }).then((data) => ({
         ...data,
         results: data.results.map(repositoryResolver),
@@ -89,9 +91,15 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
       const url = `${userURL.repositories}${id}/add/`;
 
       return $post<void>(url, null, {
-        headers: {
-          Authorization: `JWT ${store.state.auth}`,
-        },
+        headers,
+      });
+    },
+
+    removeUserRepository(id: string): Promise<void> {
+      const url = `${userURL.repositories}${id}/remove/`;
+
+      return $delete<void>(url, {
+        headers,
       });
     },
 

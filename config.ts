@@ -3,7 +3,10 @@ export default {
     auth: {
       tokenRefresh: 'auth/token/refresh/',
     },
-    user: 'user/',
+    user: {
+      me: 'user/',
+      repositories: 'user/repositories/',
+    },
     programmingLanguages: 'programming_languages/',
     repositories: 'repositories/',
   },

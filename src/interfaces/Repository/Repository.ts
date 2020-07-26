@@ -35,6 +35,6 @@ export interface Repository {
   createdAt: Date;
   updatedAt: Date;
   programmingLanguage: ProgrammingLanguage;
-  isAdded?: boolean;
+  status: 'initial' | 'added' | 'pending';
   visibility?: RepoVisibility;
 }

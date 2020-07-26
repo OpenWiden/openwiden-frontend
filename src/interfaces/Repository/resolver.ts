@@ -11,7 +11,7 @@ export default function repositoryResolver(
     url,
     vcs,
     visibility,
-    isAdded: repository.is_added,
+    status: repository.is_added ? 'added' : 'initial',
     starsCount: repository.stars_count,
     openIssuesCount: repository.open_issues_count,
     forksCount: repository.forks_count,

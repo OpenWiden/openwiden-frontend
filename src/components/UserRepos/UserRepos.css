@@ -1,0 +1,48 @@
+.addRepoBlock {
+  margin-top: var(--size-m);
+}
+
+.table {
+  margin-top: var(--size-s);
+}
+
+.tableCell {
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  &:first-of-type {
+    padding-left: calc(var(--size-s) * 2);
+  }
+
+  &:last-of-type {
+    padding-right: calc(var(--size-s) * 2);
+  }
+}
+
+.tableRow {
+  border-bottom: 1px solid #c4c4c4;
+
+  &:first-of-type .tableCell {
+    padding-top: 0;
+  }
+}
+
+.status {
+  max-width: 148px;
+}
+
+.button {
+  width: 100%;
+  min-height: 36px;
+  max-width: 100px;
+  margin-left: auto;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .addRepoBlock {
+    margin-top: var(--size-xl);
+  }
+}
