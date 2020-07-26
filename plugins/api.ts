@@ -17,7 +17,6 @@ import {
   RepositoryData,
   Repository,
 } from '@/src/interfaces/Repository/Repository';
-import { Provider } from '@/src/interfaces/Provider';
 import userResolver from '@/src/interfaces/User/resolver';
 import repositoryResolver from '@/src/interfaces/Repository/resolver';
 import { ProgrammingLanguage } from '@/src/interfaces/ProgrammingLanguage';
