@@ -1,22 +1,20 @@
 /* eslint-disable camelcase */
 import { Provider } from '@/src/interfaces/Provider';
 
+interface VCSAccount {
+  vcs: Provider;
+  login: string;
+}
+
 export interface UserData {
   id: string;
   username: string;
-  avatar: string;
-  email?: string;
-  date_joined?: Date;
   first_name?: string;
   last_name?: string;
-  password: string;
-  is_active?: boolean;
-  is_staff?: boolean;
-  is_superuser?: boolean;
-  last_login?: Date | null;
-  user_permissions?: any[];
-  oauth2_tokens: { login: string; provider: Provider }[];
-  groups?: any[];
+  email?: string;
+  date_joined?: Date;
+  avatar: string;
+  vcs_accounts: VCSAccount[];
 }
 
 export interface User {
@@ -27,5 +25,5 @@ export interface User {
   dateJoined?: Date;
   firstName?: string;
   lastName?: string;
-  oauth2Tokens: { login: string; provider: Provider }[];
+  vcsAccounts: VCSAccount[];
 }
