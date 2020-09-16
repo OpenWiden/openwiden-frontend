@@ -1,5 +1,7 @@
 <template>
-  <component :is="tag" :class="classObject"><slot /></component>
+  <component :is="tag" :class="classObject">
+    <slot />
+  </component>
 </template>
 
 <script lang="ts">
@@ -18,12 +20,29 @@ enum Tag {
   H4 = 'h4',
 }
 
+enum Size {
+  SPAN = 'span',
+  P = 'p',
+  H1 = 'h1',
+  H2 = 'h2',
+  H3 = 'h3',
+  H4 = 'h4',
+}
+
 export default Vue.extend({
   name: 'TheText' as string,
   props: {
     tag: {
       type: String as PropType<Tag>,
       default: Tag.P,
+    },
+    withUnderlay: {
+      type: Boolean,
+      default: false,
+    },
+    size: {
+      type: String as PropType<Size>,
+      default: null,
     },
     visuallyHidden: {
       type: Boolean,
@@ -32,8 +51,8 @@ export default Vue.extend({
   },
   computed: {
     classObject() {
-      const { tag, visuallyHidden } = this.$props;
-      return em('text')({ tag, visuallyHidden });
+      const { tag, size, visuallyHidden } = this.$props;
+      return em('text')({ size: size || tag, visuallyHidden });
     },
     styles() {
       return styles;

@@ -1,0 +1,21 @@
+.addRepo {
+  margin-top: 70px;
+}
+
+.addRepoBlock {
+  margin-top: var(--size-m);
+}
+
+.subtitle {
+  margin-top: 10px;
+}
+
+.repoName {
+  text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: var(--size-l);
+  }
+}

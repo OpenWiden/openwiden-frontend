@@ -7,7 +7,7 @@
   align-items: center;
 
   & + & {
-    margin-left: 15px;
+    margin-left: 12px;
   }
 }
 
@@ -21,4 +21,8 @@
 
 .iconFork {
   fill: rgba(255, 255, 255, 0.87);
+}
+
+.empty {
+  opacity: 0.65;
 }

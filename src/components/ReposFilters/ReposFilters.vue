@@ -87,12 +87,12 @@ export default {
   created() {
     this.$api
       .getProgrammingLanguages()
-      .then(({ results }) => {
-        this.languages = results;
+      .then(() => {
+        // this.languages = results;
       })
       .catch((err) => {
         // TODO: Remove this when pl endpoint will exist
-        console.log(err);
+        return err;
       });
   },
   methods: {

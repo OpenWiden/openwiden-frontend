@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 10px 20px;
+  padding: var(--size-s) var(--size-m);
   background-color: var(--primary-bg-button);
   border: unset;
   border-radius: var(--primary-border-radius-button);
@@ -19,15 +19,25 @@
   &:focus {
     background-color: var(--primary-hover-bg-button);
   }
-}
 
-.disabled {
-  background-color: #8a4dee;
-  opacity: 0.5;
-  cursor: no-drop;
-
-  &:hover,
-  &:focus {
+  &_disabled {
     background-color: #8a4dee;
+    opacity: 0.5;
+    cursor: no-drop;
+
+    &:hover,
+    &:focus {
+      background-color: #8a4dee;
+    }
+  }
+
+  &_transparent {
+    background-color: transparent;
+    border: 1px solid var(--primary-bg-button);
+
+    &:hover,
+    &:focus {
+      border-color: var(--primary-hover-bg-button);
+    }
   }
 }

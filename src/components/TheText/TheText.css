@@ -1,7 +1,8 @@
 .text {
+  position: relative;
   word-break: break-word;
 
-  &_tag {
+  &_size {
     &_h1 {
       font-size: 32px;
       font-weight: 700;
@@ -31,13 +32,17 @@
 
 @media (min-width: 768px) {
   .text {
-    &_tag {
+    &_size {
       &_h1 {
         font-size: 42px;
       }
 
       &_h2 {
         font-size: 34px;
+      }
+
+      &_h3 {
+        font-size: 24px;
       }
     }
   }
