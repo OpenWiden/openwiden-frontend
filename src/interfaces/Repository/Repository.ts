@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { ProgrammingLanguage } from '../ProgrammingLanguage';
 
+// TODO: check for deleting
 enum RepoVisibility {
   PUBLIC = 'public',
   PRIVATE = 'private',
@@ -19,7 +20,6 @@ export interface RepositoryData {
   created_at: Date;
   updated_at: Date;
   programming_language: ProgrammingLanguage;
-  is_added?: boolean;
   visibility?: RepoVisibility;
 }
 
@@ -35,6 +35,5 @@ export interface Repository {
   createdAt: Date;
   updatedAt: Date;
   programmingLanguage: ProgrammingLanguage;
-  status: 'initial' | 'added' | 'pending';
   visibility?: RepoVisibility;
 }

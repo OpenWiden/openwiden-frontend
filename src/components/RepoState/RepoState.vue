@@ -1,18 +1,18 @@
 <template>
-  <span v-if="status !== 'initial'" :class="emStatus">
-    {{ getStatusText() }}
+  <span v-if="state !== 'initial'" :class="emState">
+    {{ getStateText() }}
   </span>
 </template>
 
 <script>
 import cssmem from 'cssmem';
-import styles from './RepoStatus.css?module';
+import styles from './RepoState.css?module';
 
 const em = cssmem(styles);
 
 export default {
   props: {
-    status: {
+    state: {
       default: 'initial',
       type: String,
     },
@@ -21,18 +21,20 @@ export default {
     styles() {
       return styles;
     },
-    emStatus() {
-      return em('status')({ status: this.status });
+    emState() {
+      return em('state')({ state: this.state });
     },
   },
   methods: {
-    getStatusText() {
-      switch (this.status) {
+    getStateText() {
+      switch (this.state) {
         case 'added':
           return 'Added';
-        case 'pending':
-          return 'Pending';
-        case 'Failed':
+        case 'adding':
+          return 'Adding';
+        case 'removing':
+          return 'Removing';
+        case 'add_failed':
           return 'Failed';
         default:
           return '';

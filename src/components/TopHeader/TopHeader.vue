@@ -75,7 +75,7 @@
 import styles from './TopHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
 import ClickedOutside from '@/src/components/ClickedOutside/ClickedOutside';
-import loginUser from '@/src/lib/loginUser/';
+import loginUser from '@/src/lib/loginUser';
 
 export default {
   components: {

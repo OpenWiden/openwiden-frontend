@@ -1,5 +1,7 @@
 <template>
-  <component :is="tag" :class="classObject"><slot /></component>
+  <component :is="tag" :class="classObject">
+    <slot />
+  </component>
 </template>
 
 <script lang="ts">
@@ -33,6 +35,10 @@ export default Vue.extend({
     tag: {
       type: String as PropType<Tag>,
       default: Tag.P,
+    },
+    withUnderlay: {
+      type: Boolean,
+      default: false,
     },
     size: {
       type: String as PropType<Size>,

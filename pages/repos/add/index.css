@@ -6,6 +6,10 @@
   margin-top: var(--size-m);
 }
 
+.subtitle {
+  margin-top: 10px;
+}
+
 .repoName {
   text-transform: capitalize;
 }

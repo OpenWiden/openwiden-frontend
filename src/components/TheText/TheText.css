@@ -1,4 +1,5 @@
 .text {
+  position: relative;
   word-break: break-word;
 
   &_size {

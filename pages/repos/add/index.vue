@@ -1,14 +1,14 @@
 <template>
   <section :class="styles.addRepo">
     <BlockWrapper size="tablet">
-      <the-text tag="h1" size="h2">
-        Add a new repository to OpenWiden
+      <the-text tag="h1" size="h2" :with-underlay="true">
+        Add repository
       </the-text>
 
-      <the-text tag="p">
+      <the-text tag="p" :class="styles.subtitle">
         You can add your repositories to OpenWiden from any connected version
         control system. You are able to have more than one active connections
-        with vsc at the same time
+        with vsc at the same time.
       </the-text>
 
       <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">Loading</div>
@@ -47,6 +47,20 @@ export default {
     this.getRepos();
   },
   methods: {
+    changeRepoStatus(id, nextStatus) {
+      const { data } = this.repos;
+
+      data.find((item, index) => {
+        if (item.id === id) {
+          this.$set(data, index, { ...item, status: nextStatus });
+        }
+      });
+    },
+
+    onClick(status) {
+      return status === 'added' ? this.removeRepository : this.addRepository;
+    },
+
     getRepos() {
       const { repos, $api } = this;
 

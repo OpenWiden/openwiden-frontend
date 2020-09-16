@@ -2,36 +2,6 @@
   margin-top: var(--size-m);
 }
 
-.table {
-  margin-top: var(--size-s);
-}
-
-.tableCell {
-  padding: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  &:first-of-type {
-    padding-left: calc(var(--size-s) * 2);
-  }
-
-  &:last-of-type {
-    padding-right: calc(var(--size-s) * 2);
-  }
-}
-
-.tableRow {
-  border-bottom: 1px solid #c4c4c4;
-
-  &:first-of-type .tableCell {
-    padding-top: 0;
-  }
-}
-
-.status {
-  max-width: 148px;
-}
-
 .button {
   width: 100%;
   min-height: 36px;
@@ -39,6 +9,22 @@
   margin-left: auto;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.repo {
+  margin-top: var(--size-s);
+  display: grid;
+  grid-template-columns: 250px repeat(3, 1fr);
+  padding-bottom: 6px;
+  border-bottom: 1px solid #c4c4c4;
+
+  & + & {
+    margin-top: var(--size-m);
+  }
+}
+
+.repoCell {
+  align-self: center;
 }
 
 @media (min-width: 768px) {

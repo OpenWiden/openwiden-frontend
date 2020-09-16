@@ -1,46 +1,42 @@
 <template>
-  <div :class="styles.addRepoBlock">
+  <section :class="styles.addRepoBlock">
     <the-text tag="h2" size="h3">
       GitHub
     </the-text>
 
-    <table :class="styles.table">
-      <tr
-        v-for="repo in getGitHubRepos"
-        :key="repo.name"
-        :class="styles.tableRow"
-      >
-        <td :class="[styles.tableCell, styles.repoName]">
+    <ul :class="styles.repoList">
+      <li v-for="repo in getGitHubRepos" :key="repo.name" :class="styles.repo">
+        <div :class="[styles.repoCell, styles.repoName]">
           {{ repo.name }}
-        </td>
+        </div>
 
-        <td :class="styles.tableCell">
+        <div :class="styles.repoCell">
           <repo-stats v-bind="repo" />
-        </td>
+        </div>
 
-        <td :class="[styles.tableCell, styles.status]">
-          <repo-status :status="repo.status" />
-        </td>
+        <div :class="[styles.repoCell, styles.state]">
+          <repo-state :state="repo.state" />
+        </div>
 
-        <td :class="styles.tableCell">
+        <div :class="styles.repoCell">
           <the-button
             :class="styles.button"
-            :is-transparent="repo.status === 'added'"
-            :is-loading="repo.status === 'pending'"
-            :disabled="repo.status === 'pending'"
-            :on-click="() => onClick(repo.status)(repo.id)"
+            :is-transparent="repo.state === 'added'"
+            :is-loading="repo.state === 'adding' || repo.state === 'removing'"
+            :disabled="repo.state === 'adding' || repo.state === 'removing'"
+            :on-click="() => onClick(repo.state)(repo.id)"
             :title="
-              repo.isAdded
-                ? 'Remove repostiroty from our service'
-                : 'Add repostiroty to our service'
+              repo.state === 'added'
+                ? 'Remove repostiroty from OpenWiden service'
+                : 'Add repostiroty to OpenWiden service'
             "
           >
-            {{ repo.status === 'added' ? 'Remove' : 'Add' }}
+            {{ repo.state === 'added' ? 'Remove' : 'Add' }}
           </the-button>
-        </td>
-      </tr>
-    </table>
-  </div>
+        </div>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
@@ -48,13 +44,13 @@
 import styles from './UserRepos.css?module';
 import TheButton from '@/src/components/TheButton/TheButton';
 import TheText from '@/src/components/TheText/TheText';
-import RepoStatus from '@/src/components/RepoStatus/RepoStatus';
+import RepoState from '@/src/components/RepoState/RepoState';
 import RepoStats from '@/src/components/RepoStats/RepoStats';
 
 export default {
   components: {
     TheText,
-    RepoStatus,
+    RepoState,
     TheButton,
     RepoStats,
   },
@@ -67,6 +63,7 @@ export default {
   },
   computed: {
     getGitHubRepos() {
+      if (!this.repos) return [];
       return this.repos.filter(({ vcs }) => vcs === 'github');
     },
     styles() {
@@ -74,30 +71,30 @@ export default {
     },
   },
   methods: {
-    changeRepoStatus(id, nextStatus) {
+    changeRepoState(id, nextState) {
       this.repos.find((item, index) => {
         if (item.id === id) {
-          this.$set(this.repos, index, { ...item, status: nextStatus });
+          this.$set(this.repos, index, { ...item, state: nextState });
         }
       });
     },
     addRepository(id) {
-      this.changeRepoStatus(id, 'pending');
+      this.changeRepoState(id, 'adding');
 
       this.$api.addUserRepository(id).then(() => {
-        this.changeRepoStatus(id, 'added');
+        this.changeRepoState(id, 'added');
       });
     },
 
     removeRepository(id) {
-      this.changeRepoStatus(id, 'pending');
+      this.changeRepoState(id, 'removing');
 
       this.$api.removeUserRepository(id).then(() => {
-        this.changeRepoStatus(id, 'initial');
+        this.changeRepoState(id, 'initial');
       });
     },
-    onClick(status) {
-      return status === 'added' ? this.removeRepository : this.addRepository;
+    onClick(state) {
+      return state === 'added' ? this.removeRepository : this.addRepository;
     },
   },
 };
