@@ -56,7 +56,11 @@
             </a>
           </li>
           <li :class="styles.headerNavItem">
-            <n-link :class="styles.headerNavLink" href="#" to="/repos/add/">
+            <n-link
+              :class="styles.headerNavLink"
+              href="#"
+              to="/repos/my_repos/"
+            >
               Submit repo
             </n-link>
           </li>
