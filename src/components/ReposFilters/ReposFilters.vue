@@ -3,9 +3,8 @@
     <the-text tag="h2" visually-hidden>Filters</the-text>
 
     <ul :class="styles.filtersList">
-      <li :class="styles.filterItem">
+      <li v-if="languages.length > 0" :class="styles.filterItem">
         <the-select
-          v-if="languages.length > 0"
           filter="PROGRAMMING_LANGUAGE"
           option-label="name"
           label="Language"
@@ -28,9 +27,14 @@
         />
       </li>
       <li :class="styles.filterItem">
-        <the-button type="button" title="Search" :on-click="onSearch"
-          >Search</the-button
+        <the-button
+          :class="styles.searchButton"
+          type="button"
+          title="Search"
+          :on-click="onSearch"
         >
+          Search
+        </the-button>
       </li>
     </ul>
   </div>
@@ -80,9 +84,16 @@ export default {
       return styles;
     },
   },
-  async created() {
-    const { results } = await this.$api.getProgrammingLanguages();
-    this.languages = results;
+  created() {
+    this.$api
+      .getProgrammingLanguages()
+      .then(() => {
+        // this.languages = results;
+      })
+      .catch((err) => {
+        // TODO: Remove this when pl endpoint will exist
+        return err;
+      });
   },
   methods: {
     onFilterChange(filter, value) {

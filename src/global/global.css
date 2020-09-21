@@ -9,6 +9,7 @@ body {
   background-color: var(--dark-theme-primary-bg);
   font-family: var(--primary-font);
   font-size: 16px;
+  font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.01em;
   color: var(--dark-theme-primary-typo);
@@ -31,6 +32,7 @@ img {
 }
 
 a {
+  display: block;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -41,4 +43,9 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }

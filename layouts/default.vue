@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="rootWrapper">
     <top-header />
-    <main role="main">
+    <main class="main" role="main">
       <nuxt />
     </main>
     <the-footer />
@@ -9,10 +9,8 @@
 </template>
 
 <script>
-import cookie from 'js-cookie';
 import TopHeader from '@/src/components/TopHeader/TopHeader';
 import TheFooter from '@/src/components/TheFooter/TheFooter';
-import { MUTATIONS } from '@/store/mutationTypes';
 
 export default {
   components: {
@@ -25,14 +23,12 @@ export default {
     const state = href.searchParams.get('state');
 
     if (code && state) {
-      const {
-        detail: { access: authToken, refresh: refreshToken },
-      } = await this.$api.authorizeUser(code, state);
+      const { authToken, refreshToken } = await this.$api.authorizeUser(
+        code,
+        state
+      );
 
-      cookie.set('auth', authToken);
-      cookie.set('refresh', refreshToken);
-
-      this.$store.commit(MUTATIONS.SET_AUTH, authToken);
+      this.$store.dispatch('setAuthTokens', { authToken, refreshToken });
       this.$store.dispatch('getUser', {
         authToken,
         refreshToken,
@@ -46,3 +42,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.main {
+  min-height: 100vh;
+}
+
+.rootWrapper {
+  overflow-x: hidden;
+}
+</style>
