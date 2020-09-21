@@ -1,39 +1,20 @@
 <template>
   <section :class="styles.addRepoBlock">
-    <the-text tag="h2" size="h3">
-      GitHub
-    </the-text>
+    <!-- Preloader -->
+    <ul v-if="loadingStatus" :class="styles.reposList">
+      <li
+        v-for="index in reposSkeletons"
+        :key="index"
+        :class="[styles.repo, styles.loadingRepo]"
+      >
+        <user-repo-skeleton />
+      </li>
+    </ul>
 
-    <ul :class="styles.repoList">
+    <!-- Content -->
+    <ul v-else :class="styles.reposList">
       <li v-for="repo in getGitHubRepos" :key="repo.name" :class="styles.repo">
-        <div :class="[styles.repoCell, styles.repoName]">
-          {{ repo.name }}
-        </div>
-
-        <div :class="styles.repoCell">
-          <repo-stats v-bind="repo" />
-        </div>
-
-        <div :class="[styles.repoCell, styles.state]">
-          <repo-state :state="repo.state" />
-        </div>
-
-        <div :class="styles.repoCell">
-          <the-button
-            :class="styles.button"
-            :is-transparent="repo.state === 'added'"
-            :is-loading="repo.state === 'adding' || repo.state === 'removing'"
-            :disabled="repo.state === 'adding' || repo.state === 'removing'"
-            :on-click="() => onClick(repo.state)(repo.id)"
-            :title="
-              repo.state === 'added'
-                ? 'Remove repostiroty from OpenWiden service'
-                : 'Add repostiroty to OpenWiden service'
-            "
-          >
-            {{ repo.state === 'added' ? 'Remove' : 'Add' }}
-          </the-button>
-        </div>
+        <user-repo :on-click="onClick" :repo="repo" />
       </li>
     </ul>
   </section>
@@ -42,24 +23,29 @@
 <script>
 // import cssmem from 'cssmem';
 import styles from './UserRepos.css?module';
-import TheButton from '@/src/components/TheButton/TheButton';
-import TheText from '@/src/components/TheText/TheText';
-import RepoState from '@/src/components/RepoState/RepoState';
-import RepoStats from '@/src/components/RepoStats/RepoStats';
+import UserRepo from '@/src/components/UserRepo/UserRepo';
+import UserRepoSkeleton from '@/src/components/UserRepo/UserRepoSkeleton';
 
 export default {
   components: {
-    TheText,
-    RepoState,
-    TheButton,
-    RepoStats,
+    UserRepo,
+    UserRepoSkeleton,
   },
 
   props: {
+    loadingStatus: {
+      type: Boolean,
+      default: () => true,
+    },
     repos: {
       type: Array,
       default: () => [],
     },
+  },
+  data() {
+    return {
+      reposSkeletons: 10,
+    };
   },
   computed: {
     getGitHubRepos() {
