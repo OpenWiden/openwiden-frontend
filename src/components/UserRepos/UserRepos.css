@@ -16,25 +16,6 @@
   }
 }
 
-.added {
-  &::before {
-    background-color: #53b124;
-  }
-}
-
-.removing,
-.adding {
-  &::before {
-    background-color: #fec400;
-  }
-}
-
-.add_failed {
-  &::before {
-    background-color: #e25443;
-  }
-}
-
 .repoVCS {
   margin-top: -4px;
   margin-right: 8px;
