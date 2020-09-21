@@ -58,7 +58,7 @@
 
       <div :class="styles.issuesBlock">
         <the-text :class="styles.issuesTitle" tag="h2">
-          Issues
+          Issues <span v-if="issuesCount">({{ issuesCount }})</span>
         </the-text>
 
         <div>
@@ -72,7 +72,7 @@
               :class="[styles.issue, styles.loadingIssue]"
             >
               <div :class="styles.issueLink">
-                <icon-issue :class="styles.issueIcon" width="16" height="16" />
+                <icon-issue :class="styles.issueIcon" width="20" height="20" />
 
                 <div :class="styles.issueDescription">
                   <skeleton :style="{ width: '14em' }" is-line />
@@ -98,8 +98,8 @@
                 >
                   <icon-issue
                     :class="styles.issueIcon"
-                    width="16"
-                    height="16"
+                    width="20"
+                    height="20"
                   />
 
                   <div :class="styles.issueDescription">
@@ -117,6 +117,7 @@
             </ul>
 
             <pagination
+              v-if="pagination.next !== null && pagination.previous !== null"
               :pagination="pagination"
               :wrapper-class="styles.pagination"
               :on-prev-click="() => getRepoIssues(pagination.previous)"
@@ -179,6 +180,15 @@ export default {
   computed: {
     styles() {
       return styles;
+    },
+    issuesCount() {
+      const {
+        issues: { data },
+      } = this;
+
+      if (!data) return null;
+
+      return data.length + 1;
     },
   },
   created() {
