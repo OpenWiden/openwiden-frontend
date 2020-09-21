@@ -1,14 +1,16 @@
 import { Dispatch } from 'vuex';
 import { Provider } from '@/src/interfaces/Provider';
 
-function loginUser(vsc: Provider, baseURL: string, dispatch: Dispatch): void {
-  const loginUrl = new URL(`auth/login/${vsc}/`, baseURL);
+function loginUser(vcs: Provider, baseURL: string, dispatch: Dispatch): void {
+  const loginUrl = new URL(`auth/login/${vcs}/`, baseURL);
 
-  dispatch('loginUser', { provider: vsc });
+  dispatch('loginUser', { provider: vcs });
 
-  const redirectURI = `${window.location.href}auth/complete/${vsc}/`;
+  if (vcs === Provider.GITLAB) {
+    const redirectURI = `${window.location.origin}/auth/complete/${vcs}/`;
 
-  loginUrl.searchParams.set('redirect_uri', redirectURI);
+    loginUrl.searchParams.set('redirect_uri', redirectURI);
+  }
 
   window.location.href = loginUrl.toString();
 }
