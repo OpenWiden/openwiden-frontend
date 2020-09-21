@@ -38,20 +38,20 @@
 
 .added {
   &::before {
-    background-color: #53b124;
+    background-color: var(--success-color);
   }
 }
 
 .removing,
 .adding {
   &::before {
-    background-color: #fec400;
+    background-color: var(--pending-color);
   }
 }
 
 .add_failed {
   &::before {
-    background-color: #e25443;
+    background-color: var(--error-color);
   }
 }
 
