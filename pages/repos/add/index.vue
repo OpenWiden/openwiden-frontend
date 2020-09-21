@@ -1,19 +1,21 @@
 <template>
   <section :class="styles.addRepo">
-    <BlockWrapper size="tablet">
+    <BlockWrapper size="tablet" :class="styles.wrapper">
       <the-text tag="h1" size="h2" :with-underlay="true">
-        Add repository
+        My repositories
       </the-text>
 
       <the-text tag="p" :class="styles.subtitle">
         You can add your repositories to OpenWiden from any connected version
-        control system. You are able to have more than one active connections
-        with vsc at the same time.
+        control system. <br />
+        Also, you are able to have more than one active connection with vsc at
+        the same time.
       </the-text>
 
-      <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">Loading</div>
-
-      <UserRepos v-else :repos="repos.data" />
+      <UserRepos
+        :loading-status="repos.loadingStatus === DATA_STATUS.LOADING"
+        :repos="repos.data"
+      />
     </BlockWrapper>
   </section>
 </template>

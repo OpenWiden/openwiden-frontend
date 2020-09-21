@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="rootWrapper">
     <top-header />
     <main class="main" role="main">
       <nuxt />
@@ -46,5 +46,9 @@ export default {
 <style>
 .main {
   min-height: 100vh;
+}
+
+.rootWrapper {
+  overflow-x: hidden;
 }
 </style>

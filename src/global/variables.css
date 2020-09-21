@@ -21,6 +21,11 @@
   --dark-theme-thirdly-bg: #424242;
   --dark-theme-third-bg: hsl(0, 0%, 26%);
 
+  /* state colors */
+  --success-color: #53b124;
+  --pending-color: #fec400;
+  --error-color: #e25443;
+
   /** preloader */
   --dark-them-preloader-bg: rgba(255, 255, 255, 0.95);
 
@@ -29,9 +34,9 @@
 
   /* buttons */
   --primary-bg-button: #8a4dee;
+  --primary-hover-bg-button: #7443c4;
   --primary-border-radius-button: 6px;
   --primary-typo-button: rgba(255, 255, 255, 0.87);
-  --primary-hover-bg-button: #7443c4;
 
   /* main theme typography colors */
   --dark-theme-primary-typo: rgba(255, 255, 255, 0.95);
@@ -52,7 +57,4 @@
 
   /* transitions */
   --primary-transition-time: 0.15s;
-
-  /** issue  #8a4dee */
-  --issue-border-hover: #7e44f2;
 }
