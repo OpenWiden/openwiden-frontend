@@ -48,7 +48,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://openwiden.com/api/v1/',
+    baseURL: 'https://staging.openwiden.com/api/v1/',
     timeout: 5000,
   },
   build: {
