@@ -1,5 +1,6 @@
 <template>
   <div class="rootWrapper">
+    <div id="notifications" />
     <top-header />
     <main class="main" role="main">
       <nuxt />
