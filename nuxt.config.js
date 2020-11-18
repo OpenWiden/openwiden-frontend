@@ -30,7 +30,12 @@ module.exports = {
     '@/src/global/fonts.css',
     '@/src/global/global.css',
   ],
-  plugins: ['@/plugins/axios', '@/plugins/api'],
+  plugins: [
+    '@/plugins/axios',
+    '@/plugins/api',
+    { src: '@/plugins/notifications', mode: 'client' },
+    { src: '@/plugins/websocket', mode: 'client' },
+  ],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
@@ -39,7 +44,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://openwiden.com/api/v1/',
+    baseURL: 'https://staging.openwiden.com/api/v1/',
     timeout: 5000,
   },
   build: {
@@ -49,6 +54,8 @@ module.exports = {
         'postcss-hexrgba': {},
       },
     },
-    extend() {},
+    extend(config) {
+      config.devtool = 'source-map';
+    },
   },
 };
