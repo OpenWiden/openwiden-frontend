@@ -1,6 +1,5 @@
-import Vue from 'vue';
 import { Context } from '@nuxt/types';
-import Toast from '../src/components/Toast/Toast.vue';
+import { events } from '../src/components/ToastsGroup/events';
 interface Props {
   href?: string;
   message?: string;
@@ -13,22 +12,20 @@ declare module 'vue/types/vue' {
   }
 }
 
-const create = (props: Props) => {
-  const toastsContainer = document.getElementById('notifications');
+let id = 1;
 
-  const ComponentCtor = Vue.extend(Toast);
-  const componentInstance = new ComponentCtor({
-    propsData: {
-      ...props,
-      count: toastsContainer?.children.length,
-    },
-  });
+const createNotification = (props: Props) => {
+  const item = {
+    ...props,
+    state: 'IDLE',
+    id,
+  };
 
-  if (toastsContainer) {
-    toastsContainer.appendChild(componentInstance.$mount().$el);
-  }
+  id += 1;
+
+  events.$emit('add', item);
 };
 
 export default function (_: Context, inject: any) {
-  inject('notify', (props: any) => create(props));
+  inject('notify', createNotification);
 }

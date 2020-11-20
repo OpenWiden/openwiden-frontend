@@ -1,10 +1,15 @@
 <template>
   <div class="rootWrapper">
-    <div id="notifications" />
+    <div id="notifications"></div>
+
+    <ToastsGroup />
+
     <top-header />
+
     <main class="main" role="main">
       <nuxt />
     </main>
+
     <the-footer />
   </div>
 </template>
@@ -12,11 +17,13 @@
 <script>
 import TopHeader from '@/src/components/TopHeader/TopHeader';
 import TheFooter from '@/src/components/TheFooter/TheFooter';
+import ToastsGroup from '@/src/components/ToastsGroup/ToastsGroup';
 
 export default {
   components: {
     TopHeader,
     TheFooter,
+    ToastsGroup,
   },
   async beforeMount() {
     const href = new URL(window.location.href);
