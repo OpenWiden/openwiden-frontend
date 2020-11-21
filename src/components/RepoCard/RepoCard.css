@@ -34,24 +34,3 @@
 .repoCardStats {
   margin-top: 10px;
 }
-
-.statsList {
-  display: flex;
-}
-
-.statItem {
-  display: flex;
-  align-items: center;
-
-  & + & {
-    margin-left: 25px;
-  }
-}
-
-.icon {
-  margin-right: 8px;
-}
-
-.iconStar {
-  margin-top: -4px;
-}

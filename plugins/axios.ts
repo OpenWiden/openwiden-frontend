@@ -17,7 +17,8 @@ export default function (context: Context) {
           case 401:
             break;
           case 404:
-            redirect('/404');
+            // TODO: Fix after pl endpoint will exist
+            // redirect('/404');
             break;
           case 500:
             redirect('/500');

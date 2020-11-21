@@ -1,0 +1,168 @@
+.repo {
+  padding: 0 20px;
+}
+
+.wrapper {
+  max-width: var(--tablet-width);
+  margin: 70px auto 0 auto;
+  padding: 25px 15px;
+  background-color: var(--dark-theme-third-bg);
+  border-radius: var(--primary-border-radius);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.issuesTitle span {
+  font-size: 18px;
+  color: rgb(255, 255, 255, 0.7);
+  vertical-align: middle;
+}
+
+.description {
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.texts {
+  flex-grow: 1;
+  max-width: 80%;
+}
+
+.info {
+  font-size: 14px;
+  color: #dadada;
+}
+
+.statsList {
+  margin-top: 3px;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  grid-gap: var(--size-m);
+  margin-top: 35px;
+}
+
+.issuesBlock {
+  margin-top: var(--size-l);
+}
+
+.issuesList {
+  margin-top: var(--size-s);
+}
+
+.issueLink {
+  display: flex;
+  padding: 12px 16px;
+
+  &:focus {
+    outline: none;
+    border-radius: 6px;
+    box-shadow: rgba(#8a4dee, 0.5) 0 0 0 3px;
+  }
+}
+
+.issueDescription {
+  margin-left: 10px;
+}
+
+@keyframes animateIssueAppearance {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.loadingIssue {
+  animation: animateIssueAppearance 4.5s ease;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  pointer-events: none;
+
+  &:nth-of-type(2) {
+    animation-delay: 0.5s;
+  }
+
+  &:nth-of-type(3) {
+    animation-delay: 1s;
+  }
+
+  &:nth-of-type(4) {
+    animation-delay: 1.5s;
+  }
+
+  &:nth-of-type(5) {
+    animation-delay: 2s;
+  }
+
+  &:nth-of-type(6) {
+    animation-delay: 2.5s;
+  }
+
+  &:nth-of-type(7) {
+    animation-delay: 3s;
+  }
+
+  &:nth-of-type(8) {
+    animation-delay: 3.5s;
+  }
+
+  &:nth-of-type(9) {
+    animation-delay: 4s;
+  }
+
+  &:nth-of-type(10) {
+    animation-delay: 4.5s;
+  }
+}
+
+.issueIcon {
+  flex-shrink: 0;
+}
+
+.issue {
+  background-color: var(--dark-theme-primary-bg);
+  border-radius: 6px;
+  transition: transform var(--primary-transition-time);
+
+  & + & {
+    margin-top: 12px;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.issue a {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    margin: 70px auto 0 auto;
+    padding: 24px;
+  }
+
+  .progLangIcon {
+    width: 34px;
+    height: 34px;
+  }
+}

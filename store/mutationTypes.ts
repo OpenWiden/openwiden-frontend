@@ -3,6 +3,9 @@ export enum MUTATIONS {
   SET_AUTH = 'SET_AUTH',
   RESET_AUTH = 'RESET_AUTH',
 
+  /** Refresh */
+  SET_REFRESH = 'SET_REFRESH',
+
   /** User */
   SET_USER = 'SET_USER',
 
