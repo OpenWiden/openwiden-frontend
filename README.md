@@ -2,6 +2,10 @@
 
 OpenWiden frontend app
 
+## Documentation
+
+All project documentation locates in `docs` directory.
+
 ## Build Setup
 
 ``` bash
@@ -30,4 +34,4 @@ $ yarn dev
 
 - [Nuxt.js](https://nuxtjs.org/) - The Vue framework
 
-- [Typescript](https://www.typescriptlang.org/)
+- [Typescript](https://www.typescriptlang.org/) - Programming language which is superset of JavaScript

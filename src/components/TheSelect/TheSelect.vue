@@ -8,7 +8,7 @@
         :label="optionLabel"
         :clearable="true"
         :value="value"
-        @input="onChange"
+        @input="(value) => onChange(filter, value)"
       >
         <template #open-indicator="{ attributes }">
           <button v-bind="attributes">
@@ -32,16 +32,20 @@ export default {
   },
   props: {
     options: {
-      type: Array || Object,
+      type: [Array, Object],
       default: () => [],
+    },
+    filter: {
+      type: String,
+      default: '',
     },
     label: {
       type: String,
       default: () => '',
     },
     value: {
-      type: String || Object,
-      default: () => {},
+      type: [String, Number, Object],
+      default: () => '',
     },
     placeholder: {
       type: String,
@@ -146,6 +150,7 @@ export default {
 
 .label {
   position: relative;
+  display: block;
 }
 
 .labelText {

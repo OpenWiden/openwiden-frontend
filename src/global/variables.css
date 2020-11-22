@@ -1,4 +1,17 @@
 :root {
+  /** resolutions */
+  --mobile-width: 320px;
+  --tablet-width: 768px;
+  --desktop-width: 1024px;
+
+  /* sizes */
+  --size-xxs: 2px;
+  --size-xs: 4px;
+  --size-s: 8px;
+  --size-m: 16px;
+  --size-l: 32px;
+  --size-xl: 64px;
+
   /* fonts */
   --primary-font: 'Circe', 'Arial', sans-serif;
 
@@ -8,17 +21,22 @@
   --dark-theme-thirdly-bg: #424242;
   --dark-theme-third-bg: hsl(0, 0%, 26%);
 
+  /* state colors */
+  --success-color: #53b124;
+  --pending-color: #fec400;
+  --error-color: #e25443;
+
   /** preloader */
   --dark-them-preloader-bg: rgba(255, 255, 255, 0.95);
 
   /* main theme accent colors */
-  --dark-theme-primary-accent-bg: #8a4dee;
+  --dark-theme-primary-accent-bg: #7443c4;
 
   /* buttons */
   --primary-bg-button: #8a4dee;
+  --primary-hover-bg-button: #7443c4;
   --primary-border-radius-button: 6px;
   --primary-typo-button: rgba(255, 255, 255, 0.87);
-  --primary-hover-bg-button: #7443c4;
 
   /* main theme typography colors */
   --dark-theme-primary-typo: rgba(255, 255, 255, 0.95);
@@ -36,4 +54,7 @@
 
   /* avatar */
   --bg-avatar: #424242;
+
+  /* transitions */
+  --primary-transition-time: 0.15s;
 }
