@@ -1,33 +1,24 @@
-name: 'CI'
+name: 'Tests'
 
-on:
-  pull_request:
-    branches: [master, develop]
+on: push
 
 jobs:
-  test_pull_request:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-
       - name: Install dependencies
         run: yarn
-
       - name: Build project
         run: yarn build
-
       - name: Lint packages
         run: yarn lint:packageScripts
-
       - name: Lint ts
         run: yarn lint:ts
-
       - name: Lint css
         run: yarn lint:styles
-
       - name: Lint prettier
         run: yarn lint:prettier
-
       - name: Run tests
         run: yarn test
