@@ -33,8 +33,9 @@ module.exports = {
   plugins: [
     '@/plugins/axios',
     '@/plugins/api',
-    { src: '@/plugins/notifications', mode: 'client' },
     { src: '@/plugins/websocket', mode: 'client' },
+    { src: '@/plugins/notifications', mode: 'client' },
+    '@/plugins/userRepos',
   ],
   buildModules: [
     '@nuxt/typescript-build',
