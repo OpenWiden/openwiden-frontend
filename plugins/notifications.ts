@@ -1,10 +1,12 @@
 import { Context } from '@nuxt/types';
 import { events } from '../src/components/ToastsGroup/events';
+
 interface Props {
-  href?: string;
-  message?: string;
-  count?: number;
-  ms?: number;
+  message: string;
+  object: {
+    id: string;
+    type: 'repository';
+  };
 }
 declare module 'vue/types/vue' {
   interface Vue {
@@ -12,18 +14,13 @@ declare module 'vue/types/vue' {
   }
 }
 
-let id = 1;
-
-const createNotification = (props: Props) => {
-  const item = {
-    ...props,
-    state: 'IDLE',
-    id,
+const createNotification = ({ message, object }: Props) => {
+  const toast = {
+    message,
+    id: object.id,
   };
 
-  id += 1;
-
-  events.$emit('add', item);
+  events.$emit('add', { toast, state: 'IDLE' });
 };
 
 export default function (_: Context, inject: any) {
