@@ -1,27 +1,43 @@
+import consola from 'consola';
 import { Context } from '@nuxt/types';
 
-export default function (context: Context) {
-  const connectToWebSocket = (accessToken: string): null | void => {
-    if (!accessToken) return null;
+function initConnection(context: Context) {
+  const { auth } = context.store.state;
 
-    const ws = new WebSocket(
-      `wss://staging.openwiden.com/websocket/?access_token=${accessToken}`
-    );
+  if (auth) {
+    connectToWebSocket(context);
+  }
+}
 
-    ws.onopen = () => {
-      console.log('WS connection opened');
-    };
+const connectToWebSocket = (context: Context): void => {
+  const {
+    app,
+    isDev,
+    store: {
+      state: { auth: accessToken },
+    },
+  } = context;
 
-    ws.onmessage = (event) => {
-      event.data.text().then((message: any) => {
-        context.app.$notify({ message });
-      });
-    };
+  const ws = new WebSocket(
+    `wss://staging.openwiden.com/websocket/?access_token=${accessToken}`
+  );
 
-    ws.onerror = (error) => {
-      console.log(`WebSocket error: ${error}`);
-    };
+  ws.onopen = () => {
+    isDev && consola.success('[WebSocket] connection opened');
   };
 
-  connectToWebSocket(context.store.state.auth);
-}
+  ws.onmessage = (evt) => {
+    evt.data.text().then((result: any) => {
+      const repo = JSON.parse(result);
+
+      app.$notify(repo);
+      app.$update(repo);
+    });
+  };
+
+  ws.onerror = (error) => {
+    isDev && consola.error(`[WebSocket] error: ${error}`);
+  };
+};
+
+export default initConnection;
