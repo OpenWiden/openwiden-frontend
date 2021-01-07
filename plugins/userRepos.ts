@@ -9,7 +9,6 @@ declare module 'vue/types/vue' {
 
 export default function (_: Context, inject: any) {
   inject('update', ({ object: { id, state } }: any) => {
-    // id, status
     events.$emit('update', { id, state });
   });
 }
