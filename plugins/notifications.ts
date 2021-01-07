@@ -22,7 +22,7 @@ const createNotification = ({ message, object }: RepositoryMessage) => {
     state: object.state,
   };
 
-  events.$emit('add', { toast, state: 'IDLE' });
+  events.$emit('add', { toast });
 };
 
 export default function (_: Context, inject: any) {

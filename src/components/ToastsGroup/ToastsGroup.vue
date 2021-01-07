@@ -40,6 +40,12 @@ export default Vue.extend({
       required: false,
       default: 3500,
     },
+
+    state: {
+      type: String,
+      required: false,
+      default: ToastState.Idle,
+    },
   },
 
   data(): { show: boolean; list: ToastProps[] } {
