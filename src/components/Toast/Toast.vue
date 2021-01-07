@@ -22,6 +22,7 @@ export interface Props {
   id: number;
   href?: string;
   message?: string;
+  state: 'added' | 'removed';
 }
 
 export default Vue.extend({

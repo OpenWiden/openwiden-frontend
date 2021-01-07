@@ -1,6 +1,8 @@
 import consola from 'consola';
 import { Context } from '@nuxt/types';
 
+import { RepositoryMessage } from './notifications';
+
 function initConnection(context: Context) {
   const { auth } = context.store.state;
 
@@ -28,7 +30,7 @@ const connectToWebSocket = (context: Context): void => {
 
   ws.onmessage = (evt) => {
     evt.data.text().then((result: any) => {
-      const repo = JSON.parse(result);
+      const repo: RepositoryMessage = JSON.parse(result);
 
       app.$notify(repo);
       app.$update(repo);

@@ -2,7 +2,7 @@
   <div :class="$style.container">
     <transition-group tag="ul" :name="$style.fade">
       <li v-for="item in active" :key="item.id" :data-id="item.id">
-        <Toast :message="item.message" :href="`/repo/${item.id}`" />
+        <Toast :message="item.message" :href="getHref(item)" />
       </li>
     </transition-group>
   </div>
@@ -13,7 +13,7 @@ import Vue, { PropType } from 'vue';
 import Toast, { Props as ToastProps } from '../Toast/Toast.vue';
 import { events } from './events';
 
-interface Props extends ToastProps {
+interface Props {
   toast: ToastProps;
   ms?: number;
   state: 'IDLE' | 'DELETED';
@@ -33,7 +33,7 @@ export default Vue.extend({
     ms: {
       type: Number,
       required: false,
-      default: 3000,
+      default: 3500,
     },
   },
 
@@ -57,15 +57,13 @@ export default Vue.extend({
   },
 
   methods: {
-    addItem(props: Props): void {
-      if (!props) return;
+    addItem({ toast }: Props): void {
+      if (!toast) return;
 
-      const item = { ...props.toast, state: props.state };
-
-      this.list.push(item);
+      this.list.push(toast);
 
       setTimeout(() => {
-        this.removeItem(item.id);
+        this.removeItem(toast.id);
       }, this.$props.ms);
     },
 
@@ -75,6 +73,10 @@ export default Vue.extend({
           this.$set(this.list, index, { ...item, state: 'DELETED' });
         }
       });
+    },
+
+    getHref({ id, state }: ToastProps): string | null {
+      return state === 'added' ? `/repo/${id}` : null;
     },
   },
 });

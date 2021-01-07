@@ -1,23 +1,25 @@
 import { Context } from '@nuxt/types';
 import { events } from '../src/components/ToastsGroup/events';
 
-interface Props {
+export interface RepositoryMessage {
   message: string;
   object: {
     id: string;
     type: 'repository';
+    state: 'added' | 'removed';
   };
 }
 declare module 'vue/types/vue' {
   interface Vue {
-    $notify: (props: Props) => void;
+    $notify: (props: RepositoryMessage) => void;
   }
 }
 
-const createNotification = ({ message, object }: Props) => {
+const createNotification = ({ message, object }: RepositoryMessage) => {
   const toast = {
     message,
     id: object.id,
+    state: object.state,
   };
 
   events.$emit('add', { toast, state: 'IDLE' });
