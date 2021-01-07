@@ -1,0 +1,33 @@
+.toast {
+  z-index: 20;
+  display: flex;
+  max-width: 300px;
+  width: 250px;
+  margin: 10px 0;
+  padding: 12px 14px;
+  background-color: #424242;
+  border-radius: 6px;
+  font-size: 14px;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.link {
+  display: initial;
+  color: #56ccf2;
+  text-decoration: underline;
+  transition: color var(--primary-transition-time);
+
+  &:hover {
+    color: #32bff1;
+  }
+
+  &:active {
+    color: #00b4f1;
+  }
+}

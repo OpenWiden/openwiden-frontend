@@ -23,6 +23,7 @@
 <script>
 // import cssmem from 'cssmem';
 import styles from './UserRepos.css?module';
+import { events } from './events';
 import UserRepo from '@/src/components/UserRepo/UserRepo';
 import UserRepoSkeleton from '@/src/components/UserRepo/UserRepoSkeleton';
 
@@ -56,6 +57,11 @@ export default {
       return styles;
     },
   },
+  mounted() {
+    events.$on('update', ({ id, state }) => {
+      this.changeRepoState(id, state);
+    });
+  },
   methods: {
     changeRepoState(id, nextState) {
       this.repos.find((item, index) => {
@@ -67,17 +73,13 @@ export default {
     addRepository(id) {
       this.changeRepoState(id, 'adding');
 
-      this.$api.addUserRepository(id).then(() => {
-        this.changeRepoState(id, 'added');
-      });
+      this.$api.addUserRepository(id);
     },
 
     removeRepository(id) {
       this.changeRepoState(id, 'removing');
 
-      this.$api.removeUserRepository(id).then(() => {
-        this.changeRepoState(id, 'initial');
-      });
+      this.$api.removeUserRepository(id);
     },
     onClick(state) {
       return state === 'added' ? this.removeRepository : this.addRepository;
