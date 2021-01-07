@@ -1,7 +1,5 @@
 <template>
   <div class="rootWrapper">
-    <div id="notifications"></div>
-
     <ToastsGroup />
 
     <top-header />
