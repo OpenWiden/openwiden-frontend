@@ -16,7 +16,12 @@ import { events } from './events';
 interface Props {
   toast: ToastProps;
   ms?: number;
-  state: 'IDLE' | 'DELETED';
+  state: ToastState;
+}
+
+enum ToastState {
+  Idle = 'Idle',
+  Deleted = 'Deleted',
 }
 
 export default Vue.extend({
@@ -47,7 +52,7 @@ export default Vue.extend({
   computed: {
     active() {
       return this.$data.list
-        .filter(({ state }: Props) => state !== 'DELETED')
+        .filter(({ state }: Props) => state !== ToastState.Deleted)
         .reverse();
     },
   },
@@ -70,7 +75,7 @@ export default Vue.extend({
     removeItem(targetId: number) {
       this.list.find((item, index) => {
         if (item.id === targetId) {
-          this.$set(this.list, index, { ...item, state: 'DELETED' });
+          this.$set(this.list, index, { ...item, state: ToastState.Deleted });
         }
       });
     },
