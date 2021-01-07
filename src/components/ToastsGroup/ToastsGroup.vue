@@ -16,7 +16,7 @@ import { events } from './events';
 interface Props {
   toast: ToastProps;
   ms?: number;
-  state: ToastState;
+  state?: ToastState;
 }
 
 enum ToastState {
