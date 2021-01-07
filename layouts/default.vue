@@ -46,6 +46,9 @@ export default {
       window.history.pushState(null, '', href.toString());
     }
   },
+  mounted() {
+    this.$websocket();
+  },
 };
 </script>
 

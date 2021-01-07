@@ -28,6 +28,10 @@ const connectToWebSocket = (context: Context): void => {
     isDev && consola.success('[WebSocket] connection opened');
   };
 
+  ws.onclose = () => {
+    isDev && consola.success('[WebSocket] connection closed');
+  };
+
   ws.onmessage = (evt) => {
     evt.data.text().then((result: any) => {
       const repo: RepositoryMessage = JSON.parse(result);
@@ -42,4 +46,6 @@ const connectToWebSocket = (context: Context): void => {
   };
 };
 
-export default initConnection;
+export default (context: Context, inject: any) => {
+  inject('websocket', () => initConnection(context));
+};
