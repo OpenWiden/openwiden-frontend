@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <transition-group tag="ul" :name="$style.fade">
-      <li v-for="item in active" :key="item.id" :data-id="item.id">
+      <li v-for="item in active" :key="item.message" :data-id="item.id">
         <Toast :message="item.message" :href="getHref(item)" />
       </li>
     </transition-group>
