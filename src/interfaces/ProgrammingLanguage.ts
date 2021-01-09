@@ -1,4 +1,1 @@
-export interface ProgrammingLanguage {
-  id: number;
-  name: string;
-}
+export type ProgrammingLanguage = Record<string, string>;

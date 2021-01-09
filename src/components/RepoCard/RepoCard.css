@@ -1,4 +1,4 @@
-.repoCard {
+.card {
   display: block;
   height: 100%;
   padding: 20px 16px;
@@ -14,23 +14,28 @@
   }
 }
 
-.repoCardHeader {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.repoCardTitle {
+.title {
   font-size: 18px;
   font-weight: 700;
   text-transform: capitalize;
 }
 
-.repoCardDescription {
+.description {
   margin-top: 10px;
   word-break: break-word;
 }
 
-.repoCardStats {
+.stats {
   margin-top: 10px;
+}
+
+.lang {
+  align-self: start;
+  margin-left: 16px;
 }
