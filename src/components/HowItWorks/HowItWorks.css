@@ -110,34 +110,6 @@
   }
 }
 
-@keyframes squareAnimation2 {
-  from {
-    top: 40%;
-  }
-
-  50% {
-    top: 42%;
-  }
-
-  to {
-    top: 40%;
-  }
-}
-
-@keyframes squareAnimation3 {
-  from {
-    bottom: -50px;
-  }
-
-  50% {
-    bottom: -60px;
-  }
-
-  to {
-    bottom: -50px;
-  }
-}
-
 .circle {
   position: absolute;
   background: rgba(138, 77, 238, 0.78);
