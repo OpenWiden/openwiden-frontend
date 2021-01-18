@@ -42,12 +42,14 @@
               ]"
               @click="() => changeActiveSlide(slide)"
             >
-              {{ slide.label }}
-            </button>
+              <the-text :class="styles.label" tag="span">
+                {{ slide.label }}
+              </the-text>
 
-            <the-text v-if="activeSlide" :class="styles.text" tag="p">
-              {{ slide.text }}
-            </the-text>
+              <the-text :class="styles.text">
+                {{ slide.text }}
+              </the-text>
+            </button>
           </li>
         </ul>
       </div>
