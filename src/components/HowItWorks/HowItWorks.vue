@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     changeActiveSlide(slide) {
-      console.log('slide -->', slide);
       this.$data.activeSlide = { ...slide, isActive: true };
     },
   },
