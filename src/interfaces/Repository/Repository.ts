@@ -1,13 +1,6 @@
 /* eslint-disable camelcase */
 import { ProgrammingLanguage } from '../ProgrammingLanguage';
 
-// TODO: check for deleting
-enum RepoVisibility {
-  PUBLIC = 'public',
-  PRIVATE = 'private',
-  INTERNAL = 'internal',
-}
-
 export interface RepositoryData {
   id?: string;
   vcs: string;
@@ -19,8 +12,7 @@ export interface RepositoryData {
   forks_count?: number;
   created_at: Date;
   updated_at: Date;
-  programming_language: ProgrammingLanguage;
-  visibility?: RepoVisibility;
+  programming_languages: ProgrammingLanguage;
 }
 
 export interface Repository {
@@ -34,6 +26,5 @@ export interface Repository {
   forksCount?: number;
   createdAt: Date;
   updatedAt: Date;
-  programmingLanguage: ProgrammingLanguage;
-  visibility?: RepoVisibility;
+  programmingLanguages: ProgrammingLanguage;
 }

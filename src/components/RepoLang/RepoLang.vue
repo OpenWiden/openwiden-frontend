@@ -12,7 +12,7 @@
 export default {
   props: {
     programmingLanguage: {
-      type: [Object, null],
+      type: Array,
       default: () => null,
     },
     width: {
@@ -27,9 +27,9 @@ export default {
   computed: {
     language() {
       try {
-        const { name } = this.$props.programmingLanguage;
+        const [name] = this.$props.programmingLanguage;
         return {
-          icon: require(`@/assets/svgs/prog-languages/${name}.svg`),
+          icon: require(`@/assets/svgs/prog-languages/${name.toLowerCase()}.svg`),
           name,
         };
       } catch (err) {
