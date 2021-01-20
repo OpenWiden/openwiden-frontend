@@ -16,5 +16,5 @@ jobs:
           script: |
             cd frontend
             git pull
-            API_URL="https://${{ secrets.STAGING_HOST }}/api/v1/" yarn build
+            API_URL="https://staging.openwiden.com/api/v1/" yarn build
             pm2 reload frontend
