@@ -1,5 +1,3 @@
-import { ProgrammingLanguage } from './ProgrammingLanguage';
-
 export enum Filter {
   STARS_COUNT_GTE = 'STARS_COUNT_GTE',
   OPEN_ISSUES_COUNT_GTE = 'OPEN_ISSUES_COUNT_GTE',
@@ -14,7 +12,7 @@ export interface Filters {
   [Filter.STARS_COUNT_GTE]: number | null;
   [Filter.OPEN_ISSUES_COUNT_GTE]: number | null;
   [Filter.FORKS_COUNT]: number | null;
-  [Filter.PROGRAMMING_LANGUAGE]: ProgrammingLanguage | null;
+  [Filter.PROGRAMMING_LANGUAGE]: string | null;
   [Filter.VERSION_CONTROL_SERVICE]: string | null;
   [Filter.CREATED_AT]: string | null;
   [Filter.UPDATED_AT]: string | null;

@@ -140,6 +140,7 @@ export default {
 
 .wrapper >>> .v-select .vs__clear {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
