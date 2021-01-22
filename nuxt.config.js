@@ -1,9 +1,18 @@
 module.exports = {
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.API_URL,
+    },
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_URL,
+    },
+  },
   server: {
     host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || '3000',
   },
-  mode: 'universal',
   head: {
     title:
       'OpenWiden • Help out open source projects' ||
@@ -59,4 +68,5 @@ module.exports = {
       config.devtool = 'source-map';
     },
   },
+  telemetry: true,
 };
