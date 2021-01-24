@@ -44,7 +44,7 @@ const {
 
 interface APIMethods {
   getUser(authToken: string): Promise<User>;
-  getUserRepositories(): Promise<UserRepositories>;
+  getUserRepositories(url?: string): Promise<UserRepositories>;
   addUserRepository(id: string): Promise<void>;
   removeUserRepository(id: string): Promise<void>;
   getRefreshedToken(refreshToken: string): Promise<string>;
@@ -78,8 +78,8 @@ const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
       return user.then(userResolver);
     },
 
-    getUserRepositories(): Promise<UserRepositories> {
-      return $get<UserRepositoriesData>(userURL.repositories, {
+    getUserRepositories(url = userURL.repositories): Promise<UserRepositories> {
+      return $get<UserRepositoriesData>(url, {
         headers: { Authorization: `JWT ${store.state.auth}` },
       }).then((data) => ({
         ...data,
