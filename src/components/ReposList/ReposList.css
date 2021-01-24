@@ -1,0 +1,27 @@
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  @media (min-width: 1280px) {
+    min-height: calc(680px * 1.4);
+  }
+}
+
+.title {
+  text-align: center;
+}
+
+.repos {
+  margin-top: 150px;
+}
+
+.reposList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+  grid-gap: 45px;
+}
+
+.reposWrapper {
+  margin-top: 45px;
+}

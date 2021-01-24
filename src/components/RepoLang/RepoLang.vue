@@ -1,0 +1,41 @@
+<template>
+  <img
+    v-if="language"
+    :src="language.icon"
+    :alt="language.name"
+    :width="width"
+    :height="height"
+  />
+</template>
+
+<script>
+export default {
+  props: {
+    programmingLanguage: {
+      type: Array,
+      default: () => null,
+    },
+    width: {
+      type: String,
+      default: '24',
+    },
+    height: {
+      type: String,
+      default: '24',
+    },
+  },
+  computed: {
+    language() {
+      try {
+        const [name] = this.$props.programmingLanguage;
+        return {
+          icon: require(`@/assets/svgs/prog-languages/${name.toLowerCase()}.svg`),
+          name,
+        };
+      } catch (err) {
+        return null;
+      }
+    },
+  },
+};
+</script>

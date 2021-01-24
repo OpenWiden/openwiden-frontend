@@ -1,0 +1,28 @@
+.statsList {
+  display: flex;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+
+  & + & {
+    margin-left: 10px;
+  }
+}
+
+.icon {
+  margin-right: 6px;
+}
+
+.iconStar {
+  margin-top: -4px;
+}
+
+.iconFork {
+  fill: rgba(255, 255, 255, 0.87);
+}
+
+.empty {
+  opacity: 0.65;
+}

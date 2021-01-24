@@ -1,0 +1,88 @@
+.addRepoBlock {
+  margin-top: var(--size-l);
+}
+
+.button {
+  width: 100px;
+  height: 38px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.repo {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background-color: var(--dark-theme-primary-bg);
+  border-radius: 6px;
+  transition: transform var(--primary-transition-time);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    border-radius: 6px 0 0 6px;
+    transition: var(--primary-transition-time);
+  }
+
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.added {
+  &::before {
+    background-color: var(--success-color);
+  }
+}
+
+.removing,
+.adding {
+  &::before {
+    background-color: var(--pending-color);
+  }
+}
+
+.add_failed {
+  &::before {
+    background-color: var(--error-color);
+  }
+}
+
+.repoVCS {
+  margin-top: -4px;
+  margin-right: 8px;
+}
+
+.repoBlock {
+  display: inherit;
+  align-items: center;
+
+  &:not(:last-of-type) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  &:nth-of-type(2) {
+    margin-right: auto;
+  }
+}
+
+.repoName,
+.repoState {
+  margin-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .repoBlock {
+    &:not(:last-of-type) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}

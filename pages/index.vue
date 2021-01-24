@@ -1,17 +1,21 @@
 <template>
-  <div class="container">
-    <Logo />
+  <div>
+    <main-screen />
+    <how-it-works />
+    <repos-list />
   </div>
 </template>
 
 <script>
-import Logo from '@/src/components/Logo/Logo.vue';
+import MainScreen from '@/src/components/MainScreen/MainScreen';
+import ReposList from '@/src/components/ReposList/ReposList';
+import HowItWorks from '@/src/components/HowItWorks/HowItWorks';
 
 export default {
   components: {
-    Logo,
+    MainScreen,
+    ReposList,
+    HowItWorks,
   },
 };
 </script>
-
-<style></style>

@@ -1,5 +1,63 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="rootWrapper">
+    <ToastsGroup />
+
+    <top-header />
+
+    <main class="main" role="main">
+      <nuxt />
+    </main>
+
+    <the-footer />
   </div>
 </template>
+
+<script>
+import TopHeader from '@/src/components/TopHeader/TopHeader';
+import TheFooter from '@/src/components/TheFooter/TheFooter';
+import ToastsGroup from '@/src/components/ToastsGroup/ToastsGroup';
+
+export default {
+  components: {
+    TopHeader,
+    TheFooter,
+    ToastsGroup,
+  },
+  async beforeMount() {
+    const href = new URL(window.location.href);
+    const code = href.searchParams.get('code');
+    const state = href.searchParams.get('state');
+
+    if (code && state) {
+      const { authToken, refreshToken } = await this.$api.authorizeUser(
+        code,
+        state
+      );
+
+      this.$store.dispatch('setAuthTokens', { authToken, refreshToken });
+      this.$store.dispatch('getUser', {
+        authToken,
+        refreshToken,
+      });
+
+      href.searchParams.delete('code');
+      href.searchParams.delete('state');
+
+      window.history.pushState(null, '', href.toString());
+    }
+  },
+  mounted() {
+    this.$websocket();
+  },
+};
+</script>
+
+<style>
+.main {
+  min-height: 100vh;
+}
+
+.rootWrapper {
+  overflow-x: hidden;
+}
+</style>

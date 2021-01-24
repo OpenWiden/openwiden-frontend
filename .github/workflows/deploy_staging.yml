@@ -1,0 +1,20 @@
+name: Deploy staging
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploying
+        uses: appleboy/ssh-action@master
+        with:
+          timeout: 5s
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USERNAME }}
+          key: ${{ secrets.STAGING_PRIVATE_KEY }}
+          script: |
+            cd frontend
+            git pull
+            API_URL="https://staging.openwiden.com/api/v1/" yarn build
+            pm2 reload frontend

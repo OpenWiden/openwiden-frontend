@@ -1,0 +1,25 @@
+.introduction {
+  background-image: url(~assets/svgs/introduction-bg2.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 70px center;
+}
+
+.introductionWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  height: 100vh;
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.introductionTitle {
+  max-width: 720px;
+}
+
+.introductionDescription {
+  max-width: 720px;
+}
