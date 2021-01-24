@@ -117,11 +117,9 @@
             </ul>
 
             <pagination
-              v-if="pagination.next !== null && pagination.previous !== null"
               :pagination="pagination"
               :wrapper-class="styles.pagination"
-              :on-prev-click="() => getRepoIssues(pagination.previous)"
-              :on-next-click="() => getRepoIssues(pagination.next)"
+              :on-click="getRepoIssues"
             />
           </div>
 
