@@ -87,8 +87,8 @@ export default {
   created() {
     this.$api
       .getProgrammingLanguages()
-      .then(() => {
-        // this.languages = results;
+      .then((results) => {
+        this.languages = results;
       })
       .catch((err) => {
         // TODO: Remove this when pl endpoint will exist

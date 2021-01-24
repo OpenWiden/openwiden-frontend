@@ -1,0 +1,22 @@
+name: Deploy production
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploying
+        uses: appleboy/ssh-action@master
+        with:
+          timeout: 5s
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USERNAME }}
+          key: ${{ secrets.PRODUCTION_PRIVATE_KEY }}
+          script: |
+            cd frontend
+            git pull
+            API_URL="https://openwiden.com/api/v1/" yarn build
+            pm2 reload frontend

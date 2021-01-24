@@ -49,7 +49,7 @@
 
           <repo-lang
             :class="styles.progLangIcon"
-            :programming-language="repository.data.programmingLanguage"
+            :programming-language="programmingLanguage"
             width="30"
             height="30"
           />
@@ -151,6 +151,7 @@ import RepoStats from '@/src/components/RepoStats/RepoStats';
 import IconIssue from '@/src/components/Icons/IconIssue';
 import Skeleton from '@/src/components/Skeleton/Skeleton';
 import RepoLang from '@/src/components/RepoLang/RepoLang';
+import getRepoProgrammingLanguage from '@/src/lib/getRepoProgrammingLanguage';
 import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
 
 const DAY = 24 * 3600 * 1000;
@@ -189,6 +190,9 @@ export default {
       if (!data) return null;
 
       return data.length + 1;
+    },
+    programmingLanguage() {
+      return getRepoProgrammingLanguage(this.$data.repository.data);
     },
   },
   created() {

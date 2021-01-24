@@ -1,9 +1,18 @@
 module.exports = {
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.API_URL,
+    },
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_URL,
+    },
+  },
   server: {
     host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || '3000',
   },
-  mode: 'universal',
   head: {
     title:
       'OpenWiden • Help out open source projects' ||
@@ -30,7 +39,13 @@ module.exports = {
     '@/src/global/fonts.css',
     '@/src/global/global.css',
   ],
-  plugins: ['@/plugins/axios', '@/plugins/api'],
+  plugins: [
+    '@/plugins/axios',
+    '@/plugins/api',
+    { src: '@/plugins/websocket', mode: 'client' },
+    { src: '@/plugins/notifications', mode: 'client' },
+    '@/plugins/userRepos',
+  ],
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
@@ -39,7 +54,7 @@ module.exports = {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://openwiden.com/api/v1/',
+    baseURL: 'https://staging.openwiden.com/api/v1/',
     timeout: 5000,
   },
   build: {
@@ -49,6 +64,9 @@ module.exports = {
         'postcss-hexrgba': {},
       },
     },
-    extend() {},
+    extend(config) {
+      config.devtool = 'source-map';
+    },
   },
+  telemetry: true,
 };
