@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import styles from './TheFooter.css?module';
+import styles from './AppFooter.css?module';
 import TheText from '@/src/components/TheText/TheText';
 
 export default {
