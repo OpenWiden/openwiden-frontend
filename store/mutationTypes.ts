@@ -11,7 +11,4 @@ export enum MUTATIONS {
 
   /** Provider */
   SET_PROVIDER = 'SET_PROVIDER',
-
-  /** Filters */
-  SET_FILTER = 'SET_FILTER',
 }
