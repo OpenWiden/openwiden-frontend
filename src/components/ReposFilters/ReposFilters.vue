@@ -88,7 +88,11 @@ export default {
     this.$api
       .getProgrammingLanguages()
       .then((languages) => {
-        this.$set(this.filters, 0, { ...this.filters[0], options: languages });
+        const languageFilterIndex = this.filters.findIndex(
+          (filter) => filter.name === 'PROGRAMMING_LANGUAGE'
+        );
+
+        this.$set(this.filters[languageFilterIndex], 'options', languages);
       })
       .catch((err) => {
         // TODO: Remove this when pl endpoint will exist
