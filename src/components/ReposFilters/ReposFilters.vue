@@ -53,14 +53,14 @@ export default {
   data() {
     return {
       filtersState: {
-        PROGRAMMING_LANGUAGE: null,
+        PROGRAMMING_LANGUAGES: null,
         STARS_COUNT_GTE: null,
         OPEN_ISSUES_COUNT_GTE: null,
       },
       filters: [
         {
           options: [],
-          name: 'PROGRAMMING_LANGUAGE',
+          name: 'PROGRAMMING_LANGUAGES',
           label: 'Language',
           placeholder: 'Choose language...',
         },
@@ -89,7 +89,7 @@ export default {
       .getProgrammingLanguages()
       .then((languages) => {
         const languageFilterIndex = this.filters.findIndex(
-          (filter) => filter.name === 'PROGRAMMING_LANGUAGE'
+          (filter) => filter.name === 'PROGRAMMING_LANGUAGES'
         );
 
         this.$set(this.filters[languageFilterIndex], 'options', languages);
