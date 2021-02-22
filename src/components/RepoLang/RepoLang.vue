@@ -3,8 +3,8 @@
     v-if="language"
     :src="language.icon"
     :alt="language.name"
-    :width="width"
-    :height="height"
+    :width="size"
+    :height="size"
   />
 </template>
 
@@ -15,11 +15,7 @@ export default {
       type: Array,
       default: () => null,
     },
-    width: {
-      type: String,
-      default: '24',
-    },
-    height: {
+    size: {
       type: String,
       default: '24',
     },
