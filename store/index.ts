@@ -5,7 +5,6 @@ import cookies from 'js-cookie';
 import { MUTATIONS } from './mutationTypes';
 import { User } from '@/src/interfaces/User/User';
 import { Provider } from '@/src/interfaces/Provider';
-import { Filter } from '@/src/interfaces/Filters';
 import { AuthorizationTokens } from '~/src/interfaces/AuthorizationTokens/AuthorizationTokens';
 import { AppState } from '@/src/interfaces/AppState';
 
@@ -22,15 +21,6 @@ export const state = (): AppState => {
     refresh: null,
     provider: null,
     user: null,
-    filters: {
-      [Filter.STARS_COUNT_GTE]: null,
-      [Filter.OPEN_ISSUES_COUNT_GTE]: null,
-      [Filter.FORKS_COUNT]: null,
-      [Filter.PROGRAMMING_LANGUAGE]: null,
-      [Filter.VERSION_CONTROL_SERVICE]: null,
-      [Filter.CREATED_AT]: null,
-      [Filter.UPDATED_AT]: null,
-    },
   };
 };
 
@@ -59,13 +49,6 @@ export const mutations: MutationTree<AppState> = {
 
   [MUTATIONS.SET_PROVIDER](state, provider: Provider): void {
     state.provider = provider;
-  },
-
-  [MUTATIONS.SET_FILTER](
-    state: AppState,
-    { name, value }: { name: Filter; value: any }
-  ): void {
-    state.filters[name] = value;
   },
 };
 
