@@ -1,10 +1,7 @@
 import { Context } from '@nuxt/types';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
-import { userAPICreator, UserAPIMethods } from '../api/userAPI';
-import {
-  repositoriesAPICreator,
-  RepositoriesAPIMethods,
-} from '../api/reposAPI';
+import { userAPICreator, UserAPIMethods } from './userAPI';
+import { repositoriesAPICreator, RepositoriesAPIMethods } from './reposAPI';
 
 import { AppState } from '@/src/interfaces/AppState';
 
