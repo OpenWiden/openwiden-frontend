@@ -7,6 +7,7 @@
       <repo-lang
         :class="styles.lang"
         :programming-language="programmingLanguage"
+        size="32"
       />
     </div>
     <div :class="styles.stats">

@@ -50,8 +50,7 @@
           <repo-lang
             :class="styles.progLangIcon"
             :programming-language="programmingLanguage"
-            width="30"
-            height="30"
+            size="30"
           />
         </header>
       </div>

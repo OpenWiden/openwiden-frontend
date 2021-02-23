@@ -1,6 +1,6 @@
-import { Filters } from '@/src/interfaces/Filters';
-
 import getObjectKeys from '@/src/lib/getObjectKeys';
+
+import { Filters } from '@/src/interfaces/Filters';
 
 export default function setFiltersQueryParams(baseURL: URL, filters: Filters) {
   getObjectKeys(filters).forEach((filter) => {

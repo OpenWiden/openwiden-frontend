@@ -8,7 +8,7 @@
         :label="optionLabel"
         :clearable="true"
         :value="value"
-        @input="(value) => onChange(filter, value)"
+        @input="(value) => onChange(name, value)"
       >
         <template #open-indicator="{ attributes }">
           <button v-bind="attributes">
@@ -35,7 +35,7 @@ export default {
       type: [Array, Object],
       default: () => [],
     },
-    filter: {
+    name: {
       type: String,
       default: '',
     },

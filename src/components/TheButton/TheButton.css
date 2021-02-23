@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: var(--size-s) var(--size-m);
+  padding: 16px 24px;
   background-color: var(--primary-bg-button);
   border: unset;
   border-radius: var(--primary-border-radius-button);
