@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <transition-group tag="ul" :name="$style.fade">
+    <transition-group tag="ul" :name="$style.toast">
       <li v-for="item in active" :key="item.message" :data-id="item.id">
         <Toast :message="item.message" :href="getHref(item)" />
       </li>
@@ -16,12 +16,6 @@ import { events } from './events';
 interface Props {
   toast: ToastProps;
   ms?: number;
-  state?: ToastState;
-}
-
-enum ToastState {
-  Idle = 'Idle',
-  Deleted = 'Deleted',
 }
 
 export default Vue.extend({
@@ -40,26 +34,17 @@ export default Vue.extend({
       required: false,
       default: 3500,
     },
-
-    state: {
-      type: String,
-      required: false,
-      default: ToastState.Idle,
-    },
   },
 
-  data(): { show: boolean; list: ToastProps[] } {
+  data(): { list: ToastProps[] } {
     return {
-      show: false,
       list: [],
     };
   },
 
   computed: {
     active() {
-      return this.$data.list
-        .filter(({ state }: Props) => state !== ToastState.Deleted)
-        .reverse();
+      return [].concat(this.$data.list).reverse();
     },
   },
 
@@ -78,12 +63,10 @@ export default Vue.extend({
       }, this.$props.ms);
     },
 
-    removeItem(targetId: number) {
-      this.list.find((item, index) => {
-        if (item.id === targetId) {
-          this.$set(this.list, index, { ...item, state: ToastState.Deleted });
-        }
-      });
+    removeItem(idToRemove: number) {
+      const index = this.list.findIndex((item) => item.id === idToRemove);
+
+      this.$delete(this.list, index);
     },
 
     getHref({ id, state }: ToastProps): string | null {

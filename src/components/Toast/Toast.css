@@ -3,13 +3,10 @@
   display: flex;
   max-width: 300px;
   width: 250px;
-  margin: 10px 0;
   padding: 12px 14px;
   background-color: #424242;
   border-radius: 6px;
   font-size: 14px;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
 }
 
 .icon {
