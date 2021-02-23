@@ -1,28 +1,24 @@
 <template>
-  <div v-if="isVisible" :class="wrapperClass">
+  <div v-if="isVisible" :class="[styles.container, wrapperClass]">
     <the-button
       :class="{
+        [styles.paginationButton]: true,
         [buttonsClass]: buttonsClass,
-        [styles.prevButton]: isPrevBtnAvailable,
       }"
       :on-click="() => onClick(pagination.previous)"
       :disabled="!isPrevBtnAvailable"
       :title="prevBtnTitle"
     >
       <span :class="styles.wrapper">
+        <arrow-icon :class="styles.prevIcon" width="16" height="16" />
         Previous
-        <arrow-icon
-          :class="[styles.icon, styles.prevIcon]"
-          width="16"
-          height="16"
-        />
       </span>
     </the-button>
 
     <the-button
       :class="{
+        [styles.paginationButton]: true,
         [buttonsClass]: buttonsClass,
-        [styles.nextButton]: isNextBtnAvailable,
       }"
       :on-click="() => onClick(pagination.next)"
       :disabled="!isNextBtnAvailable"
@@ -30,11 +26,7 @@
     >
       <span :class="styles.wrapper">
         Next
-        <arrow-icon
-          :class="[styles.icon, styles.nextIcon]"
-          width="16"
-          height="16"
-        />
+        <arrow-icon :class="styles.nextIcon" width="16" height="16" />
       </span>
     </the-button>
   </div>

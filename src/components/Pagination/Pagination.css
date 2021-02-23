@@ -1,41 +1,43 @@
-.wrapper {
-  position: relative;
+.container {
+  display: flex;
+  justify-content: center;
 }
 
-.icon {
-  position: absolute;
-  top: 50%;
-  opacity: 0;
-  margin-top: -2px;
-  animation-fill-mode: forwards;
-  animation-duration: 0.3s;
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .prevIcon {
-  left: 0;
-  transform: translateY(-50%) rotate(-90deg);
+  transform: rotate(-90deg);
+  margin-right: 6px;
 }
 
 .nextIcon {
-  right: 0;
-  transform: translateY(-50%) rotate(90deg);
+  transform: rotate(90deg);
+  margin-left: 6px;
 }
 
-.prevButton {
-  &:hover,
-  &:focus {
-    & .prevIcon {
-      animation-name: animatePrevButton;
-    }
+.paginationButton {
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+
+  &:first-of-type {
+    margin-right: 40px;
   }
-}
 
-.nextButton {
   &:hover,
   &:focus {
-    & .nextIcon {
-      animation-name: animateNextButton;
-    }
+    background-color: transparent;
+    border-color: #8a4dee;
+  }
+
+  &:active {
+    transform: none;
+    border-color: #7443c4;
   }
 }
 
