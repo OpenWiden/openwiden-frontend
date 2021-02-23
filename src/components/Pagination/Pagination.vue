@@ -1,13 +1,13 @@
 <template>
-  <div :class="wrapperClass">
+  <div v-if="isVisible" :class="wrapperClass">
     <the-button
       :class="{
-        buttonsClass,
+        [buttonsClass]: buttonsClass,
         [styles.prevButton]: isPrevBtnAvailable,
       }"
-      :on-click="onPrevClick"
+      :on-click="() => onClick(pagination.previous)"
       :disabled="!isPrevBtnAvailable"
-      title="Go to the previous page of list"
+      :title="prevBtnTitle"
     >
       <span :class="styles.wrapper">
         Previous
@@ -21,12 +21,12 @@
 
     <the-button
       :class="{
-        buttonsClass,
+        [buttonsClass]: buttonsClass,
         [styles.nextButton]: isNextBtnAvailable,
       }"
-      :on-click="onNextClick"
+      :on-click="() => onClick(pagination.next)"
       :disabled="!isNextBtnAvailable"
-      title="Go to the next page of list"
+      :title="nextBtnTitle"
     >
       <span :class="styles.wrapper">
         Next
@@ -51,7 +51,7 @@ export default {
     ArrowIcon,
   },
   props: {
-    onPrevClick: {
+    onClick: {
       type: Function,
       default: () => {},
     },
@@ -63,14 +63,10 @@ export default {
       type: String,
       default: () => '',
     },
-    onNextClick: {
-      type: Function,
-      default: () => {},
-    },
     pagination: {
       type: Object,
       default: () => ({
-        prev: null,
+        previous: null,
         next: null,
       }),
     },
@@ -78,6 +74,21 @@ export default {
   computed: {
     styles() {
       return styles;
+    },
+    isVisible() {
+      const { previous, next } = this.pagination;
+
+      return previous !== null || next !== null;
+    },
+    prevBtnTitle() {
+      return this.isPrevBtnAvailable
+        ? 'Go to the previous page of list'
+        : 'Previous page is not available';
+    },
+    nextBtnTitle() {
+      return this.isNextBtnAvailable
+        ? 'Go to the next page of list'
+        : 'Next page is not available';
     },
     isPrevBtnAvailable() {
       return Boolean(this.$props.pagination.previous);

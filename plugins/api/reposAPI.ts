@@ -27,7 +27,7 @@ interface Store {
 }
 
 export interface RepositoriesAPIMethods {
-  getUserRepositories(): Promise<UserRepositories>;
+  getUserRepositories(url: string): Promise<UserRepositories>;
   addUserRepository(id: string): Promise<void>;
   removeUserRepository(id: string): Promise<void>;
   getRepositories(filtersState?: Filters): Promise<Repositories>;
@@ -54,8 +54,8 @@ export const repositoriesAPICreator = (
   } = config;
 
   return {
-    getUserRepositories() {
-      return $get<UserRepositoriesData>(userURL.repositories, {
+    getUserRepositories(url = userURL.repositories) {
+      return $get<UserRepositoriesData>(url, {
         headers: { Authorization: `JWT ${store.state.auth}` },
       }).then((data) => ({
         ...data,
