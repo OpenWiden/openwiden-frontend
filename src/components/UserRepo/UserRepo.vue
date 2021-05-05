@@ -1,15 +1,15 @@
 <template>
   <div :class="[styles.repo, styles[repo.state]]">
-    <div :class="styles.repoBlock">
-      <img
-        :class="styles.repoVCS"
-        :src="require(`@/assets/svgs/${repo.vcs}-logo.svg`)"
-        :alt="`${repo.vcs} repository`"
-        width="28"
-        height="28"
-      />
+    <img
+      :class="styles.vcsIcon"
+      :src="require(`@/assets/svgs/${repo.vcs}-logo.svg`)"
+      :alt="`${repo.vcs} repository`"
+      width="30"
+      height="30"
+    />
 
-      <div :class="styles.repoName">
+    <div>
+      <template>
         <nuxt-link
           v-if="isRepoAdded"
           :to="`/repo/${repo.id}`"
@@ -21,14 +21,17 @@
         <the-text v-else tag="p">
           {{ repo.name }}
         </the-text>
-      </div>
+      </template>
+
+      <repo-stats
+        :class="styles.stats"
+        :open-issues-count="repo.openIssuesCount"
+        :stars-count="repo.starsCount"
+        :forks-count="repo.forksCount"
+      />
     </div>
 
-    <div :class="styles.repoBlock">
-      <repo-stats :class="styles.repoStats" v-bind="repo" />
-    </div>
-
-    <div :class="styles.repoBlock">
+    <div :class="styles.controls">
       <repo-state :class="styles.repoState" :state="repo.state" />
 
       <the-button

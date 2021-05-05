@@ -18,11 +18,11 @@ declare module 'vue/types/vue' {
 }
 
 const apiCreator = ($axios: NuxtAxiosInstance, store: Store): APIMethods => {
-  const reposAPI = repositoriesAPICreator($axios, store);
+  const repositoriesAPI = repositoriesAPICreator($axios, store);
   const userAPI = userAPICreator($axios, store);
 
   return {
-    ...reposAPI,
+    ...repositoriesAPI,
     ...userAPI,
   };
 };
