@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import styles from './TopHeader.css?module';
+import styles from './AppHeader.css?module';
 import Logo from '@/src/components/Logo/Logo.vue';
 import ClickedOutside from '@/src/components/ClickedOutside/ClickedOutside';
 import loginUser from '@/src/lib/loginUser';

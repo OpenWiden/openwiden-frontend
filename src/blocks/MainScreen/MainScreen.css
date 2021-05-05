@@ -1,0 +1,104 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.text {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  max-width: 720px;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin-top: 8px;
+}
+
+.buttonsList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.buttonItem {
+  margin: 24px 20px 0 20px;
+}
+
+.issuesSvg {
+  width: 400px;
+
+  @media (max-width: 1023px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.1;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    display: flex;
+    flex-shrink: 0;
+    margin: 0 auto;
+    background-color: #8a4dee;
+    border-radius: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .issuesSvg {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .introduction {
+    background-image: url(~assets/svgs/introduction-bg.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top right;
+  }
+
+  .wrapper {
+    min-height: 680px;
+    padding-top: calc(120px - 50px);
+  }
+
+  .text {
+    margin: 0;
+    margin-right: 60px;
+    text-align: left;
+  }
+
+  .buttonsList {
+    margin-top: 24px;
+    justify-content: flex-start;
+  }
+
+  .buttonItem {
+    margin: 0;
+
+    & + & {
+      margin-left: 32px;
+    }
+  }
+
+  .issuesSvg {
+    width: 400px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .issuesSvg {
+    width: unset;
+    margin-right: -200px;
+  }
+}

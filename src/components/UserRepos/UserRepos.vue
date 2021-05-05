@@ -21,7 +21,6 @@
 </template>
 
 <script>
-// import cssmem from 'cssmem';
 import styles from './UserRepos.css?module';
 import { events } from './events';
 import UserRepo from '@/src/components/UserRepo/UserRepo';

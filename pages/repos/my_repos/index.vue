@@ -1,6 +1,6 @@
 <template>
   <section :class="styles.addRepo">
-    <BlockWrapper size="tablet" :class="styles.wrapper">
+    <block-wrapper size="tablet" :class="styles.wrapper">
       <the-text tag="h1" size="h2" :with-underlay="true">
         My repositories
       </the-text>
@@ -12,11 +12,18 @@
         the same time.
       </the-text>
 
-      <UserRepos
+      <user-repos
         :loading-status="repos.loadingStatus === DATA_STATUS.LOADING"
         :repos="repos.data"
       />
-    </BlockWrapper>
+
+      <pagination
+        :pagination="pagination"
+        :wrapper-class="styles.pagination"
+        :buttons-class="styles.paginationControl"
+        :on-click="getRepos"
+      />
+    </block-wrapper>
   </section>
 </template>
 
@@ -25,6 +32,7 @@ import styles from './index.css?module';
 import TheText from '@/src/components/TheText/TheText';
 import BlockWrapper from '@/src/components/BlockWrapper/BlockWrapper';
 import UserRepos from '@/src/components/UserRepos/UserRepos';
+import Pagination from '@/src/components/Pagination/Pagination';
 import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
 
 export default {
@@ -32,12 +40,17 @@ export default {
     TheText,
     BlockWrapper,
     UserRepos,
+    Pagination,
   },
   data() {
     return {
       DATA_STATUS,
       repos: DEFAULT_DATA_OBJECT,
       repoErr: null,
+      pagination: {
+        previous: null,
+        next: null,
+      },
     };
   },
   computed: {
@@ -63,14 +76,16 @@ export default {
       return status === 'added' ? this.removeRepository : this.addRepository;
     },
 
-    getRepos() {
+    getRepos(url) {
       const { repos, $api } = this;
 
       repos.loadingStatus = DATA_STATUS.LOADING;
 
       $api
-        .getUserRepositories()
-        .then(({ results }) => {
+        .getUserRepositories(url)
+        .then((response) => {
+          const { results, next, previous } = response;
+
           if (!results.length) {
             repos.loadingStatus = DATA_STATUS.IDLE;
             return;
@@ -78,6 +93,9 @@ export default {
 
           repos.data = results.sort((a) => (a.status === 'added' ? -1 : 1));
           repos.loadingStatus = DATA_STATUS.LOADED;
+
+          this.pagination.next = next;
+          this.pagination.previous = previous;
         })
         .catch((err) => {
           repos.loadingStatus = DATA_STATUS.FAILED;

@@ -5,7 +5,7 @@
         List of projects on GitHub that need your help
       </the-text>
 
-      <repos-filters :on-search="getRepos" />
+      <repos-filters />
 
       <div :class="styles.reposWrapper">
         <div v-if="repos.loadingStatus === DATA_STATUS.LOADING">
@@ -52,59 +52,64 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
 import styles from './ReposList.css?module';
 import TheText from '@/src/components/TheText/TheText.vue';
 import RepoCard from '@/src/components/RepoCard/RepoCard.vue';
 import ReposFilters from '@/src/components/ReposFilters/ReposFilters.vue';
 import RepoCardSkeleton from '@/src/components/RepoCardSkeleton/RepoCardSkeleton.vue';
-import { Repository } from '@/src/interfaces/Repository/Repository';
-import { Data, DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
+import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
+import { Filters } from '@/src/interfaces/Filters';
+import { Bus } from '@/src/lib/Bus';
 
-@Component({
+export default {
   components: {
     TheText,
     RepoCard,
     RepoCardSkeleton,
     ReposFilters,
   },
-})
-export default class ReposList extends Vue {
-  DATA_STATUS = DATA_STATUS;
-
-  reposCount: number = 0;
-
-  preloaderCards: number = 8;
-
-  repos: Data<Repository> = { ...DEFAULT_DATA_OBJECT };
-
+  data() {
+    return {
+      DATA_STATUS,
+      reposCount: 0,
+      preloaderCards: 8,
+      repos: { ...DEFAULT_DATA_OBJECT },
+    };
+  },
+  computed: {
+    styles() {
+      return styles;
+    },
+  },
+  mounted() {
+    Bus.$on('search-repositories', (filtersState: Filters) => {
+      this.getRepos(filtersState);
+    });
+  },
   async created() {
     await this.getRepos();
-  }
+  },
+  methods: {
+    getRepos(filtersState?: Filters): void {
+      this.repos.loadingStatus = DATA_STATUS.LOADING;
 
-  public getRepos() {
-    this.repos.loadingStatus = DATA_STATUS.LOADING;
+      this.$api
+        .getRepositories(filtersState)
+        .then(({ results, count }) => {
+          if (!results.length) {
+            this.repos.loadingStatus = DATA_STATUS.IDLE;
+            return;
+          }
 
-    this.$api
-      .getRepositories()
-      .then(({ results, count }) => {
-        if (!results.length) {
-          this.repos.loadingStatus = DATA_STATUS.IDLE;
-          return;
-        }
-
-        this.repos.data = results;
-        this.reposCount = count;
-        this.repos.loadingStatus = DATA_STATUS.LOADED;
-      })
-      .catch((err) => {
-        this.repos.loadingStatus = DATA_STATUS.FAILED;
-        this.repos.errorText = err.message;
-      });
-  }
-
-  get styles() {
-    return styles;
-  }
-}
+          this.repos.data = results;
+          this.reposCount = count;
+          this.repos.loadingStatus = DATA_STATUS.LOADED;
+        })
+        .catch((err) => {
+          this.repos.loadingStatus = DATA_STATUS.FAILED;
+          this.repos.errorText = err.message;
+        });
+    },
+  },
+};
 </script>

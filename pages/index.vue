@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import MainScreen from '@/src/components/MainScreen/MainScreen';
-import ReposList from '@/src/components/ReposList/ReposList';
-import HowItWorks from '@/src/components/HowItWorks/HowItWorks';
+import MainScreen from '@/src/blocks/MainScreen/MainScreen';
+import HowItWorks from '@/src/blocks/HowItWorks/HowItWorks';
+import ReposList from '@/src/blocks/ReposList/ReposList';
 
 export default {
   components: {

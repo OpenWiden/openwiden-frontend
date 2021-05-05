@@ -2,25 +2,25 @@
   <div class="rootWrapper">
     <ToastsGroup />
 
-    <top-header />
+    <app-header />
 
     <main class="main" role="main">
       <nuxt />
     </main>
 
-    <the-footer />
+    <app-footer />
   </div>
 </template>
 
 <script>
-import TopHeader from '@/src/components/TopHeader/TopHeader';
-import TheFooter from '@/src/components/TheFooter/TheFooter';
+import AppHeader from '@/src/blocks/AppHeader/AppHeader';
+import AppFooter from '@/src/blocks/AppFooter/AppFooter';
 import ToastsGroup from '@/src/components/ToastsGroup/ToastsGroup';
 
 export default {
   components: {
-    TopHeader,
-    TheFooter,
+    AppHeader,
+    AppFooter,
     ToastsGroup,
   },
   async beforeMount() {

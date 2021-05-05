@@ -50,8 +50,7 @@
           <repo-lang
             :class="styles.progLangIcon"
             :programming-language="programmingLanguage"
-            width="30"
-            height="30"
+            size="30"
           />
         </header>
       </div>
@@ -117,11 +116,9 @@
             </ul>
 
             <pagination
-              v-if="pagination.next !== null && pagination.previous !== null"
               :pagination="pagination"
               :wrapper-class="styles.pagination"
-              :on-prev-click="() => getRepoIssues(pagination.previous)"
-              :on-next-click="() => getRepoIssues(pagination.next)"
+              :on-click="getRepoIssues"
             />
           </div>
 
