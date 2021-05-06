@@ -14,7 +14,7 @@ import {
 } from '@/src/interfaces/Repository/Repository';
 import repositoryResolver from '@/src/interfaces/Repository/resolver';
 import userRepositoryResolver from '@/src/interfaces/UserRepository/resolver';
-import { ProgrammingLanguage } from '@/src/interfaces/ProgrammingLanguage';
+import { ProgrammingLanguage } from '~/src/interfaces/ProgrammingLanguage/ProgrammingLanguage';
 import { FetchingDataWithPagination } from '@/src/interfaces/FetchingDataWithPagination';
 import { IssueData, Issue } from '@/src/interfaces/Issue/Issue';
 import { Filters } from '@/src/interfaces/Filters';
