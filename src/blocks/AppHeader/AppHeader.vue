@@ -46,14 +46,12 @@
 
         <ul v-else :class="styles.headerNavList">
           <li :class="styles.headerNavItem">
-            <a :class="styles.headerNavLink" href="#">
-              <img
-                :class="styles.avatar"
-                :src="user.avatar"
-                :alt="user.username"
-              />
-              {{ user.username }}
-            </a>
+            <img
+              :class="styles.avatar"
+              :src="user.avatar"
+              :alt="user.username"
+            />
+            {{ user.username }}
           </li>
           <li :class="styles.headerNavItem">
             <n-link

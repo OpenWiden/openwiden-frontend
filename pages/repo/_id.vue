@@ -41,10 +41,6 @@
             <div :class="styles.stats">
               <repo-stats :class="styles.statsList" v-bind="repository.data" />
             </div>
-
-            <the-text :class="styles.description" tag="p">
-              {{ repository.data.description }}
-            </the-text>
           </div>
 
           <repo-lang
@@ -53,9 +49,13 @@
             size="30"
           />
         </header>
+
+        <the-text :class="styles.description" tag="p">
+          {{ repository.data.description }}
+        </the-text>
       </div>
 
-      <div :class="styles.issuesBlock">
+      <section :class="styles.issuesBlock">
         <the-text :class="styles.issuesTitle" tag="h2">
           Issues <span v-if="issuesCount">({{ issuesCount }})</span>
         </the-text>
@@ -135,7 +135,7 @@
             </the-text>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </section>
 </template>

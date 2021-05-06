@@ -84,7 +84,7 @@ export default {
           label: 'Add repository',
           img: 'list.svg',
           text:
-            'If you want to find an open source help for your project you are able to add your repository to our service from any connected version control system.',
+            'If you want to find an open source help for your project you can add your repository to our service from any connected version control system',
         },
       ],
       activeSlide: null,
