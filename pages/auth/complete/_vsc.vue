@@ -8,7 +8,7 @@
       <div v-else>
         <the-text tag="h1">
           Glad to see you,
-          <span :class="$style.firstName"> {{ user.firstName }} </span>!
+          <span :class="$style.firstName"> {{ user.firstName }}! </span>
         </the-text>
 
         <the-button

@@ -65,13 +65,13 @@ export default {
           placeholder: 'Choose language...',
         },
         {
-          options: [10, 100, 1000, 10000, 1000000],
+          options: [10, 100, 1000, 10000],
           name: 'STARS_COUNT_GTE',
           label: 'Popularity (stars)',
           placeholder: 'Greater than...',
         },
         {
-          options: [10, 100, 1000, 10000, 1000000],
+          options: [10, 100, 1000, 10000],
           name: 'OPEN_ISSUES_COUNT_GTE',
           label: 'Issues',
           placeholder: 'Greater than...',
@@ -92,7 +92,18 @@ export default {
           (filter) => filter.name === 'PROGRAMMING_LANGUAGES'
         );
 
-        this.$set(this.filters[languageFilterIndex], 'options', languages);
+        // TODO: remove when backend will send unique values only
+        const uniqueLangs = languages.reduce((store, lang) => {
+          if (store.find((el) => el.id === lang.id)) return store;
+
+          store.push(lang);
+
+          return store;
+        }, []);
+
+        const langs = uniqueLangs.map((lang) => lang.name);
+
+        this.$set(this.filters[languageFilterIndex], 'options', langs);
       })
       .catch((err) => {
         // TODO: Remove this when pl endpoint will exist
@@ -100,9 +111,6 @@ export default {
       });
   },
   methods: {
-    onFilterChange(filter, value) {
-      this.$store.commit('SET_FILTER', { name: filter, value });
-    },
     handleFilterChange(filter, value) {
       this.filtersState[filter] = value;
     },

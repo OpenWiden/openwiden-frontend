@@ -2,7 +2,7 @@
   <section :class="styles.repos">
     <div :class="styles.wrapper">
       <the-text :class="styles.title" tag="h2">
-        List of projects on GitHub that need your help
+        List of projects that need your help
       </the-text>
 
       <repos-filters />

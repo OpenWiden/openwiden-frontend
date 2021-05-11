@@ -41,10 +41,6 @@
             <div :class="styles.stats">
               <repo-stats :class="styles.statsList" v-bind="repository.data" />
             </div>
-
-            <the-text :class="styles.description" tag="p">
-              {{ repository.data.description }}
-            </the-text>
           </div>
 
           <repo-lang
@@ -53,9 +49,13 @@
             size="30"
           />
         </header>
+
+        <the-text :class="styles.description" tag="p">
+          {{ repository.data.description }}
+        </the-text>
       </div>
 
-      <div :class="styles.issuesBlock">
+      <section :class="styles.issuesBlock">
         <the-text :class="styles.issuesTitle" tag="h2">
           Issues <span v-if="issuesCount">({{ issuesCount }})</span>
         </the-text>
@@ -135,7 +135,7 @@
             </the-text>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </section>
 </template>
@@ -148,7 +148,7 @@ import RepoStats from '@/src/components/RepoStats/RepoStats';
 import IconIssue from '@/src/components/Icons/IconIssue';
 import Skeleton from '@/src/components/Skeleton/Skeleton';
 import RepoLang from '@/src/components/RepoLang/RepoLang';
-import getRepoProgrammingLanguage from '@/src/lib/getRepoProgrammingLanguage';
+import getMainProgrammingLanguage from '@/src/lib/getMainProgrammingLanguage';
 import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
 
 const DAY = 24 * 3600 * 1000;
@@ -189,7 +189,7 @@ export default {
       return data.length + 1;
     },
     programmingLanguage() {
-      return getRepoProgrammingLanguage(this.$data.repository.data);
+      return getMainProgrammingLanguage(this.$data.repository.data);
     },
   },
   created() {

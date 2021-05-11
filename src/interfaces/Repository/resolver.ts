@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+import { repoProgrammingLangResolver } from '../ProgrammingLanguage/resolver';
 import { RepositoryData, Repository } from './Repository';
 
 export default function repositoryResolver(
@@ -15,6 +17,8 @@ export default function repositoryResolver(
     forksCount: repository.forks_count,
     createdAt: repository.created_at,
     updatedAt: repository.updated_at,
-    programmingLanguages: repository.programming_languages,
+    programmingLanguages: repository.programming_languages.map(
+      repoProgrammingLangResolver
+    ),
   };
 }

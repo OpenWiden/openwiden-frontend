@@ -5,7 +5,6 @@
       <v-select
         :options="options"
         :placeholder="placeholder"
-        :label="optionLabel"
         :clearable="true"
         :value="value"
         @input="(value) => onChange(name, value)"
@@ -48,10 +47,6 @@ export default {
       default: () => '',
     },
     placeholder: {
-      type: String,
-      default: () => '',
-    },
-    optionLabel: {
       type: String,
       default: () => '',
     },
