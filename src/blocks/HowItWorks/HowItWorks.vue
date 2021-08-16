@@ -75,14 +75,14 @@ export default {
         {
           id: 2,
           label: 'Find repository',
-          img: 'add.svg',
+          img: 'list.svg',
           text:
             'Find repositories you would like to help. You can filter by language, stars or issues count',
         },
         {
           id: 3,
           label: 'Add repository',
-          img: 'list.svg',
+          img: 'add.svg',
           text:
             'If you want to find an open source help for your project you are able to add your repository to our service from any connected version control system.',
         },
