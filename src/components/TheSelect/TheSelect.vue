@@ -53,7 +53,7 @@ export default {
     },
     optionLabel: {
       type: String,
-      default: () => '',
+      default: () => 'label',
     },
     onChange: {
       type: Function,
