@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
-import config from '@/config';
+import services from '@/src/services';
 
 import { AppState } from '@/src/interfaces/AppState';
 import {
@@ -51,7 +51,7 @@ export const repositoriesAPICreator = (
       repositories: repositoriesURL,
       programmingLanguages,
     },
-  } = config;
+  } = services;
 
   return {
     getUserRepositories(url = userURL.repositories) {

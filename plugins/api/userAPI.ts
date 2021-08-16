@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
-import config from '@/config';
+import services from '@/src/services';
 
 import { UserData, User } from '@/src/interfaces/User/User';
 import {
@@ -29,7 +29,7 @@ export const userAPICreator = (
 
   const {
     urls: { auth, user: userURL },
-  } = config;
+  } = services;
 
   return {
     getUser(authToken) {
