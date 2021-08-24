@@ -69,10 +69,10 @@ export const actions: any = {
   },
 
   logoutUser({ commit }: any) {
+    this.$websocket.close();
+
     removeCookies(['auth', 'refresh', 'provider']);
     commit(MUTATIONS.RESET_AUTH);
-
-    this.$websocket();
   },
 
   loginUser({ commit }: any, { provider }: { provider: string }) {
@@ -90,7 +90,7 @@ export const actions: any = {
     commit(MUTATIONS.SET_AUTH, authToken);
     commit(MUTATIONS.SET_REFRESH, refreshToken);
 
-    this.$websocket();
+    this.$websocket.init();
   },
 
   async getUser(

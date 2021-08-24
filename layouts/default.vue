@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    this.$websocket();
+    this.$websocket.init();
   },
 };
 </script>

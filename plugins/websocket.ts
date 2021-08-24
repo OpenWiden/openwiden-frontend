@@ -3,12 +3,18 @@ import { Context } from '@nuxt/types';
 
 import { RepositoryMessage } from './notifications';
 
+let ws: WebSocket;
+
 function initConnection(context: Context) {
   const { auth } = context.store.state;
 
   if (auth) {
     connectToWebSocket(context);
   }
+}
+
+function abortConnection() {
+  ws.close();
 }
 
 const connectToWebSocket = (context: Context): void => {
@@ -20,7 +26,7 @@ const connectToWebSocket = (context: Context): void => {
     },
   } = context;
 
-  const ws = new WebSocket(
+  ws = new WebSocket(
     `wss://staging.openwiden.com/websocket/?access_token=${accessToken}`
   );
 
@@ -47,5 +53,8 @@ const connectToWebSocket = (context: Context): void => {
 };
 
 export default (context: Context, inject: any) => {
-  inject('websocket', () => initConnection(context));
+  inject('websocket', {
+    init: () => initConnection(context),
+    close: abortConnection,
+  });
 };
