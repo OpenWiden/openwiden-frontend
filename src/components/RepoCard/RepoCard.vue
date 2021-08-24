@@ -27,7 +27,7 @@ import TheText from '@/src/components/TheText/TheText';
 import RepoLang from '@/src/components/RepoLang/RepoLang';
 import RepoStats from '@/src/components/RepoStats/RepoStats';
 import getShortStringFormat from '@/src/lib/getShortStringFormat';
-import getRepoProgrammingLanguage from '@/src/lib/getRepoProgrammingLanguage';
+import getRepoMainProgrammingLanguage from '@/src/lib/getRepoMainProgrammingLanguage';
 
 const MAX_DESCRIPTION_SYMBOLS = 40;
 
@@ -54,7 +54,7 @@ export default {
       );
     },
     programmingLanguage() {
-      return getRepoProgrammingLanguage(this.$props.repository);
+      return getRepoMainProgrammingLanguage(this.$props.repository);
     },
   },
 };

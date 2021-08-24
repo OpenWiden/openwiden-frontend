@@ -53,14 +53,14 @@ export default {
   data() {
     return {
       filtersState: {
-        PROGRAMMING_LANGUAGES: null,
+        PROGRAMMING_LANGUAGE: null,
         STARS_COUNT_GTE: null,
         OPEN_ISSUES_COUNT_GTE: null,
       },
       filters: [
         {
           options: [],
-          name: 'PROGRAMMING_LANGUAGES',
+          name: 'PROGRAMMING_LANGUAGE',
           label: 'Language',
           placeholder: 'Choose language...',
         },
@@ -84,26 +84,32 @@ export default {
       return styles;
     },
   },
-  created() {
-    this.$api
-      .getProgrammingLanguages()
-      .then((languages) => {
-        const languageFilterIndex = this.filters.findIndex(
-          (filter) => filter.name === 'PROGRAMMING_LANGUAGES'
-        );
+  async created() {
+    try {
+      const languages = await this.$api.getProgrammingLanguages();
 
-        this.$set(this.filters[languageFilterIndex], 'options', languages);
-      })
-      .catch((err) => {
-        // TODO: Remove this when pl endpoint will exist
-        return err;
-      });
+      const languageFilterIndex = this.filters.findIndex(
+        (filter) => filter.name === 'PROGRAMMING_LANGUAGE'
+      );
+
+      const languagesOptions = languages.map((language) => ({
+        label: language.name,
+        value: language.name,
+      }));
+
+      this.$set(this.filters[languageFilterIndex], 'options', languagesOptions);
+    } catch (error) {}
   },
   methods: {
     onFilterChange(filter, value) {
       this.$store.commit('SET_FILTER', { name: filter, value });
     },
     handleFilterChange(filter, value) {
+      if (typeof value === 'object') {
+        this.filtersState[filter] = value?.label;
+        return;
+      }
+
       this.filtersState[filter] = value;
     },
     handleSearch() {
