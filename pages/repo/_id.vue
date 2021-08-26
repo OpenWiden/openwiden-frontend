@@ -35,16 +35,18 @@
         <header :class="styles.header">
           <div :class="styles.texts">
             <the-text :class="styles.title" tag="h1">
-              {{ repository.data.name }}
+              <a
+                :class="styles.link"
+                :href="repository.data.url"
+                target="_blank"
+              >
+                {{ repository.data.name }}
+              </a>
             </the-text>
 
             <div :class="styles.stats">
               <repo-stats :class="styles.statsList" v-bind="repository.data" />
             </div>
-
-            <the-text :class="styles.description" tag="p">
-              {{ repository.data.description }}
-            </the-text>
           </div>
 
           <repo-lang
@@ -53,6 +55,10 @@
             size="30"
           />
         </header>
+
+        <the-text :class="styles.description" tag="p">
+          {{ repository.data.description }}
+        </the-text>
       </div>
 
       <div :class="styles.issuesBlock">
@@ -116,7 +122,7 @@
             </ul>
 
             <pagination
-              :pagination="pagination"
+              v-bind="pagination"
               :wrapper-class="styles.pagination"
               :on-click="getRepoIssues"
             />
@@ -143,15 +149,16 @@
 <script>
 import styles from './repo.css?module';
 import TheText from '@/src/components/TheText/TheText';
-import Pagination from '@/src/components/Pagination/Pagination';
+import Pagination, {
+  PAGINATION_DEFAULT_STATE,
+} from '@/src/components/Pagination/Pagination';
 import RepoStats from '@/src/components/RepoStats/RepoStats';
 import IconIssue from '@/src/components/Icons/IconIssue';
 import Skeleton from '@/src/components/Skeleton/Skeleton';
 import RepoLang from '@/src/components/RepoLang/RepoLang';
 import getRepoProgrammingLanguage from '@/src/lib/getRepoProgrammingLanguage';
+import { DAY } from '@/src/constants';
 import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
-
-const DAY = 24 * 3600 * 1000;
 
 export default {
   components: {
@@ -167,12 +174,9 @@ export default {
       DATA_STATUS,
       repository: { ...DEFAULT_DATA_OBJECT },
       issues: { ...DEFAULT_DATA_OBJECT },
-      pagination: {
-        previous: null,
-        next: null,
-      },
-      repoID: this.$route.params.id,
       issuesSkeletons: 10,
+      pagination: { ...PAGINATION_DEFAULT_STATE },
+      repoID: this.$route.params.id,
     };
   },
   computed: {
@@ -207,8 +211,7 @@ export default {
           this.repository.data = repo;
           this.repository.loadingStatus = DATA_STATUS.LOADED;
         })
-        .catch((err) => {
-          this.repository.errorText = err.message;
+        .catch(() => {
           this.repository.loadingStatus = DATA_STATUS.FAILED;
         });
     },
@@ -218,21 +221,24 @@ export default {
     getRepoIssues(url) {
       this.issues.loadingStatus = DATA_STATUS.LOADING;
 
+      console.log('url -->', url);
+
+      this.pagination.current = url;
+
       this.$api
         .getRepositoryIssues(this.repoID, url)
-        .then(({ results, next, previous }) => {
-          if (results.length) {
-            this.issues.data = results;
-            this.issues.loadingStatus = DATA_STATUS.LOADED;
-          } else {
+        .then(({ results, count }) => {
+          if (!results.length) {
             this.issues.loadingStatus = DATA_STATUS.IDLE;
           }
 
-          this.pagination.next = next;
-          this.pagination.previous = previous;
+          this.issues.data = results;
+          this.issues.loadingStatus = DATA_STATUS.LOADED;
+
+          this.pagination.total = count;
+          this.pagination.perPage = 10;
         })
-        .catch((err) => {
-          this.issues.errorText = err.message;
+        .catch(() => {
           this.issues.loadingStatus = DATA_STATUS.FAILED;
         });
     },
