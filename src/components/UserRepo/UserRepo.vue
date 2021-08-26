@@ -32,18 +32,16 @@
       <repo-state :class="styles.repoState" :state="repo.state" />
 
       <the-button
-        :class="styles.button"
+        :class="styles.actionButton"
         :is-transparent="isRepoAdded"
         :is-loading="isButtonDisabled"
         :disabled="isButtonDisabled"
         :on-click="() => onClick(repo.state)(repo.id)"
-        :title="
-          isRepoAdded
-            ? 'Remove repostiroty from OpenWiden service'
-            : 'Add repostiroty to OpenWiden service'
-        "
+        :aria-label="actionBtnLabel"
+        :title="actionBtnLabel"
       >
-        {{ isRepoAdded ? 'Remove' : 'Add' }}
+        <delete-icon v-if="isRepoAdded" size="18" />
+        <add-icon v-else size="18" />
       </the-button>
     </div>
   </div>
@@ -54,6 +52,8 @@ import TheButton from '@/src/components/TheButton/TheButton';
 import TheText from '@/src/components/TheText/TheText';
 import RepoState from '@/src/components/RepoState/RepoState';
 import RepoStats from '@/src/components/RepoStats/RepoStats';
+import DeleteIcon from '@/src/components/Icons/DeleteIcon';
+import AddIcon from '@/src/components/Icons/AddIcon';
 // eslint-disable-next-line import/order
 import styles from './UserRepo.css?module';
 
@@ -62,6 +62,8 @@ export default {
     TheText,
     RepoState,
     TheButton,
+    DeleteIcon,
+    AddIcon,
     RepoStats,
   },
 
@@ -84,6 +86,13 @@ export default {
       const { repo } = this.$props;
 
       return repo.state === 'added';
+    },
+    actionBtnLabel() {
+      const { repo } = this.$props;
+
+      if (this.isRepoAdded) return `Remove ${repo.name} from OpenWiden`;
+
+      return `Add ${repo.name} to OpenWiden`;
     },
     isButtonDisabled() {
       const { repo } = this.$props;

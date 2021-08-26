@@ -12,7 +12,7 @@
   font-weight: 700;
   color: var(--primary-typo-button);
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, border-color 0.15s;
   outline: none;
 
   &:hover,
@@ -20,15 +20,10 @@
     background-color: var(--primary-hover-bg-button);
   }
 
-  &_disabled {
-    background-color: #8a4dee;
+  &[disabled='disabled'] {
+    background-color: var(--primary-bg-button);
     opacity: 0.5;
-    cursor: no-drop;
-
-    &:hover,
-    &:focus {
-      background-color: #8a4dee;
-    }
+    pointer-events: none;
   }
 
   &_transparent {

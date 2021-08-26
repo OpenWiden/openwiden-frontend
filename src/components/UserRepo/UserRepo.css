@@ -2,11 +2,10 @@
   margin-top: var(--size-l);
 }
 
-.button {
-  width: 100px;
-  height: 38px;
-  font-size: 14px;
-  text-transform: uppercase;
+.actionButton {
+  width: 40px;
+  height: 40px;
+  padding: 0;
 }
 
 .repo {
