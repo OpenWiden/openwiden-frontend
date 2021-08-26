@@ -221,8 +221,6 @@ export default {
     getRepoIssues(url) {
       this.issues.loadingStatus = DATA_STATUS.LOADING;
 
-      console.log('url -->', url);
-
       this.pagination.current = url;
 
       this.$api

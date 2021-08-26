@@ -18,7 +18,7 @@
       />
 
       <pagination
-        :pagination="pagination"
+        v-bind="pagination"
         :wrapper-class="styles.pagination"
         :buttons-class="styles.paginationControl"
         :on-click="getRepos"
@@ -32,7 +32,9 @@ import styles from './index.css?module';
 import TheText from '@/src/components/TheText/TheText';
 import BlockWrapper from '@/src/components/BlockWrapper/BlockWrapper';
 import UserRepos from '@/src/components/UserRepos/UserRepos';
-import Pagination from '@/src/components/Pagination/Pagination';
+import Pagination, {
+  PAGINATION_DEFAULT_STATE,
+} from '@/src/components/Pagination/Pagination';
 import { DATA_STATUS, DEFAULT_DATA_OBJECT } from '@/src/interfaces/Data';
 
 export default {
@@ -45,12 +47,8 @@ export default {
   data() {
     return {
       DATA_STATUS,
-      repos: DEFAULT_DATA_OBJECT,
-      repoErr: null,
-      pagination: {
-        previous: null,
-        next: null,
-      },
+      repos: { ...DEFAULT_DATA_OBJECT },
+      pagination: { ...PAGINATION_DEFAULT_STATE },
     };
   },
   computed: {
@@ -59,7 +57,7 @@ export default {
     },
   },
   created() {
-    this.getRepos();
+    this.getRepos(this.$route.query?.page);
   },
   methods: {
     changeRepoStatus(id, nextStatus) {
@@ -76,15 +74,17 @@ export default {
       return status === 'added' ? this.removeRepository : this.addRepository;
     },
 
-    getRepos(url) {
+    getRepos(pageNumber) {
       const { repos, $api } = this;
 
       repos.loadingStatus = DATA_STATUS.LOADING;
 
+      if (pageNumber) this.pagination.current = Number(pageNumber);
+
       $api
-        .getUserRepositories(url)
+        .getUserRepositories(pageNumber)
         .then((response) => {
-          const { results, next, previous } = response;
+          const { results, count } = response;
 
           if (!results.length) {
             repos.loadingStatus = DATA_STATUS.IDLE;
@@ -94,8 +94,8 @@ export default {
           repos.data = results.sort((a) => (a.status === 'added' ? -1 : 1));
           repos.loadingStatus = DATA_STATUS.LOADED;
 
-          this.pagination.next = next;
-          this.pagination.previous = previous;
+          this.pagination.total = count;
+          this.pagination.perPage = 10;
         })
         .catch((err) => {
           repos.loadingStatus = DATA_STATUS.FAILED;
