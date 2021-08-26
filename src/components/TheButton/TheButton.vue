@@ -1,27 +1,16 @@
 <template>
   <component
     :is="href ? 'nuxt-link' : 'button'"
-    v-if="isLoading"
-    :class="classObj"
-    :title="title"
-    :type="type"
-    :disabled="true"
-    :to="href"
-  >
-    <preloader />
-  </component>
-
-  <component
-    :is="href ? 'nuxt-link' : 'button'"
-    v-else
     :class="classObj"
     :title="title"
     :type="type"
     :disabled="disabled"
     :to="href"
+    :aria-label="ariaLabel"
     @click="onClick"
   >
-    <slot />
+    <preloader v-if="isLoading" />
+    <slot v-else />
   </component>
 </template>
 
@@ -29,7 +18,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import cssmem from 'cssmem';
 import styles from './TheButton.css?module';
-import Preloader from '@/src/components/Preloader/Preloader';
+import Preloader from '@/src/components/Preloader/Preloader.vue';
 
 enum ButtonType {
   SUBMIT = 'submit',
@@ -41,6 +30,8 @@ const em = cssmem(styles);
 @Component({ components: { Preloader } })
 export default class TheButton extends Vue {
   @Prop({ required: true }) title!: string;
+  @Prop({ required: false }) ariaLabel!: string;
+
   @Prop() href!: string;
 
   @Prop({ default: false }) disabled!: boolean;
